@@ -13,9 +13,31 @@
          "width":50,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":2,
+         "name":"objects",
+         "objects":[
+                {
+                 "height":61.3333333333334,
+                 "id":1,
+                 "name":"penguin-spawn",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":66.6666666666666,
+                 "x":280,
+                 "y":494.666666666667
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":2,
- "nextobjectid":1,
+ "nextlayerid":3,
+ "nextobjectid":3,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.8.2",
