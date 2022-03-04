@@ -53,9 +53,9 @@ export default class Game extends Phaser.Scene {
                         .play('player-idle')
                         .setFixedRotation()
 
-                    // this.#penguin.setOnCollide( (data: MatterJS.ICollisionPair) => {
-                    //     this.#isTouchingGround = true;
-                    // })
+                    this.#penguin.setOnCollide( (data) => {
+                        this.#isTouchingGround = true;
+                    })
 
                     this.cameras.main.startFollow(this.#penguin)  // centers camera on penguin
 
@@ -66,7 +66,7 @@ export default class Game extends Phaser.Scene {
     }
 
     update() {
-        const speed = 5
+        const speed = 7
 
         if (this.#cursors.left.isDown) {
             this.#penguin.flipX = true
@@ -85,7 +85,7 @@ export default class Game extends Phaser.Scene {
 
         const spaceJustPressed = Phaser.Input.Keyboard.JustDown(this.#cursors.space)
         if (spaceJustPressed && this.#isTouchingGround) {
-            this.#penguin.setVelocityY(-12)
+            this.#penguin.setVelocityY(-15)
             this.#isTouchingGround = false
         }
     }
