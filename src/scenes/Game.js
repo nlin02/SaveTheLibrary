@@ -1,10 +1,14 @@
 import Phaser from 'phaser'
+import CountdownController from './CountdownController'
 
 export default class Game extends Phaser.Scene {
 
     #penguin;
     #cursors;
     #isTouchingGround = false;
+
+    /** @type {CountdownController} */
+    countdown
 
     constructor() {
         super('game')
@@ -21,6 +25,11 @@ export default class Game extends Phaser.Scene {
     }
 
     create() {
+        // countdown //
+        const timerLabel = this.add.text(100,50,'45', {fontSize: 48})
+            .setOrigin(0.5)
+        this.countdown = new CountdownController(this, timerLabel)
+        this.countdown.start(this.handleCountdownFinished.bind(this))
         // Sets width and height to the scale
         const {width, height} = this.scale
         // short for 
@@ -65,6 +74,10 @@ export default class Game extends Phaser.Scene {
         })
     }
 
+    handleCountdownFinished(){
+        // null player from moving 
+    }
+
     update() {
         const speed = 7
 
@@ -88,7 +101,10 @@ export default class Game extends Phaser.Scene {
             this.#penguin.setVelocityY(-15)
             this.#isTouchingGround = false
         }
+
+        this.countdown.update()
     }
+    
 
     #createPenguinAnimations() {
         this.anims.create({
