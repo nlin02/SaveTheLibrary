@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+import PlayerController from './PlayerController'
 // import CountdownController from './CountdownController'
 
 export default class Game extends Phaser.Scene {
@@ -7,7 +8,8 @@ export default class Game extends Phaser.Scene {
 
     private penguin?: Phaser.Physics.Matter.Sprite    // ? = could be undefined
 
-    private isTouchingGround = false
+    private playerController?: PlayerController
+
 
     // /** @type {CountdownController} */
     // countdown
@@ -40,8 +42,6 @@ export default class Game extends Phaser.Scene {
         // const height = this.scale.height
 
         // this.add.image(width * 0.5, height * 0.5, 'penguin', 'penguin_die04.png')
-
-        this.createPenguinAnimations()
         
         // adds tilemap
         const map = this.make.tilemap({ key: 'tilemap' })
@@ -65,9 +65,7 @@ export default class Game extends Phaser.Scene {
                         .play('player-idle')
                         .setFixedRotation()
 
-                    this.penguin.setOnCollide( (data: MatterJS.ICollisionPair) => {
-                        this.isTouchingGround = true;
-                    })
+                    this.playerController = new PlayerController(this.penguin, this.cursors)
 
                     this.cameras.main.startFollow(this.penguin)  // centers camera on penguin
 
@@ -81,57 +79,11 @@ export default class Game extends Phaser.Scene {
         // null player from moving 
     }
 
-    update() {
-        const speed = 7
-
-        if (!this.penguin) {
+    update(t: number, dt: number) {
+        if (!this.playerController){
             return
         }
 
-        if (this.cursors.left.isDown) {
-            this.penguin.flipX = true
-            this.penguin.setVelocityX(-speed)
-            this.penguin.play('player-walk', true)
-        }
-        else if (this.cursors.right.isDown) {
-            this.penguin.flipX = false
-            this.penguin.setVelocityX(speed)
-            this.penguin.play('player-walk', true)
-        }
-        else {
-            this.penguin.setVelocityX(0)
-            this.penguin.play('player-idle', true)
-        }
-
-        const spaceJustPressed = Phaser.Input.Keyboard.JustDown(this.cursors.space)
-        if (spaceJustPressed && this.isTouchingGround) {
-            this.penguin.setVelocityY(-15)
-            this.isTouchingGround = false
-        }
-
-        // this.countdown.update()
-    }
-    
-
-    private createPenguinAnimations() {
-        this.anims.create({
-            key: 'player-idle',
-            frames: [{
-                key: 'penguin',
-                frame: 'penguin_walk01.png'
-            }]
-        })
-
-        this.anims.create({
-            key: 'player-walk',
-            frameRate: 10,
-            frames: this.anims.generateFrameNames('penguin', {
-                start: 1, 
-                end: 4, 
-                prefix: 'penguin_walk0',
-                suffix: '.png'
-            }),
-            repeat: -1
-        })
+        this.playerController.update(dt)
     }
 }
