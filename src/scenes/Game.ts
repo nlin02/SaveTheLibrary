@@ -26,9 +26,11 @@ export default class Game extends Phaser.Scene {
         this.load.atlas('penguin', 'assets/penguin.png', 'assets/penguin.json')
         this.load.image('tiles', 'assets/sheet.png')
         this.load.tilemapTiledJSON('tilemap', 'assets/game.json')
+        this.load.image('star', 'assets/star.png')
     }
 
     create() {
+        this.scene.launch('ui') //runs parallel scenes (aka UI.. )
         // countdown //
         // const timerLabel = this.add.text(100,50,'45', {fontSize: 48})
         //     .setOrigin(0.5)
@@ -68,9 +70,18 @@ export default class Game extends Phaser.Scene {
                     this.playerController = new PlayerController(this.penguin, this.cursors)
 
                     this.cameras.main.startFollow(this.penguin)  // centers camera on penguin
-
                     break
                 }
+
+                case 'star':{
+                    const star = this.matter.add.sprite(x, y, 'star', undefined,{
+                        isStatic: true,
+                        isSensor: true
+                    })
+                    star.setData('type', 'star') // set the Data of the star so that when collieded, we know it's a star
+                    break
+                }
+
             }
         })
     }

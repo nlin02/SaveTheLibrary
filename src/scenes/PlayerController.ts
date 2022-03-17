@@ -1,5 +1,6 @@
 import Phaser from 'phaser'
 import StateMachine from '../StateMachine/StateMachine'
+import { sharedInstance as events } from './EventCenter'
 
 type CursorKeys = Phaser.Types.Input.Keyboard.CursorKeys
 
@@ -32,9 +33,36 @@ export default class PlayerController {
         .setState('idle')
 
         this.sprite.setOnCollide((data: MatterJS.ICollisionPair) => {
-            if(this.stateMachine.isCurrentState('jump')){
-                this.stateMachine.setState('idle')
+
+            const body = data.bodyB as MatterJS.BodyType // body being collided on
+            const gameObject = body.gameObject
+
+            if (!gameObject){
+                return
+                
             }
+
+            // if (gameObject instanceof Phaser.Physics.Matter.TileBody){ // allows double jumps
+                
+                if(this.stateMachine.isCurrentState('jump')){
+                    this.stateMachine.setState('idle')
+                }
+                // return 
+            // }
+            const sprite = gameObject as Phaser.Physics.Matter.Sprite
+            const type = sprite.getData('type') // as long as it has a type, we will get not get undefined 
+            
+            switch (type){ // do s omething depending on the type
+                
+                case 'star':
+                    {
+                        events.emit('star-collected')
+                        sprite.destroy()
+                        break
+                    }
+            }
+
+            
         })
     }
 

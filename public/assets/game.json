@@ -20,15 +20,70 @@
          "name":"objects",
          "objects":[
                 {
-                 "height":61.3333333333334,
+                 "height":61.3333,
                  "id":1,
                  "name":"penguin-spawn",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":66.6666666666666,
+                 "width":66.6667,
                  "x":280,
-                 "y":494.666666666667
+                 "y":494.667
+                }, 
+                {
+                 "height":69.4783032666991,
+                 "id":5,
+                 "name":"star",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":69.4783032666992,
+                 "x":554.607508532423,
+                 "y":494
+                }, 
+                {
+                 "height":69.4783,
+                 "id":8,
+                 "name":"star",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":69.4783,
+                 "x":913.578743710385,
+                 "y":268.77133269137
+                }, 
+                {
+                 "height":69.4783,
+                 "id":9,
+                 "name":"star",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":69.4783,
+                 "x":1273.15943605558,
+                 "y":549.122380960507
+                }, 
+                {
+                 "height":69.4783,
+                 "id":10,
+                 "name":"star",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":69.4783,
+                 "x":1458.43491143345,
+                 "y":194.41735901999
+                }, 
+                {
+                 "height":69.4783,
+                 "id":11,
+                 "name":"star",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":69.4783,
+                 "x":429.668456045831,
+                 "y":200.511947025841
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -36,8 +91,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":3,
- "nextobjectid":3,
+ "nextlayerid":4,
+ "nextobjectid":12,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.8.2",
