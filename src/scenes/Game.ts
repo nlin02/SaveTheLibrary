@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+import ObstaclesController from './ObstaclesController'
 import PlayerController from './PlayerController'
 // import CountdownController from './CountdownController'
 
@@ -10,6 +11,8 @@ export default class Game extends Phaser.Scene {
 
     private playerController?: PlayerController
 
+    private obstacles!: ObstaclesController
+
 
     // /** @type {CountdownController} */
     // countdown
@@ -20,6 +23,7 @@ export default class Game extends Phaser.Scene {
 
     init() {
         this.cursors = this.input.keyboard.createCursorKeys();
+        this.obstacles = new ObstaclesController()
     }
 
     preload() {
@@ -50,6 +54,7 @@ export default class Game extends Phaser.Scene {
         const tileset = map.addTilesetImage('iceworld', 'tiles')
 
         const ground = map.createLayer('ground', tileset)   // creates the game layer
+        map.createLayer('obstacles', tileset)
         ground.setCollisionByProperty({ collides: true })   // sets collision property
 
         this.matter.world.convertTilemapLayer(ground)   // add matter to tilemap aka blue lines in the server; makes tiles static
@@ -59,7 +64,7 @@ export default class Game extends Phaser.Scene {
         const objectLayer = map.getObjectLayer('objects')
 
         objectLayer.objects.forEach(objData => {
-            const{ x = 0, y = 0, name, width = 0 } = objData
+            const{ x = 0, y = 0, name, width = 0, height = 0 } = objData
 
             switch(name) {
                 case 'penguin-spawn': {
@@ -67,7 +72,7 @@ export default class Game extends Phaser.Scene {
                         .play('player-idle')
                         .setFixedRotation()
 
-                    this.playerController = new PlayerController(this.penguin, this.cursors)
+                    this.playerController = new PlayerController(this, this.penguin, this.cursors, this.obstacles)
 
                     this.cameras.main.startFollow(this.penguin)  // centers camera on penguin
                     break
@@ -79,6 +84,14 @@ export default class Game extends Phaser.Scene {
                         isSensor: true
                     })
                     star.setData('type', 'star') // set the Data of the star so that when collieded, we know it's a star
+                    break
+                }
+
+                case 'spikes': {
+                    const spike = this.matter.add.rectangle(x + (width * 0.5), y + (height * 0.5), width, height, {
+                        isStatic: true
+                    })
+                    this.obstacles.add('spikes', spike)
                     break
                 }
 
