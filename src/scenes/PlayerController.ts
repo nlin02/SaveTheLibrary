@@ -16,6 +16,7 @@ export default class PlayerController {
     private obstacles: ObstaclesController
 
     private stateMachine: StateMachine
+    private health = 100
 
     constructor(scene: Phaser.Scene, sprite: Phaser.Physics.Matter.Sprite, cursors: CursorKeys, obstacles: ObstaclesController) {
         this.scene = scene
@@ -75,6 +76,14 @@ export default class PlayerController {
                         sprite.destroy()
                         break
                     }
+
+                case 'health':{
+                    const value = sprite.getData('healthPoints') ?? 10 // ?? means if there is no data, we default to the # following after. 
+                    this.health = Phaser.Math.Clamp(this.health + value, 0, 100)  // clamps to to 0 to 100, cannot exceed 100 
+                    events.emit('health-changed', this.health)
+                    sprite.destroy()
+                    break
+                }
             }
 
             
@@ -144,6 +153,9 @@ export default class PlayerController {
 
     private spikeHitOnEnter() {
         this.sprite.setVelocityY(-12)
+        this.health = Phaser.Math.Clamp(this.health -10, 0,100)
+
+        events.emit('health-changed', this.health)
 
         // red and white color
         const startColor = Phaser.Display.Color.ValueToColor(0xffffff)

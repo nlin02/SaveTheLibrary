@@ -98,37 +98,48 @@
                  "y":200.512
                 }, 
                 {
-                 "height":47.1158376522852,
+                 "height":47.1158,
                  "id":16,
                  "name":"spikes",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":210.002019250185,
-                 "x":700.00673083395,
-                 "y":581.544053308205
+                 "width":210.002,
+                 "x":700.007,
+                 "y":581.544
                 }, 
                 {
-                 "height":38.3657535168608,
+                 "height":38.3658,
                  "id":19,
                  "name":"spikes",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":68.6545062933296,
-                 "x":1330.68587197954,
-                 "y":660.967893922057
+                 "width":68.6545,
+                 "x":1330.69,
+                 "y":660.968
                 }, 
                 {
-                 "height":32.9810863565996,
+                 "height":32.9811,
                  "id":20,
                  "name":"spiks",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":137.982095981692,
-                 "x":1750.01682708488,
-                 "y":315.67611227031
+                 "width":137.982,
+                 "x":1750.02,
+                 "y":315.676
+                }, 
+                {
+                 "height":68.259385665529,
+                 "id":21,
+                 "name":"health",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":67.0404680643589,
+                 "x":1120.18527547538,
+                 "y":279.132130667967
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -137,7 +148,7 @@
          "y":0
         }],
  "nextlayerid":5,
- "nextobjectid":21,
+ "nextobjectid":25,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.8.2",

@@ -31,6 +31,7 @@ export default class Game extends Phaser.Scene {
         this.load.image('tiles', 'assets/sheet.png')
         this.load.tilemapTiledJSON('tilemap', 'assets/game.json')
         this.load.image('star', 'assets/star.png')
+        this.load.image('health', 'assets/health.png')
     }
 
     create() {
@@ -84,6 +85,17 @@ export default class Game extends Phaser.Scene {
                         isSensor: true
                     })
                     star.setData('type', 'star') // set the Data of the star so that when collieded, we know it's a star
+                    break
+                }
+
+                case 'health': {
+                    const health = this.matter.add.sprite(x,y, 'health', undefined, {
+                        isStatic: true,
+                        isSensor: true
+                    })
+
+                    health.setData('type', 'health')
+                    health.setData('healthPoints', 10)
                     break
                 }
 
