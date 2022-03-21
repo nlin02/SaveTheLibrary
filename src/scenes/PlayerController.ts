@@ -124,7 +124,6 @@ export default class PlayerController {
 
         events.emit('health-changed', this.health)
 
-        //TODO: check for death
         if (this.health <= 0) {
             this.stateMachine.setState('dead')
         }
