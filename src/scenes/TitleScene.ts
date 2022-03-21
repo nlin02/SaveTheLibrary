@@ -7,7 +7,7 @@ export default class TitleScene extends Phaser.Scene{
 
     create(){
         const{width, height} = this.scale
-        this.add.text(width*0.5, height *0.3, 'Start Game', {
+        this.add.text(width*0.5, height *0.3, 'Welcome to the Game!', {
             fontSize: '52px',
             color: '#ff0000'
         })
@@ -19,7 +19,7 @@ export default class TitleScene extends Phaser.Scene{
                 this.scene.start('game')
             })
 
-        this.add.text(button.x, button.y, 'Start Game',{
+        this.add.text(button.x, button.y, 'Start',{
             color: '#000000'
         })
         .setOrigin(0.5)
