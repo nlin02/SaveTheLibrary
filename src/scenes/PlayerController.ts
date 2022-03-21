@@ -49,6 +49,9 @@ export default class PlayerController {
         .addState('snowman-stomp', {
             onEnter: this.snowmanStompOnEnter
         })
+        .addState('dead',{
+            onEnter: this.deadOnEnter
+        })
         .setState('idle')
 
         this.sprite.setOnCollide((data: MatterJS.ICollisionPair) => {
@@ -116,6 +119,18 @@ export default class PlayerController {
         this.stateMachine.update(dt)
     }
 
+    private setHealth(value: number){
+        this.health = Phaser.Math.Clamp(value -10, 0,100)
+
+        events.emit('health-changed', this.health)
+
+        //TODO: check for death
+        if (this.health <= 0) {
+            this.stateMachine.setState('dead')
+        }
+
+    }
+
     private idleOnEnter(){
         this.sprite.play('player-idle')
     }
@@ -175,9 +190,6 @@ export default class PlayerController {
 
     private spikeHitOnEnter() {
         this.sprite.setVelocityY(-12)
-        this.health = Phaser.Math.Clamp(this.health -10, 0,100)
-
-        events.emit('health-changed', this.health)
 
         // red and white color
         const startColor = Phaser.Display.Color.ValueToColor(0xffffff)
@@ -210,6 +222,9 @@ export default class PlayerController {
                 this.sprite.setTint(color)
             }
         })
+        this.stateMachine.setState('idle')
+
+        this.setHealth(this.health -10)
     }
 
     private snowmanHitOnEnter() {
@@ -225,10 +240,6 @@ export default class PlayerController {
         else {
             this.sprite.setVelocityY(-20)
         }
-
-        this.health = Phaser.Math.Clamp(this.health -10, 0,100)
-
-        events.emit('health-changed', this.health)
 
         // blue and white color
         const startColor = Phaser.Display.Color.ValueToColor(0xffffff)
@@ -263,12 +274,21 @@ export default class PlayerController {
 
         this.stateMachine.setState('idle')
 
+        this.setHealth(this.health -10)
     }
 
     private snowmanStompOnEnter() {
         this.sprite.setVelocityY(-10)
         events.emit('snowman-stomped', this.lastSnowman)
         this.stateMachine.setState('idle')
+    }
+
+    private deadOnEnter(){
+        this.sprite.play('player-death')
+        this.sprite.setOnCollide(() => {})
+        this.scene.time.delayedCall(1600, () => {
+            this.scene.scene.start('game-over')
+        })
     }
 
     private createAnimations() {
@@ -291,5 +311,17 @@ export default class PlayerController {
             }),
             repeat: -1
         })
+
+        this.sprite.anims.create({
+            key: 'player-death',
+            frames: this.sprite.anims.generateFrameNames('penguin', {
+                start: 1,
+                end: 4, 
+                prefix: 'penguin_die',
+                zeroPad: 2,
+                suffix: '.png'
+            }),
+            frameRate: 10
+            })
     }
 }

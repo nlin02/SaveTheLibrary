@@ -80,7 +80,7 @@ export default class Game extends Phaser.Scene {
 
                     this.playerController = new PlayerController(this, this.penguin, this.cursors, this.obstacles)
 
-                    this.cameras.main.startFollow(this.penguin)  // centers camera on penguin
+                    this.cameras.main.startFollow(this.penguin, true)  // centers camera on penguin
                     break
                 }
 
@@ -129,6 +129,7 @@ export default class Game extends Phaser.Scene {
 
     // when scene ends, clean up snowman events
     destroy() {
+        this.scene.stop('ui')
         this.snowmen.forEach(snowman => snowman.destroy())
     }
 
