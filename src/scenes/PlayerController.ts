@@ -93,7 +93,7 @@ export default class PlayerController {
             const sprite = gameObject as Phaser.Physics.Matter.Sprite
             const type = sprite.getData('type') // as long as it has a type, we will get not get undefined 
             
-            switch (type){ // do s omething depending on the type
+            switch (type){ // do something depending on the type
                 
                 case 'star':
                     {
