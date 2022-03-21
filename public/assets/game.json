@@ -142,7 +142,7 @@
                  "y":279.132
                 }, 
                 {
-                 "height":67.6764421527554,
+                 "height":139.133754431196,
                  "id":25,
                  "name":"snowman",
                  "rotation":0,
@@ -150,7 +150,18 @@
                  "visible":true,
                  "width":67.6764421527553,
                  "x":1893.32903641637,
-                 "y":628.424105704157
+                 "y":557.524975829842
+                }, 
+                {
+                 "height":140.18691588785,
+                 "id":27,
+                 "name":"snowman",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":66.0650982919756,
+                 "x":2803.73831775701,
+                 "y":488.237189816307
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -159,7 +170,7 @@
          "y":0
         }],
  "nextlayerid":5,
- "nextobjectid":26,
+ "nextobjectid":28,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.8.2",
