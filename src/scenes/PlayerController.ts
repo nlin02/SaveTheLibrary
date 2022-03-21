@@ -18,6 +18,8 @@ export default class PlayerController {
     private stateMachine: StateMachine
     private health = 100
 
+    private lastSnowman?: Phaser.Physics.Matter.Sprite
+
     constructor(scene: Phaser.Scene, sprite: Phaser.Physics.Matter.Sprite, cursors: CursorKeys, obstacles: ObstaclesController) {
         this.scene = scene
         this.sprite = sprite
@@ -41,6 +43,12 @@ export default class PlayerController {
         .addState('spike-hit', {
             onEnter: this.spikeHitOnEnter
         })
+        .addState('snowman-hit', {
+            onEnter: this.snowmanHitOnEnter
+        })
+        .addState('snowman-stomp', {
+            onEnter: this.snowmanStompOnEnter
+        })
         .setState('idle')
 
         this.sprite.setOnCollide((data: MatterJS.ICollisionPair) => {
@@ -50,6 +58,20 @@ export default class PlayerController {
             
             if (this.obstacles.is('spikes', body)) {
                 this.stateMachine.setState('spike-hit')
+                return
+            }
+
+            if (this.obstacles.is('snowman', body)) {
+                this.lastSnowman = body.gameObject
+
+                // if sprite is on top of snowman, stomp and kill snowman
+                if(this.sprite.y < body.position.y) {
+                    this.stateMachine.setState('snowman-stomp')
+                }
+                // hit by snowman, penguin gets hurt
+                else {
+                    this.stateMachine.setState('snowman-hit')
+                }
                 return
             }
 
@@ -188,6 +210,65 @@ export default class PlayerController {
                 this.sprite.setTint(color)
             }
         })
+    }
+
+    private snowmanHitOnEnter() {
+        if(this.lastSnowman) {
+            // move left if left of snowman
+            if(this.sprite.x < this.lastSnowman.x) {
+                this.sprite.setVelocityX(-20)
+            }
+            else {
+                this.sprite.setVelocityX(20)
+            }
+        }
+        else {
+            this.sprite.setVelocityY(-20)
+        }
+
+        this.health = Phaser.Math.Clamp(this.health -10, 0,100)
+
+        events.emit('health-changed', this.health)
+
+        // blue and white color
+        const startColor = Phaser.Display.Color.ValueToColor(0xffffff)
+        const endColor = Phaser.Display.Color.ValueToColor(0x0000ff)
+
+
+        // sets penguin tint to move from white to red every 100ms when a spike is hit
+        this.scene.tweens.addCounter({
+            from: 0,
+            to: 100,
+            duration: 100,
+            repeat: 2,
+            yoyo: true,
+            ease: Phaser.Math.Easing.Sine.InOut,
+            onUpdate: tween => {
+                const value = tween.getValue()
+                const colorObject = Phaser.Display.Color.Interpolate.ColorWithColor(
+                    startColor,
+                    endColor,
+                    100,
+                    value
+                )
+                const color = Phaser.Display.Color.GetColor(
+                    colorObject.r,
+                    colorObject.g,
+                    colorObject.b
+                )
+
+                this.sprite.setTint(color)
+            }
+        })
+
+        this.stateMachine.setState('idle')
+
+    }
+
+    private snowmanStompOnEnter() {
+        this.sprite.setVelocityY(-10)
+        events.emit('snowman-stomped', this.lastSnowman)
+        this.stateMachine.setState('idle')
     }
 
     private createAnimations() {

@@ -1,17 +1,16 @@
 import Phaser from 'phaser'
 import ObstaclesController from './ObstaclesController'
 import PlayerController from './PlayerController'
+import SnowmanController from './SnowmanController'
 // import CountdownController from './CountdownController'
 
 export default class Game extends Phaser.Scene {
 
     private cursors!: Phaser.Types.Input.Keyboard.CursorKeys
-
     private penguin?: Phaser.Physics.Matter.Sprite    // ? = could be undefined
-
     private playerController?: PlayerController
-
     private obstacles!: ObstaclesController
+    private snowmen?: SnowmanController[] = [] //array of snowman controllers since there can be more than 1
 
 
     // /** @type {CountdownController} */
@@ -24,6 +23,11 @@ export default class Game extends Phaser.Scene {
     init() {
         this.cursors = this.input.keyboard.createCursorKeys();
         this.obstacles = new ObstaclesController()
+        this.snowmen = [] //create new list of snowmen every time game starts
+
+        this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
+            this.destroy()
+        })
     }
 
     preload() {
@@ -81,8 +85,13 @@ export default class Game extends Phaser.Scene {
                 }
 
                 case 'snowman': {
-                    this.matter.add.sprite(x, y, 'snowman')
+                    const snowman = this.matter.add.sprite(x, y, 'snowman')
                         .setFixedRotation()
+                    this.snowmen.push(new SnowmanController(this, snowman)) //add a snowman controller for each snowman in tiled
+                    
+                    // add snowmen to obstacles controller
+                    this.obstacles.add('snowman', snowman.body as MatterJS.BodyType)
+                    
                     break
                 }
 
@@ -118,15 +127,26 @@ export default class Game extends Phaser.Scene {
         })
     }
 
+    // when scene ends, clean up snowman events
+    destroy() {
+        this.snowmen.forEach(snowman => snowman.destroy())
+    }
+
     handleCountdownFinished(){
         // null player from moving 
     }
 
     update(t: number, dt: number) {
-        if (!this.playerController){
-            return
-        }
 
-        this.playerController.update(dt)
+        this.playerController?.update(dt)
+
+        // update snowman controller every frame
+        this.snowmen.forEach(snowman => snowman.update(dt))
+
+        // question mark after playerController does null check in Typescript
+        // it is the same as saying
+        // if (this.playerController){
+        //     this.playerController.update(dt)
+        // }
     }
 }

@@ -545,6 +545,6 @@
   <object id="19" name="spikes" x="1330.69" y="660.968" width="68.6545" height="38.3658"/>
   <object id="20" name="spikes" x="1750.02" y="315.676" width="137.982" height="32.9811"/>
   <object id="21" name="health" x="1120.19" y="279.132" width="67.0405" height="68.2594"/>
-  <object id="25" name="snonwman" x="1893.33" y="628.424" width="67.6764" height="67.6764"/>
+  <object id="25" name="snowman" x="1893.33" y="628.424" width="67.6764" height="67.6764"/>
  </objectgroup>
 </map>
