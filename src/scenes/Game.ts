@@ -32,6 +32,7 @@ export default class Game extends Phaser.Scene {
         this.load.tilemapTiledJSON('tilemap', 'assets/game.json')
         this.load.image('star', 'assets/star.png')
         this.load.image('health', 'assets/health.png')
+        this.load.atlas('snowman', 'assets/snowman.png', 'assets/snowman.json')
     }
 
     create() {
@@ -76,6 +77,12 @@ export default class Game extends Phaser.Scene {
                     this.playerController = new PlayerController(this, this.penguin, this.cursors, this.obstacles)
 
                     this.cameras.main.startFollow(this.penguin)  // centers camera on penguin
+                    break
+                }
+
+                case 'snowman': {
+                    this.matter.add.sprite(x, y, 'snowman')
+                        .setFixedRotation()
                     break
                 }
 

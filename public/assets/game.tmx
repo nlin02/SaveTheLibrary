@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="50" height="15" tilewidth="70" tileheight="70" infinite="0" nextlayerid="5" nextobjectid="25">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="50" height="15" tilewidth="70" tileheight="70" infinite="0" nextlayerid="5" nextobjectid="26">
  <editorsettings>
   <export target="game.json" format="json"/>
  </editorsettings>
@@ -543,7 +543,8 @@
   <object id="11" name="star" x="429.668" y="200.512" width="69.4783" height="69.4783"/>
   <object id="16" name="spikes" x="700.007" y="581.544" width="210.002" height="47.1158"/>
   <object id="19" name="spikes" x="1330.69" y="660.968" width="68.6545" height="38.3658"/>
-  <object id="20" name="spiks" x="1750.02" y="315.676" width="137.982" height="32.9811"/>
+  <object id="20" name="spikes" x="1750.02" y="315.676" width="137.982" height="32.9811"/>
   <object id="21" name="health" x="1120.19" y="279.132" width="67.0405" height="68.2594"/>
+  <object id="25" name="snonwman" x="1893.33" y="628.424" width="67.6764" height="67.6764"/>
  </objectgroup>
 </map>

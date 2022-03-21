@@ -122,7 +122,7 @@
                 {
                  "height":32.9811,
                  "id":20,
-                 "name":"spiks",
+                 "name":"spikes",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -131,15 +131,26 @@
                  "y":315.676
                 }, 
                 {
-                 "height":68.259385665529,
+                 "height":68.2594,
                  "id":21,
                  "name":"health",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":67.0404680643589,
-                 "x":1120.18527547538,
-                 "y":279.132130667967
+                 "width":67.0405,
+                 "x":1120.19,
+                 "y":279.132
+                }, 
+                {
+                 "height":67.6764421527554,
+                 "id":25,
+                 "name":"snonwman",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":67.6764421527553,
+                 "x":1893.32903641637,
+                 "y":628.424105704157
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -148,7 +159,7 @@
          "y":0
         }],
  "nextlayerid":5,
- "nextobjectid":25,
+ "nextobjectid":26,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.8.2",
