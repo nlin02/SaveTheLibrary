@@ -15,7 +15,7 @@ var config = {
 			debug: true
 		}
 	},
-	scene: [Game, UI, GameOver, TitleScene]
+	scene: [TitleScene, Game, UI, GameOver]
 }
 
 export default new Phaser.Game(config)
