@@ -43,7 +43,7 @@ export default class UI extends Phaser.Scene
     private setHealthBar(value: number){
         const width = 200
         const percent = Phaser.Math.Clamp(value, 0, 100) / 100 // normalize within 0 and 1
- 
+        // console.log(value)
         this.graphics.clear() //clearing it out since this gets reset often
         this.graphics.fillStyle(0x808080) // set the back bar to be gray
         this.graphics.fillRoundedRect(10,10,width,20, 5)
@@ -70,7 +70,7 @@ export default class UI extends Phaser.Scene
             duration: 200,
             onUpdate: tween => {
                 const value = tween.getValue() //value between from and two
-                console.log(value)
+                // console.log(value)
                 this.setHealthBar(value)
             }
         })

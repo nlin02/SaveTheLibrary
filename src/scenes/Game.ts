@@ -41,17 +41,9 @@ export default class Game extends Phaser.Scene {
 
     create() {
         this.scene.launch('ui') //runs parallel scenes (aka UI.. )
-        // countdown //
-        // const timerLabel = this.add.text(100,50,'45', {fontSize: 48})
-        //     .setOrigin(0.5)
-        // this.countdown = new CountdownController(this, timerLabel)
-        // this.countdown.start(this.handleCountdownFinished.bind(this))
-        
+
         // Sets width and height to the scale
         const {width, height} = this.scale
-        // short for 
-        // const width = this.scale.width
-        // const height = this.scale.height
 
         // this.add.image(width * 0.5, height * 0.5, 'penguin', 'penguin_die04.png')
         

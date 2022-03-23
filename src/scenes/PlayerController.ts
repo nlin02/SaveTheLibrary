@@ -120,7 +120,7 @@ export default class PlayerController {
     }
 
     private setHealth(value: number){
-        this.health = Phaser.Math.Clamp(value -10, 0,100)
+        this.health = value // this is it. 
 
         events.emit('health-changed', this.health)
 
@@ -223,7 +223,7 @@ export default class PlayerController {
         })
         this.stateMachine.setState('idle')
 
-        this.setHealth(this.health -10)
+        this.setHealth(this.health-10)
     }
 
     private snowmanHitOnEnter() {
@@ -273,7 +273,9 @@ export default class PlayerController {
 
         this.stateMachine.setState('idle')
 
-        this.setHealth(this.health -10)
+        this.setHealth(this.health - 10)
+
+        
     }
 
     private snowmanStompOnEnter() {
