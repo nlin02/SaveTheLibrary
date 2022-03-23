@@ -17,6 +17,7 @@ export default class PlayerController {
 
     private stateMachine: StateMachine
     private health = 100
+    private time =0;
 
     private lastSnowman?: Phaser.Physics.Matter.Sprite
 
@@ -117,6 +118,7 @@ export default class PlayerController {
 
     update(dt: number) {
         this.stateMachine.update(dt)
+        events.emit('timer-update', this.time) 
     }
 
     private setHealth(value: number){
