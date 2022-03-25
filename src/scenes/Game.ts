@@ -32,8 +32,8 @@ export default class Game extends Phaser.Scene {
 
     preload() {
         this.load.atlas('penguin', 'assets/penguin.png', 'assets/penguin.json')
-        this.load.image('tiles', 'assets/sheet.png')
-        this.load.tilemapTiledJSON('tilemap', 'assets/game.json')
+        this.load.image('tiles', 'assets/AllTilesLarge.png')
+        this.load.tilemapTiledJSON('tilemap', 'assets/Level1LARGE.json')
         this.load.image('star', 'assets/star.png')
         this.load.image('health', 'assets/health.png')
         this.load.atlas('snowman', 'assets/snowman.png', 'assets/snowman.json')
@@ -49,7 +49,7 @@ export default class Game extends Phaser.Scene {
         
         // adds tilemap
         const map = this.make.tilemap({ key: 'tilemap' })
-        const tileset = map.addTilesetImage('iceworld', 'tiles')
+        const tileset = map.addTilesetImage('AllTilesLarge', 'tiles')
 
         const ground = map.createLayer('ground', tileset)   // creates the game layer
         map.createLayer('obstacles', tileset)
