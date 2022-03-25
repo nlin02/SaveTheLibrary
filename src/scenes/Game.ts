@@ -125,9 +125,6 @@ export default class Game extends Phaser.Scene {
         this.snowmen.forEach(snowman => snowman.destroy())
     }
 
-    handleCountdownFinished(){
-        // null player from moving 
-    }
 
     update(t: number, dt: number) {
 

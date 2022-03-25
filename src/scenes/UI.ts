@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+import StateMachine from '../StateMachine/StateMachine'
 import { sharedInstance as events } from './EventCenter'
 
 export default class UI extends Phaser.Scene
@@ -7,6 +8,7 @@ export default class UI extends Phaser.Scene
     private starsCollected = 0
     private graphics!: Phaser.GameObjects.Graphics
     private lastHealth = 100
+    private stateMachine: StateMachine
     
 
     private testLabel!: Phaser.GameObjects.Text  // testLabel
@@ -106,6 +108,10 @@ export default class UI extends Phaser.Scene
                     const value = tween.getValue() / 100
                     this.accumulatedTime += value
                     this.testLabel.text = `Time: ${this.accumulatedTime}`
+                }
+                else{
+                    this.stateMachine.setState('dead')
+
                 }
                 
             }
