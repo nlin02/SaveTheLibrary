@@ -58,6 +58,7 @@ export default class Game extends Phaser.Scene {
         this.matter.world.convertTilemapLayer(ground)   // add matter to tilemap aka blue lines in the server; makes tiles static
         
         // this.cameras.main.scrollY = 200  // moves camera down; starts at 0, 0 aka upper left corner
+        this.cameras.main.setZoom(0.6,0.6)
         
         const objectLayer = map.getObjectLayer('objects')
 
