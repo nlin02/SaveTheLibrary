@@ -31,7 +31,7 @@ export default class UI extends Phaser.Scene
     create()
     {
         this.graphics = this.add.graphics()
-        this.createHeader()
+        // this.createHeader()
 
         this.setHealthBar(100)
         
@@ -50,7 +50,7 @@ export default class UI extends Phaser.Scene
 
         events.on('star-collected', this.handleStarCollected, this)
         events.on('health-changed', this.handleHealthChanged, this)
-        events.on('timer-update', this.updateTime, this)
+        // events.on('timer-update', this.updateTime, this)
 
         // clean up of resources that we know we need for later.. 
         this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
@@ -63,7 +63,7 @@ export default class UI extends Phaser.Scene
         const percent = Phaser.Math.Clamp(value, 0, 100) / 100 // normalize within 0 and 1
         // console.log(value)
         this.graphics.clear() //clearing it out since this gets reset often
-        this.createHeader()
+        // this.createHeader()
         this.graphics.fillStyle(0x808080) // set the back bar to be gray
         this.graphics.fillRoundedRect(10,10,width,20, 5)
         if (percent > 0){
