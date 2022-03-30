@@ -38,7 +38,8 @@ export default class Game extends Phaser.Scene {
         this.load.tilemapTiledJSON('tilemap', 'assets/TEST.json')
         this.load.image('star', 'assets/star.png')
         this.load.image('health', 'assets/health.png')
-        this.load.atlas('snowman', 'assets/snowman.png', 'assets/snowman.json')
+        // this.load.atlas('snowman', 'assets/snowman.png', 'assets/snowman.json')
+        this.load.atlas('spikeMoveUp', 'assets/spikeMoveUp.png', 'assets/spikeMoveUp.json')
         this.load.audio('egyptmusic', ['/assets/audio/egyptmusic.mp3'])
     }
 
@@ -47,6 +48,7 @@ export default class Game extends Phaser.Scene {
 
         // Sets width and height to the scale
         const {width, height} = this.scale
+        this.cameras.main.setBackgroundColor('rgb(193,147,107)')
 
         // this.add.image(width * 0.5, height * 0.5, 'penguin', 'penguin_die04.png')
         
