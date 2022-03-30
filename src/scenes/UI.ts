@@ -12,7 +12,7 @@ export default class UI extends Phaser.Scene
     
 
     private testLabel!: Phaser.GameObjects.Text  // testLabel
-    private accumulatedTime = 0
+    private accumulatedTime = 1000
     private header !: Phaser.GameObjects.Graphics
 
     constructor()
@@ -50,7 +50,7 @@ export default class UI extends Phaser.Scene
 
         events.on('star-collected', this.handleStarCollected, this)
         events.on('health-changed', this.handleHealthChanged, this)
-        // events.on('timer-update', this.updateTime, this)
+        events.on('timer-update', this.updateTime, this)
 
         // clean up of resources that we know we need for later.. 
         this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
@@ -99,23 +99,32 @@ export default class UI extends Phaser.Scene
     }
 
     private updateTime(){
-        this.tweens.addCounter({
-            from: 0,
-            to: 100,
-            duration: 1,
-            onUpdate: tween => {
-                if(this.accumulatedTime < 1000){
-                    const value = tween.getValue() / 100
-                    this.accumulatedTime += value
-                    this.testLabel.text = `Time: ${this.accumulatedTime}`
-                }
-                else{
-                    this.stateMachine.setState('dead')
+        // this.tweens.addCounter({
+        //     from: 0,
+        //     to: 100,
+        //     duration: 1,
+        //     onUpdate: tween => {
+        //         if(this.accumulatedTime < 1000){
+        //             const value = tween.getValue() / 100
+        //             this.accumulatedTime += value
+        //             this.testLabel.text = `Time: ${this.accumulatedTime}`
+        //         }
+        //         else{
+        //             this.stateMachine.setState('dead')
 
-                }
+        //         }
                 
-            }
-        })
+        //     }
+        // })
+
+        if(this.accumulatedTime > 0) {
+            this.accumulatedTime -=1
+            this.testLabel.text = `Time: ${this.accumulatedTime}`
+        }
+        else{
+             this.stateMachine.setState('dead')
+
+        }
 
     }
 

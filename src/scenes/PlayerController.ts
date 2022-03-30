@@ -119,7 +119,7 @@ export default class PlayerController {
 
     update(dt: number) {
         this.stateMachine.update(dt)
-        // events.emit('timer-update', this.time) 
+        events.emit('timer-update', this.time) 
     }
 
     private setHealth(value: number){
