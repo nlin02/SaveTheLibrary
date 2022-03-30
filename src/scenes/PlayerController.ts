@@ -190,7 +190,14 @@ export default class PlayerController {
 
     private spikeHitOnEnter() {
         this.sprite.setVelocityY(-12)
-        this.speed = this.speed - 2
+        
+        if(this.speed <= 1) {
+            this.speed = 1
+        }
+        else {
+            this.speed = this.speed - 2
+            console.log(`speed: ${this.speed}`)
+        }
 
         // red and white color
         const startColor = Phaser.Display.Color.ValueToColor(0xffffff)
