@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+import MovingSpikesController from './MovingSpikesController'
 import ObstaclesController from './ObstaclesController'
 import PlayerController from './PlayerController'
 import SnowmanController from './SnowmanController'
@@ -11,6 +12,7 @@ export default class Game extends Phaser.Scene {
     private playerController?: PlayerController
     private obstacles!: ObstaclesController
     private snowmen?: SnowmanController[] = [] //array of snowman controllers since there can be more than 1
+    private spikesMoveUp?: MovingSpikesController[] = []
 
 
     // /** @type {CountdownController} */
@@ -91,13 +93,24 @@ export default class Game extends Phaser.Scene {
                     break
                 }
 
-                case 'snowman': {
-                    const snowman = this.matter.add.sprite(x, y, 'snowman')
+                // case 'snowman': {
+                //     const snowman = this.matter.add.sprite(x, y, 'snowman')
+                //         .setFixedRotation()
+                //     this.snowmen.push(new SnowmanController(this, snowman)) //add a snowman controller for each snowman in tiled
+                    
+                //     // add snowmen to obstacles controller
+                //     this.obstacles.add('snowman', snowman.body as MatterJS.BodyType)
+                    
+                //     break
+                // }
+
+                case 'spikes-moveup': {
+                    const spikesMoveUp = this.matter.add.sprite(x, y, 'spikeMoveUp')
                         .setFixedRotation()
-                    this.snowmen.push(new SnowmanController(this, snowman)) //add a snowman controller for each snowman in tiled
+                    this.spikesMoveUp.push(new MovingSpikesController(this, spikesMoveUp)) //add a snowman controller for each snowman in tiled
                     
                     // add snowmen to obstacles controller
-                    this.obstacles.add('snowman', snowman.body as MatterJS.BodyType)
+                    this.obstacles.add('spikesMoveUp', spikesMoveUp.body as MatterJS.BodyType)
                     
                     break
                 }

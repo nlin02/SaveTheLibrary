@@ -1,0 +1,41 @@
+{
+	"textures": [
+		{
+			"image": "spikeMoveUp.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 146,
+				"h": 146
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "spike.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 144,
+						"h": 144
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 144,
+						"h": 144
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 144,
+						"h": 144
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:71ea492953372f098ffe76ded357521a:3180ff55f7833daaa26c0364820298c9:0ff2d9f520221c350d6d802412b0fdb2$"
+	}
+}

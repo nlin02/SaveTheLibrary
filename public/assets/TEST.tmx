@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="250" height="50" tilewidth="72" tileheight="72" infinite="0" nextlayerid="4" nextobjectid="42">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="250" height="50" tilewidth="72" tileheight="72" infinite="0" nextlayerid="4" nextobjectid="46">
  <editorsettings>
   <export target="TEST.json" format="json"/>
  </editorsettings>
@@ -2530,5 +2530,8 @@
   <object id="39" name="spikes" x="17277.9" y="2122.02" width="73.7513" height="40.228"/>
   <object id="40" name="spikes" x="17499.2" y="1622.53" width="63.6943" height="30.171"/>
   <object id="41" name="spikes" x="17576.3" y="1585.65" width="43.5803" height="60.3419"/>
+  <object id="42" name="spikes-moveup" x="2594.16" y="2307.31" width="139.686" height="137.191"/>
+  <object id="43" name="spikes-moveup" x="6622.6" y="2232.48" width="144.674" height="139.686"/>
+  <object id="44" name="spikes-moveside" x="11526.6" y="2953.35" width="137.191" height="69.8429"/>
  </objectgroup>
 </map>
