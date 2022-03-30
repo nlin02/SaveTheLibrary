@@ -18,7 +18,7 @@ export default class PlayerController {
     private stateMachine: StateMachine
     private health = 100
     private time =0;
-    private speed = 0
+    private speed = 7
 
     private lastSnowman?: Phaser.Physics.Matter.Sprite
 
@@ -152,7 +152,6 @@ export default class PlayerController {
     }
 
     private walkOnUpdate(){
-        this.speed = 7
 
         if (this.cursors.left.isDown) {
             this.sprite.flipX = true
@@ -178,7 +177,6 @@ export default class PlayerController {
     }
 
     private jumpOnUpdate(){
-        this.speed = 7
 
         if (this.cursors.left.isDown) {
             this.sprite.flipX = true
@@ -192,7 +190,7 @@ export default class PlayerController {
 
     private spikeHitOnEnter() {
         this.sprite.setVelocityY(-12)
-        this.speed = 2
+        this.speed = this.speed - 2
 
         // red and white color
         const startColor = Phaser.Display.Color.ValueToColor(0xffffff)
