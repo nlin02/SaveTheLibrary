@@ -37,6 +37,7 @@ export default class Game extends Phaser.Scene {
         this.load.image('star', 'assets/star.png')
         this.load.image('health', 'assets/health.png')
         this.load.atlas('snowman', 'assets/snowman.png', 'assets/snowman.json')
+        this.load.audio('egyptmusic', ['/assets/audio/egyptmusic.mp3'])
     }
 
     create() {
@@ -57,6 +58,19 @@ export default class Game extends Phaser.Scene {
 
         this.matter.world.convertTilemapLayer(ground)   // add matter to tilemap aka blue lines in the server; makes tiles static
         
+        const music = this.sound.add ('egyptmusic')
+        if (this.sound.locked)
+		{
+			this.add.text(this.scale.width * 0.5, 50, 'Tap to Play').setOrigin(0.5)
+			this.sound.once(Phaser.Sound.Events.UNLOCKED, () => {
+				music.play()
+			})
+		}
+		else
+		{
+			music.play()
+		}
+
         // this.cameras.main.scrollY = 200  // moves camera down; starts at 0, 0 aka upper left corner
         this.cameras.main.setZoom(0.6,0.6)
         
