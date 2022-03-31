@@ -1,6 +1,7 @@
 import Phaser from 'phaser'
 import StateMachine from '../StateMachine/StateMachine'
 import { sharedInstance as events } from './EventCenter'
+import PlayerController from './PlayerController'
 
 export default class UI extends Phaser.Scene
 {
@@ -122,7 +123,8 @@ export default class UI extends Phaser.Scene
             this.testLabel.text = `Time: ${this.accumulatedTime}`
         }
         else{
-             this.stateMachine.setState('dead')
+            events.emit('times-up', PlayerController)
+            this.accumulatedTime = 1000;
 
         }
 

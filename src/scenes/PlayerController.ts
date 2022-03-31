@@ -54,6 +54,9 @@ export default class PlayerController {
         .addState('dead',{
             onEnter: this.deadOnEnter
         })
+        .addState('times-up', {
+            onEnter: this.timesUp
+        })
         .setState('idle')
 
         this.sprite.setOnCollide((data: MatterJS.ICollisionPair) => {
@@ -120,6 +123,7 @@ export default class PlayerController {
     update(dt: number) {
         this.stateMachine.update(dt)
         events.emit('timer-update', this.time) 
+        events.on('times-up', this.timesUp, this)
     }
 
     private setHealth(value: number){
@@ -296,6 +300,13 @@ export default class PlayerController {
     private deadOnEnter(){
         this.sprite.play('player-death')
         this.sprite.setOnCollide(() => {})
+        this.scene.time.delayedCall(1600, () => {
+            this.scene.scene.start('game-over')
+        })
+    }
+
+    private timesUp(){
+        // this.sprite.setOnCollide(() => {})
         this.scene.time.delayedCall(1600, () => {
             this.scene.scene.start('game-over')
         })
