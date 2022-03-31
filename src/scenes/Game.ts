@@ -34,6 +34,7 @@ export default class Game extends Phaser.Scene {
 
     preload() {
         this.load.atlas('penguin', 'assets/penguin.png', 'assets/penguin.json')
+        this.load.atlas('explorer', 'assets/explorer.png', 'assets/explorer.json')
         this.load.image('tiles', 'assets/AllTilesLarge.png')
         this.load.tilemapTiledJSON('tilemap', 'assets/TEST.json')
         this.load.image('star', 'assets/star.png')
@@ -85,7 +86,7 @@ export default class Game extends Phaser.Scene {
 
             switch(name) {
                 case 'penguin-spawn': {
-                    this.penguin = this.matter.add.sprite(x + (width * 0.5), y, 'penguin')  // add penguin to server
+                    this.penguin = this.matter.add.sprite(x + (width * 0.5), y, 'explorer')  // add penguin to server
                         .play('player-idle')
                         .setFixedRotation()
 

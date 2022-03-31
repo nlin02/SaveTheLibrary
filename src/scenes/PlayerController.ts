@@ -305,18 +305,18 @@ export default class PlayerController {
         this.sprite.anims.create({
             key: 'player-idle',
             frames: [{
-                key: 'penguin',
-                frame: 'penguin_walk01.png'
+                key: 'explorer',
+                frame: 'explorer_walk.png'
             }]
         })
 
         this.sprite.anims.create({
             key: 'player-walk',
             frameRate: 10,
-            frames: this.sprite.anims.generateFrameNames('penguin', {
+            frames: this.sprite.anims.generateFrameNames('explorer', {
                 start: 1, 
-                end: 4, 
-                prefix: 'penguin_walk0',
+                end: 6, 
+                prefix: 'explorer_walk0',
                 suffix: '.png'
             }),
             repeat: -1
