@@ -10,7 +10,7 @@
 			"scale": 1,
 			"frames": [
 				{
-					"filename": "spike.png",
+					"filename": "spikeMoveUp.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {

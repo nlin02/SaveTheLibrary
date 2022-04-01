@@ -199,7 +199,7 @@ export default class PlayerController {
             this.speed = 1
         }
         else {
-            this.speed = this.speed - 2
+            // this.speed = this.speed - 2
             console.log(`speed: ${this.speed}`)
         }
 

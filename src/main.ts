@@ -12,7 +12,7 @@ var config = {
 	physics: {
 		default: 'matter',
 		matter: {
-			debug: true
+			debug: false
 		}
 	},
 	scene: [TitleScene, Game, UI, GameOver]

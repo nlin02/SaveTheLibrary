@@ -31,8 +31,8 @@ export default class UI extends Phaser.Scene
      
     create()
     {
+    
         this.graphics = this.add.graphics()
-        // this.createHeader()
 
         this.setHealthBar(100)
         
@@ -43,6 +43,9 @@ export default class UI extends Phaser.Scene
         this.testLabel = this.add.text(500,35, 'Time: 0',{
             fontSize: '32px'
         })
+
+        this.add.rectangle(200, 100, this.accumulatedTime, 100, 0xff0000)
+        this.add.rectangle(200+this.accumulatedTime,100, 1000-this.accumulatedTime, 100, 0x00ffff)
         
         
 
@@ -119,8 +122,9 @@ export default class UI extends Phaser.Scene
         // })
 
         if(this.accumulatedTime > 0) {
-            this.accumulatedTime -=1
+            this.accumulatedTime -= 0.01
             this.testLabel.text = `Time: ${this.accumulatedTime}`
+            // update position and width of rec
         }
         else{
             events.emit('times-up', PlayerController)
