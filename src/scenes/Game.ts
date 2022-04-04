@@ -26,6 +26,7 @@ export default class Game extends Phaser.Scene {
         this.cursors = this.input.keyboard.createCursorKeys();
         this.obstacles = new ObstaclesController()
         this.snowmen = [] //create new list of snowmen every time game starts
+        this.spikesMoveUp = []
 
         this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
             this.destroy()
@@ -108,12 +109,12 @@ export default class Game extends Phaser.Scene {
                 // }
 
                 case 'spikes-moveup': {
-                    const spikesMoveUp = this.matter.add.sprite(x, y, 'spikeMoveUp')
+                    const spikeMoveUp = this.matter.add.sprite(x, y, 'spikeMoveUp')
                         .setFixedRotation()
-                    this.spikesMoveUp.push(new MovingSpikesController(this, spikesMoveUp)) //add a snowman controller for each snowman in tiled
+                        
+                    this.spikesMoveUp.push(new MovingSpikesController(this, spikeMoveUp)) //add a snowman controller for each snowman in tiled
                     
-                    // add snowmen to obstacles controller
-                    this.obstacles.add('spikesMoveUp', spikesMoveUp.body as MatterJS.BodyType)
+                    this.obstacles.add('spikeMoveUp', spikeMoveUp.body as MatterJS.BodyType)
                     
                     break
                 }
@@ -163,11 +164,7 @@ export default class Game extends Phaser.Scene {
 
         // update snowman controller every frame
         this.snowmen.forEach(snowman => snowman.update(dt))
+        this.spikesMoveUp.forEach(spikeMoveUp => spikeMoveUp.update(dt))
 
-        // question mark after playerController does null check in Typescript
-        // it is the same as saying
-        // if (this.playerController){
-        //     this.playerController.update(dt)
-        // }
     }
 }

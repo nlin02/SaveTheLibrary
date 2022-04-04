@@ -69,6 +69,11 @@ export default class PlayerController {
                 return
             }
 
+            if (this.obstacles.is('spikeMoveUp', body)) {
+                this.stateMachine.setState('spike-hit')
+                return
+            }
+
             if (this.obstacles.is('snowman', body)) {
                 this.lastSnowman = body.gameObject
 

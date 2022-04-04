@@ -11,7 +11,7 @@ export default class MovingSpikesController {
     constructor(scene: Phaser.Scene, sprite: Phaser.Physics.Matter.Sprite) {
         this.scene = scene
         this.sprite = sprite
-        this.stateMachine = new StateMachine(this, 'spikes-moveup')
+        this.stateMachine = new StateMachine(this, 'spikesMoveUp')
 
         // this.createAnimations()
 
@@ -19,25 +19,18 @@ export default class MovingSpikesController {
             .addState('idle', {
                 onEnter: this.idleOnEnter
             })
-            .addState('move-left', {
-                onEnter: this.moveLeftOnEnter,
-                onUpdate: this.moveLeftOnUpdate
+            .addState('move-up', {
+                onEnter: this.moveUpOnEnter,
+                onUpdate: this.moveUpOnUpdate
             })
-            .addState('move-right', {
-                onEnter: this.moveRightOnEnter,
-                onUpdate: this.moveRightOnUpdate
+            .addState('move-down', {
+                onEnter: this.moveDownOnEnter,
+                onUpdate: this.moveDownOnUpdate
             })
-            .addState('dead')
-            .setState('idle')
+            .setState('move-up')
 
-            // events.on('snowman-stomped', this.handleStomped, this)
     }
 
-    // destroy() {
-    //     events.off('snowman-stomped', this.handleStomped, this)
-    // }
-
-    //statemachine needs an update function to execute each frame
     update(dt: number) {
         this.stateMachine.update(dt)
     }
@@ -75,65 +68,41 @@ export default class MovingSpikesController {
     private idleOnEnter() {
         this.sprite.play('idle')
         const rand = Phaser.Math.Between(1,100)
-        // if random number is greater than 50, snowman begins moving left
         if(rand < 50) {
-            this.stateMachine.setState('move-left')
+            this.stateMachine.setState('move-up')
         }
         else {
-            this.stateMachine.setState('move-right')
+            this.stateMachine.setState('move-down')
         }
     }
 
-    private moveLeftOnEnter() {
+    private moveUpOnEnter() {
         this.moveTime = 0
-		this.sprite.play('move-left')
+		// this.sprite.play('move-left')
     }
 
-    private moveLeftOnUpdate(dt: number) {
+    private moveUpOnUpdate(dt: number) {
         this.moveTime += dt
-        this.sprite.setVelocityX(-3)
+        this.sprite.setVelocityY(-3)
 
         // if moveTime is greater than 2000 ms, change state to right
-        if(this.moveTime > 2000) {
-            this.stateMachine.setState('move-right')
+        if(this.moveTime > 1050) {
+            this.stateMachine.setState('move-down')
         }
     }
 
-    private moveRightOnEnter() {
+    private moveDownOnEnter() {
         this.moveTime = 0
-		this.sprite.play('move-right')
+		// this.sprite.play('move-right')
     }
 
-    private moveRightOnUpdate(dt: number) {
+    private moveDownOnUpdate(dt: number) {
         this.moveTime += dt
-        this.sprite.setVelocityX(3)
+        this.sprite.setVelocityY(3)
 
-        // if moveTime is greater than 2000 ms, change state to left
-        if(this.moveTime > 2000) {
-            this.stateMachine.setState('move-left')
+        if(this.moveTime > 1050) {
+            this.stateMachine.setState('move-up')
         }
     }
 
-    // private handleStomped(snowman: Phaser.Physics.Matter.Sprite) {
-    //     // if stomped snowman is not the same sprite
-    //     if(this.sprite !== snowman) {
-    //         return
-    //     }
-
-    //     events.off('snowman-stomped', this.handleStomped, this)
-
-    //     // animation to make snowman shrink on stomp
-	// 	this.scene.tweens.add({
-	// 		targets: this.sprite,
-	// 		displayHeight: 0,
-	// 		y: this.sprite.y + (this.sprite.displayHeight * 0.5),
-	// 		duration: 200,
-	// 		onComplete: () => {
-	// 			this.sprite.destroy()
-	// 		}
-	// 	})
-
-    //     // if it is, set dead state
-    //     this.stateMachine.setState('dead')
-    // }
 }
