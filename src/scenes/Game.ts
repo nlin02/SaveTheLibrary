@@ -111,8 +111,24 @@ export default class Game extends Phaser.Scene {
                 case 'spikes-moveup': {
                     const spikeMoveUp = this.matter.add.sprite(x, y, 'spikeMoveUp')
                         .setFixedRotation()
+                    
+                    // spikeMoveUp.setStatic(true)
+                    
+                    // spikeMoveUp.setBody('STATIC_BODY')
                         
-                    this.spikesMoveUp.push(new MovingSpikesController(this, spikeMoveUp)) //add a snowman controller for each snowman in tiled
+                    
+                    // spikeMoveUp.setIgnoreGravity(true).disableInteractive()
+                    // spikeMoveUp.setBody
+                    
+                    // spikeMoveUp.setOnCollideWith(this.penguin, () => {
+                    //     spikeMoveUp.setX(x)
+                    // })
+
+                    // spikeMoveUp.setMass(10000)
+                    
+                    // spikeMoveUp.body.immovable = true;
+                        
+                    this.spikesMoveUp.push(new MovingSpikesController(this, spikeMoveUp as Phaser.Physics.Matter.Sprite)) //add a snowman controller for each snowman in tiled
                     
                     this.obstacles.add('spikeMoveUp', spikeMoveUp.body as MatterJS.BodyType)
                     

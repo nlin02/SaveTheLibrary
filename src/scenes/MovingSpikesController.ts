@@ -27,7 +27,7 @@ export default class MovingSpikesController {
                 onEnter: this.moveDownOnEnter,
                 onUpdate: this.moveDownOnUpdate
             })
-            .setState('move-up')
+            .setState('move-down')
 
     }
 
@@ -83,10 +83,10 @@ export default class MovingSpikesController {
 
     private moveUpOnUpdate(dt: number) {
         this.moveTime += dt
-        this.sprite.setVelocityY(-3)
+        this.sprite.setVelocityY(-4)
 
         // if moveTime is greater than 2000 ms, change state to right
-        if(this.moveTime > 1050) {
+        if(this.moveTime > 1200) {
             this.stateMachine.setState('move-down')
         }
     }
@@ -98,9 +98,10 @@ export default class MovingSpikesController {
 
     private moveDownOnUpdate(dt: number) {
         this.moveTime += dt
-        this.sprite.setVelocityY(3)
+        this.sprite.setVelocityY(4)
 
-        if(this.moveTime > 1050) {
+
+        if(this.moveTime > 1200) {
             this.stateMachine.setState('move-up')
         }
     }
