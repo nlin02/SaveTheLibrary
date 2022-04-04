@@ -14,6 +14,8 @@ export default class Game extends Phaser.Scene {
     private snowmen?: SnowmanController[] = [] //array of snowman controllers since there can be more than 1
     private spikesMoveUp?: MovingSpikesController[] = []
 
+    private map?: Phaser.Tilemaps.Tilemap
+
 
     // /** @type {CountdownController} */
     // countdown
@@ -55,11 +57,11 @@ export default class Game extends Phaser.Scene {
         // this.add.image(width * 0.5, height * 0.5, 'penguin', 'penguin_die04.png')
         
         // adds tilemap
-        const map = this.make.tilemap({ key: 'tilemap' })
-        const tileset = map.addTilesetImage('AllTilesLarge', 'tiles')
+        this.map = this.make.tilemap({ key: 'tilemap' })
+        const tileset = this.map.addTilesetImage('AllTilesLarge', 'tiles')
 
-        const ground = map.createLayer('ground', tileset)   // creates the game layer
-        map.createLayer('obstacles', tileset)
+        const ground = this.map.createLayer('ground', tileset)   // creates the game layer
+        this.map.createLayer('obstacles', tileset)
         ground.setCollisionByProperty({ collides: true })   // sets collision property
 
         this.matter.world.convertTilemapLayer(ground)   // add matter to tilemap aka blue lines in the server; makes tiles static
@@ -80,7 +82,7 @@ export default class Game extends Phaser.Scene {
         // this.cameras.main.scrollY = 200  // moves camera down; starts at 0, 0 aka upper left corner
         this.cameras.main.setZoom(0.6,0.6)
         
-        const objectLayer = map.getObjectLayer('objects')
+        const objectLayer = this.map.getObjectLayer('objects')
 
         objectLayer.objects.forEach(objData => {
             const{ x = 0, y = 0, name, width = 0, height = 0 } = objData
@@ -91,7 +93,7 @@ export default class Game extends Phaser.Scene {
                         .play('player-idle')
                         .setFixedRotation()
 
-                    this.playerController = new PlayerController(this, this.penguin, this.cursors, this.obstacles)
+                    this.playerController = new PlayerController(this, this.penguin, this.cursors, this.obstacles, this.map)
 
                     this.cameras.main.startFollow(this.penguin, true)  // centers camera on penguin
                     break

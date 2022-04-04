@@ -15,6 +15,8 @@ export default class PlayerController {
 
     private obstacles: ObstaclesController
 
+    private map: Phaser.Tilemaps.Tilemap
+
     private stateMachine: StateMachine
     private health = 100
     private time =0;
@@ -22,7 +24,7 @@ export default class PlayerController {
 
     private lastSnowman?: Phaser.Physics.Matter.Sprite
 
-    constructor(scene: Phaser.Scene, sprite: Phaser.Physics.Matter.Sprite, cursors: CursorKeys, obstacles: ObstaclesController) {
+    constructor(scene: Phaser.Scene, sprite: Phaser.Physics.Matter.Sprite, cursors: CursorKeys, obstacles: ObstaclesController, map: Phaser.Tilemaps.Tilemap) {
         this.scene = scene
         this.sprite = sprite
         this.cursors = cursors
