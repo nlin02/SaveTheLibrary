@@ -67,19 +67,7 @@ export default class Game2 extends Phaser.Scene {
         ground.setCollisionByProperty({ collides: true })   // sets collision property
 
         this.matter.world.convertTilemapLayer(ground)   // add matter to tilemap aka blue lines in the server; makes tiles static
-        
-        // const music = this.sound.add ('egyptmusic')
-        // if (this.sound.locked)
-		// {
-		// 	this.add.text(this.scale.width * 0.5, 50, 'Tap to Play').setOrigin(0.5)
-		// 	this.sound.once(Phaser.Sound.Events.UNLOCKED, () => {
-		// 		music.play()
-		// 	})
-		// }
-		// else
-		// {
-		// 	music.play()
-		// }
+    
 
         this.cameras.main.scrollY = 200  // moves camera down; starts at 0, 0 aka upper left corner
         this.cameras.main.setZoom(0.6,0.6)
@@ -140,12 +128,11 @@ export default class Game2 extends Phaser.Scene {
                     break
                 }
 
-                case 'piglet':{
-                    const piglet = this.matter.add.sprite(x, y, 'piglet', undefined,{
-                        isStatic: true,
-                        isSensor: true
+                case 'time-machine':{
+                    const timeMachine = this.matter.add.rectangle(x + (width * 0.5), y + (height * 0.5), width, height, {
+                        isStatic: true
                     })
-                    piglet.setData('type', 'piglet') // set the Data of the star so that when collieded, we know it's a star
+                    
                     break
                 }
 
