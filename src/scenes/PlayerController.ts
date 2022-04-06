@@ -261,9 +261,17 @@ export default class PlayerController {
             this.sprite.setVelocityY(-20)
         }
 
+        if(this.speed <= 1) {
+            this.speed = 1
+        }
+        else {
+            this.speed = this.speed - 1
+            console.log(`speed: ${this.speed}`)
+        }
+
         // blue and white color
         const startColor = Phaser.Display.Color.ValueToColor(0xffffff)
-        const endColor = Phaser.Display.Color.ValueToColor(0x0000ff)
+        const endColor = Phaser.Display.Color.ValueToColor(0x00ff00)
 
 
         // sets penguin tint to move from white to red every 100ms when a spike is hit
