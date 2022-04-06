@@ -323,8 +323,11 @@ export default class PlayerController {
 
     private timesUp(){
         // this.sprite.setOnCollide(() => {})
-        this.scene.time.delayedCall(1600, () => {
+        console.log("timesUp method detected")
+        this.stateMachine.setState("times-up")
+        this.scene.time.delayedCall(0, () => {
             this.scene.scene.start('game-over')
+            console.log("gameover screen has been called")
         })
     }
 

@@ -9,12 +9,16 @@ export default class UI extends Phaser.Scene
     private starsCollected = 0
     private graphics!: Phaser.GameObjects.Graphics
     private lastHealth = 100
-    private stateMachine: StateMachine
     
 
     private testLabel!: Phaser.GameObjects.Text  // testLabel
-    private accumulatedTime = 1000
+    private accumulatedTime = 100
     private header !: Phaser.GameObjects.Graphics
+
+    private timePos !: Phaser.GameObjects.Rectangle // represents positive time
+    private timeNeg !: Phaser.GameObjects.Rectangle // represents negative time
+    
+
 
     constructor()
     {
@@ -44,13 +48,8 @@ export default class UI extends Phaser.Scene
             fontSize: '32px'
         })
 
-        this.add.rectangle(200, 100, this.accumulatedTime, 100, 0xff0000)
-        this.add.rectangle(200+this.accumulatedTime,100, 1000-this.accumulatedTime, 100, 0x00ffff)
-        
-        
-
-        
-
+        this.timeNeg = this.add.rectangle(500,25, this.accumulatedTime, 20, 0x808080)
+        this.timePos = this.add.rectangle(500, 25, this.accumulatedTime, 20, 0xff0000)
 
         events.on('star-collected', this.handleStarCollected, this)
         events.on('health-changed', this.handleHealthChanged, this)
@@ -69,7 +68,7 @@ export default class UI extends Phaser.Scene
         this.graphics.clear() //clearing it out since this gets reset often
         // this.createHeader()
         this.graphics.fillStyle(0x808080) // set the back bar to be gray
-        this.graphics.fillRoundedRect(10,10,width,20, 5)
+        this.graphics.fillRoundedRect(100,10,width,20, 5)
         if (percent > 0){
             this.graphics.fillStyle(0x00ff00) // set another rectangle that is green
             this.graphics.fillRoundedRect(10,10,width * percent,20, 5) // fit it within the bar    
@@ -103,32 +102,18 @@ export default class UI extends Phaser.Scene
     }
 
     private updateTime(){
-        // this.tweens.addCounter({
-        //     from: 0,
-        //     to: 100,
-        //     duration: 1,
-        //     onUpdate: tween => {
-        //         if(this.accumulatedTime < 1000){
-        //             const value = tween.getValue() / 100
-        //             this.accumulatedTime += value
-        //             this.testLabel.text = `Time: ${this.accumulatedTime}`
-        //         }
-        //         else{
-        //             this.stateMachine.setState('dead')
-
-        //         }
-                
-        //     }
-        // })
-
-        if(this.accumulatedTime > 0) {
-            this.accumulatedTime -= 0.01
+        if(this.accumulatedTime >= 0) {
+            this.accumulatedTime -= .1
             this.testLabel.text = `Time: ${this.accumulatedTime}`
             // update position and width of rec
+            this.timePos.setSize(this.accumulatedTime, 20)
+            this.timePos.setPosition(500 - .1/2, 25)
+            
         }
         else{
             events.emit('times-up', PlayerController)
-            this.accumulatedTime = 1000;
+            console.log("time over is detected, event has been called")
+            this.accumulatedTime = 0;
 
         }
 
