@@ -32,7 +32,7 @@ export default class UI extends Phaser.Scene
     init()
     {
         this.starsCollected = 0 // reset to 0
-        this.accumulatedTime = 100
+        this.accumulatedTime = 500
         this.timeLeft = true;
     }
      
@@ -118,6 +118,7 @@ export default class UI extends Phaser.Scene
             this.timeLeft = false;
             events.emit('times-up', PlayerController)
             this.accumulatedTime = 0;
+
         }
         else{
             // do nothing
