@@ -16,6 +16,7 @@ export default class PlayerController {
     private obstacles: ObstaclesController
 
     private map: Phaser.Tilemaps.Tilemap
+    private groundLayer: Phaser.Tilemaps.TilemapLayer
 
     private stateMachine: StateMachine
     private health = 100
@@ -24,12 +25,13 @@ export default class PlayerController {
 
     private lastscorpion?: Phaser.Physics.Matter.Sprite
 
-    constructor(scene: Phaser.Scene, sprite: Phaser.Physics.Matter.Sprite, cursors: CursorKeys, obstacles: ObstaclesController, map: Phaser.Tilemaps.Tilemap) {
+    constructor(scene: Phaser.Scene, sprite: Phaser.Physics.Matter.Sprite, cursors: CursorKeys, obstacles: ObstaclesController, map: Phaser.Tilemaps.Tilemap, layer: Phaser.Tilemaps.TilemapLayer) {
         this.scene = scene
         this.sprite = sprite
         this.cursors = cursors
         this.obstacles = obstacles
         this.map = map
+        this.groundLayer = layer
         this.createAnimations()
         this.stateMachine = new StateMachine(this, 'player')
 
@@ -44,6 +46,10 @@ export default class PlayerController {
         .addState('jump', {
             onEnter: this.jumpOnEnter,
             onUpdate: this.jumpOnUpdate
+        })
+        .addState('climb', {
+            onEnter: this.climbOnEnter,
+            onUpdate: this.climbOnUpdate
         })
         .addState('spike-hit', {
             onEnter: this.spikeHitOnEnter
@@ -164,6 +170,15 @@ export default class PlayerController {
         if (spaceJustPressed) {
             this.stateMachine.setState('jump')
         }
+
+        // Handle hero climbing
+        if ((this.cursors.up.isDown || this.cursors.down.isDown) && !this.stateMachine.isCurrentState('climb')) {
+            const tile = this.map.getTileAt(Math.floor(this.sprite.x / 72), Math.floor(this.sprite.y / 72), true, this.groundLayer);
+
+            if (tile.properties.canClimb) {
+                this.stateMachine.setState('climb');
+            }
+        }
     }
 
     private walkOnEnter(){
@@ -189,6 +204,16 @@ export default class PlayerController {
         if (spaceJustPressed) {
             this.stateMachine.setState('jump')
         }
+
+        // Handle hero climbing
+        if ((this.cursors.up.isDown || this.cursors.down.isDown) && !this.stateMachine.isCurrentState('climb')) {
+            const tile = this.map.getTileAt(Math.floor(this.sprite.x / 72), Math.floor(this.sprite.y / 72), true, this.groundLayer);
+
+            if (tile.properties.canClimb) {
+                this.stateMachine.setState('climb');
+            }
+        }
+
     }
 
     private jumpOnEnter(){
@@ -204,6 +229,34 @@ export default class PlayerController {
         else if (this.cursors.right.isDown) {
             this.sprite.flipX = false
             this.sprite.setVelocityX(this.speed)
+        }
+    }
+
+    private climbOnEnter(){
+       this.sprite.setVelocity(0,0)
+    }
+
+    private climbOnUpdate(){
+        const tile = this.map.getTileAt(Math.floor(this.sprite.x / 72), Math.floor(this.sprite.y / 72), true, this.groundLayer);
+
+        // Handle climbing movement
+        if (this.cursors.up.isDown) {
+            this.sprite.setVelocityY(-this.speed)
+        } 
+        else if (this.cursors.down.isDown) {
+            this.sprite.setVelocityY(this.speed)
+        }
+        else if (this.cursors.left.isDown) {
+            this.sprite.flipX = true
+            this.sprite.setVelocityX(-this.speed)
+        }
+        else if (this.cursors.right.isDown) {
+            this.sprite.flipX = false
+            this.sprite.setVelocityX(this.speed)
+        }
+
+        if (!tile.properties.canClimb) {
+            this.stateMachine.setState('idle');
         }
     }
 
@@ -367,6 +420,8 @@ export default class PlayerController {
                 suffix: '.png'
             }),
             frameRate: 10
-            })
+        })
+
+        // NEED TO CREATE CLIMBING ANIMATION!!!!!
     }
 }

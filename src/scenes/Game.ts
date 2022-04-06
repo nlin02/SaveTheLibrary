@@ -15,6 +15,7 @@ export default class Game extends Phaser.Scene {
     private spikesMoveUp?: MovingSpikesController[] = []
 
     private map?: Phaser.Tilemaps.Tilemap
+    private groundLayer?: Phaser.Tilemaps.TilemapLayer
 
 
     // /** @type {CountdownController} */
@@ -40,7 +41,7 @@ export default class Game extends Phaser.Scene {
         this.load.atlas('explorer', 'assets/explorer.png', 'assets/explorer.json')
         this.load.atlas('scorpion', 'assets/scorpion.png', 'assets/scorpion.json')
         this.load.image('tiles', 'assets/AllTilesLarge.png')
-        this.load.tilemapTiledJSON('tilemap', 'assets/TEST.json')
+        this.load.tilemapTiledJSON('tilemap', 'assets/TESTwithTileProperties.json')
         this.load.image('star', 'assets/star.png')
         this.load.image('health', 'assets/health.png')
         this.load.image('piglet', 'assets/pigletCeasar.png')
@@ -55,18 +56,16 @@ export default class Game extends Phaser.Scene {
         // Sets width and height to the scale
         const {width, height} = this.scale
         this.cameras.main.setBackgroundColor('rgb(193,147,107)')
-
-        // this.add.image(width * 0.5, height * 0.5, 'penguin', 'penguin_die04.png')
         
         // adds tilemap
         this.map = this.make.tilemap({ key: 'tilemap' })
         const tileset = this.map.addTilesetImage('AllTilesLarge', 'tiles')
 
-        const ground = this.map.createLayer('ground', tileset)   // creates the game layer
+        this.groundLayer = this.map.createLayer('ground', tileset)   // creates the game layer
         this.map.createLayer('obstacles', tileset)
-        ground.setCollisionByProperty({ collides: true })   // sets collision property
+        this.groundLayer.setCollisionByProperty({ collides: true })   // sets collision property
 
-        this.matter.world.convertTilemapLayer(ground)   // add matter to tilemap aka blue lines in the server; makes tiles static
+        this.matter.world.convertTilemapLayer(this.groundLayer)   // add matter to tilemap aka blue lines in the server; makes tiles static
         
         const music = this.sound.add ('egyptmusic')
         if (this.sound.locked)
@@ -95,7 +94,7 @@ export default class Game extends Phaser.Scene {
                         .play('player-idle')
                         .setFixedRotation()
 
-                    this.playerController = new PlayerController(this, this.penguin, this.cursors, this.obstacles, this.map)
+                    this.playerController = new PlayerController(this, this.penguin, this.cursors, this.obstacles, this.map, this.groundLayer)
 
                     this.cameras.main.startFollow(this.penguin, true)  // centers camera on penguin
                     break
