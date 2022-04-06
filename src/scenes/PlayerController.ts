@@ -22,7 +22,7 @@ export default class PlayerController {
     private time =0;
     private speed = 7
 
-    private lastSnowman?: Phaser.Physics.Matter.Sprite
+    private lastscorpion?: Phaser.Physics.Matter.Sprite
 
     constructor(scene: Phaser.Scene, sprite: Phaser.Physics.Matter.Sprite, cursors: CursorKeys, obstacles: ObstaclesController, map: Phaser.Tilemaps.Tilemap) {
         this.scene = scene
@@ -48,11 +48,11 @@ export default class PlayerController {
         .addState('spike-hit', {
             onEnter: this.spikeHitOnEnter
         })
-        .addState('snowman-hit', {
-            onEnter: this.snowmanHitOnEnter
+        .addState('scorpion-hit', {
+            onEnter: this.scorpionHitOnEnter
         })
-        .addState('snowman-stomp', {
-            onEnter: this.snowmanStompOnEnter
+        .addState('scorpion-stomp', {
+            onEnter: this.scorpionStompOnEnter
         })
         .addState('dead',{
             onEnter: this.deadOnEnter
@@ -78,15 +78,15 @@ export default class PlayerController {
             }
 
             if (this.obstacles.is('scorpion', body)) {
-                this.lastSnowman = body.gameObject
+                this.lastscorpion = body.gameObject
 
-                // if sprite is on top of snowman, stomp and kill snowman
+                // if sprite is on top of scorpion, stomp and kill scorpion
                 if(this.sprite.y + 20 < body.position.y) {
-                    this.stateMachine.setState('snowman-stomp')
+                    this.stateMachine.setState('scorpion-stomp')
                 }
-                // hit by snowman, penguin gets hurt
+                // hit by scorpion, penguin gets hurt
                 else {
-                    this.stateMachine.setState('snowman-hit')
+                    this.stateMachine.setState('scorpion-hit')
                 }
                 return
             }
@@ -247,10 +247,10 @@ export default class PlayerController {
         this.setHealth(this.health-10)
     }
 
-    private snowmanHitOnEnter() {
-        if(this.lastSnowman) {
-            // move left if left of snowman
-            if(this.sprite.x < this.lastSnowman.x) {
+    private scorpionHitOnEnter() {
+        if(this.lastscorpion) {
+            // move left if left of scorpion
+            if(this.sprite.x < this.lastscorpion.x) {
                 this.sprite.setVelocityX(-20)
             }
             else {
@@ -299,9 +299,9 @@ export default class PlayerController {
         
     }
 
-    private snowmanStompOnEnter() {
+    private scorpionStompOnEnter() {
         this.sprite.setVelocityY(-10)
-        events.emit('snowman-stomped', this.lastSnowman)
+        events.emit('scorpion-stomped', this.lastscorpion)
         this.stateMachine.setState('idle')
     }
 

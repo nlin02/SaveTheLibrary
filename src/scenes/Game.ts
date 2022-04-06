@@ -2,7 +2,7 @@ import Phaser from 'phaser'
 import MovingSpikesController from './MovingSpikesController'
 import ObstaclesController from './ObstaclesController'
 import PlayerController from './PlayerController'
-import SnowmanController from './SnowmanController'
+import ScorpionController from './ScorpionController'
 // import CountdownController from './CountdownController'
 
 export default class Game extends Phaser.Scene {
@@ -11,7 +11,7 @@ export default class Game extends Phaser.Scene {
     private penguin?: Phaser.Physics.Matter.Sprite    // ? = could be undefined
     private playerController?: PlayerController
     private obstacles!: ObstaclesController
-    private snowmen?: SnowmanController[] = [] //array of snowman controllers since there can be more than 1
+    private scorpions?: ScorpionController[] = [] //array of scorpion controllers since there can be more than 1
     private spikesMoveUp?: MovingSpikesController[] = []
 
     private map?: Phaser.Tilemaps.Tilemap
@@ -27,7 +27,7 @@ export default class Game extends Phaser.Scene {
     init() {
         this.cursors = this.input.keyboard.createCursorKeys();
         this.obstacles = new ObstaclesController()
-        this.snowmen = [] //create new list of snowmen every time game starts
+        this.scorpions = [] //create new list of scorpions every time game starts
         this.spikesMoveUp = []
 
         this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
@@ -43,7 +43,6 @@ export default class Game extends Phaser.Scene {
         this.load.tilemapTiledJSON('tilemap', 'assets/TEST.json')
         this.load.image('star', 'assets/star.png')
         this.load.image('health', 'assets/health.png')
-        // this.load.atlas('snowman', 'assets/snowman.png', 'assets/snowman.json')
         this.load.atlas('spikeMoveUp', 'assets/spikeMoveUp.png', 'assets/spikeMoveUp.json')
         this.load.audio('egyptmusic', ['/assets/audio/egyptmusic.mp3'])
     }
@@ -103,24 +102,14 @@ export default class Game extends Phaser.Scene {
                     case 'scorpion': {
                     const scorpion = this.matter.add.sprite(x, y, 'scorpion')
                         .setFixedRotation()
-                    this.snowmen.push(new SnowmanController(this, scorpion)) //add a snowman controller for each snowman in tiled
+                    this.scorpions.push(new ScorpionController(this, scorpion)) //add a scorpion controller for each scorpion in tiled
                     
-                    // add snowmen to obstacles controller
+                    // add scorpions to obstacles controller
                     this.obstacles.add('scorpion', scorpion.body as MatterJS.BodyType)
                     
                     break
                 }
 
-                // case 'snowman': {
-                //     const snowman = this.matter.add.sprite(x, y, 'snowman')
-                //         .setFixedRotation()
-                //     this.snowmen.push(new SnowmanController(this, snowman)) //add a snowman controller for each snowman in tiled
-                    
-                //     // add snowmen to obstacles controller
-                //     this.obstacles.add('snowman', snowman.body as MatterJS.BodyType)
-                    
-                //     break
-                // }
 
                 case 'spikes-moveup': {
                     const spikeMoveUp = this.matter.add.sprite(x, y, 'spikeMoveUp')
@@ -142,7 +131,7 @@ export default class Game extends Phaser.Scene {
                     
                     // spikeMoveUp.body.immovable = true;
                         
-                    this.spikesMoveUp.push(new MovingSpikesController(this, spikeMoveUp as Phaser.Physics.Matter.Sprite)) //add a snowman controller for each snowman in tiled
+                    this.spikesMoveUp.push(new MovingSpikesController(this, spikeMoveUp as Phaser.Physics.Matter.Sprite)) //add a scorpion controller for each scorpion in tiled
                     
                     this.obstacles.add('spikeMoveUp', spikeMoveUp.body as MatterJS.BodyType)
                     
@@ -181,10 +170,10 @@ export default class Game extends Phaser.Scene {
         })
     }
 
-    // when scene ends, clean up snowman events
+    // when scene ends, clean up scorpion events
     destroy() {
         this.scene.stop('ui')
-        this.snowmen.forEach(snowman => snowman.destroy())
+        this.scorpions.forEach(scorpion => scorpion.destroy())
     }
 
 
@@ -192,8 +181,8 @@ export default class Game extends Phaser.Scene {
 
         this.playerController?.update(dt)
 
-        // update snowman controller every frame
-        this.snowmen.forEach(snowman => snowman.update(dt))
+        // update scorpion controller every frame
+        this.scorpions.forEach(scorpion => scorpion.update(dt))
         this.spikesMoveUp.forEach(spikeMoveUp => spikeMoveUp.update(dt))
 
     }

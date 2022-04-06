@@ -2,7 +2,7 @@ import { Physics } from "phaser";
 import StateMachine from "../StateMachine/StateMachine";
 import { sharedInstance as events} from "./EventCenter";
 
-export default class SnowmanController {
+export default class ScorpionController {
     private scene: Phaser.Scene
     private sprite: Physics.Matter.Sprite
     private stateMachine: StateMachine
@@ -11,7 +11,7 @@ export default class SnowmanController {
     constructor(scene: Phaser.Scene, sprite: Phaser.Physics.Matter.Sprite) {
         this.scene = scene
         this.sprite = sprite
-        this.stateMachine = new StateMachine(this, 'snowman')
+        this.stateMachine = new StateMachine(this, 'scorpion')
 
         this.createAnimations()
 
@@ -30,11 +30,11 @@ export default class SnowmanController {
             .addState('dead')
             .setState('idle')
 
-            events.on('snowman-stomped', this.handleStomped, this)
+            events.on('scorpion-stomped', this.handleStomped, this)
     }
 
     destroy() {
-        events.off('snowman-stomped', this.handleStomped, this)
+        events.off('scorpion-stomped', this.handleStomped, this)
     }
 
     //statemachine needs an update function to execute each frame
@@ -75,7 +75,7 @@ export default class SnowmanController {
     private idleOnEnter() {
         this.sprite.play('idle')
         const rand = Phaser.Math.Between(1,100)
-        // if random number is greater than 50, snowman begins moving left
+        // if random number is greater than 50, scorpion begins moving left
         if(rand < 50) {
             this.stateMachine.setState('move-left')
         }
@@ -114,15 +114,15 @@ export default class SnowmanController {
         }
     }
 
-    private handleStomped(snowman: Phaser.Physics.Matter.Sprite) {
-        // if stomped snowman is not the same sprite
-        if(this.sprite !== snowman) {
+    private handleStomped(scorpion: Phaser.Physics.Matter.Sprite) {
+        // if stomped scorpion is not the same sprite
+        if(this.sprite !== scorpion) {
             return
         }
 
-        events.off('snowman-stomped', this.handleStomped, this)
+        events.off('scorpion-stomped', this.handleStomped, this)
 
-        // animation to make snowman shrink on stomp
+        // animation to make scorpion shrink on stomp
 		this.scene.tweens.add({
 			targets: this.sprite,
 			displayHeight: 0,
