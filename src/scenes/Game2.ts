@@ -40,7 +40,7 @@ export default class Game2 extends Phaser.Scene {
         this.load.atlas('explorer', 'assets/explorer.png', 'assets/explorer.json')
         this.load.atlas('scorpion', 'assets/scorpion.png', 'assets/scorpion.json')
         this.load.image('tiles', 'assets/AllTilesLarge.png')
-        this.load.tilemapTiledJSON('tilemap', 'assets/DraftsTileMaps/Level1JSON.json')
+        this.load.tilemapTiledJSON('level1', 'assets/DraftsTileMaps/Level1JSON.json')
         this.load.image('star', 'assets/star.png')
         this.load.image('health', 'assets/health.png')
         this.load.image('piglet', 'assets/pigletCeasar.png')
@@ -59,7 +59,7 @@ export default class Game2 extends Phaser.Scene {
         // this.add.image(width * 0.5, height * 0.5, 'penguin', 'penguin_die04.png')
         
         // adds tilemap
-        this.map = this.make.tilemap({ key: 'tilemap' })
+        this.map = this.make.tilemap({ key: 'level1' })
         const tileset = this.map.addTilesetImage('AllTilesLarge', 'tiles')
 
         const ground = this.map.createLayer('ground', tileset)   // creates the game layer

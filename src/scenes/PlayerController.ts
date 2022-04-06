@@ -125,8 +125,7 @@ export default class PlayerController {
 
                 case 'piglet':{
                     console.log('touched piglet!')
-                    this.scene.scene.stop('game')
-
+                    Phaser.Scenes.Events.SHUTDOWN
                     this.scene.scene.start('levelTwo')
                     break
                 }
