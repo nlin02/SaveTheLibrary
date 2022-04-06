@@ -19,7 +19,7 @@ export default class PlayerController {
 
     private stateMachine: StateMachine
     private health = 100
-    private time =0;
+    private time = 100;
     private speed = 7
 
     private lastscorpion?: Phaser.Physics.Matter.Sprite
@@ -120,6 +120,14 @@ export default class PlayerController {
                     this.health = Phaser.Math.Clamp(this.health + value, 0, 100)  // clamps to to 0 to 100, cannot exceed 100 
                     events.emit('health-changed', this.health)
                     sprite.destroy()
+                    break
+                }
+
+                case 'piglet':{
+                    console.log('touched piglet!')
+                    this.scene.scene.stop('game')
+
+                    this.scene.scene.start('levelTwo')
                     break
                 }
             }
@@ -320,7 +328,7 @@ export default class PlayerController {
             this.scene.scene.start('game-over')
         })
     }
-
+    
     private timesUp(){
         // this.sprite.setOnCollide(() => {})
         this.stateMachine.setState("times-up")

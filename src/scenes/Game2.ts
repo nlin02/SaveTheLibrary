@@ -5,7 +5,7 @@ import PlayerController from './PlayerController'
 import ScorpionController from './ScorpionController'
 // import CountdownController from './CountdownController'
 
-export default class Game extends Phaser.Scene {
+export default class Game2 extends Phaser.Scene {
 
     private cursors!: Phaser.Types.Input.Keyboard.CursorKeys
     private penguin?: Phaser.Physics.Matter.Sprite    // ? = could be undefined
@@ -21,7 +21,7 @@ export default class Game extends Phaser.Scene {
     // countdown
 
     constructor() {
-        super('game')
+        super('levelTwo')
     }
 
     init() {
@@ -40,7 +40,7 @@ export default class Game extends Phaser.Scene {
         this.load.atlas('explorer', 'assets/explorer.png', 'assets/explorer.json')
         this.load.atlas('scorpion', 'assets/scorpion.png', 'assets/scorpion.json')
         this.load.image('tiles', 'assets/AllTilesLarge.png')
-        this.load.tilemapTiledJSON('tilemap', 'assets/TEST.json')
+        this.load.tilemapTiledJSON('tilemap', 'assets/DraftsTileMaps/Level1JSON.json')
         this.load.image('star', 'assets/star.png')
         this.load.image('health', 'assets/health.png')
         this.load.image('piglet', 'assets/pigletCeasar.png')
@@ -49,7 +49,7 @@ export default class Game extends Phaser.Scene {
     }
 
     create() {
-        console.log("Launching Game!")
+        console.log("Launching Game2!")
         this.scene.launch('ui') //runs parallel scenes (aka UI.. )
 
         // Sets width and height to the scale
@@ -68,20 +68,20 @@ export default class Game extends Phaser.Scene {
 
         this.matter.world.convertTilemapLayer(ground)   // add matter to tilemap aka blue lines in the server; makes tiles static
         
-        const music = this.sound.add ('egyptmusic')
-        if (this.sound.locked)
-		{
-			this.add.text(this.scale.width * 0.5, 50, 'Tap to Play').setOrigin(0.5)
-			this.sound.once(Phaser.Sound.Events.UNLOCKED, () => {
-				music.play()
-			})
-		}
-		else
-		{
-			music.play()
-		}
+        // const music = this.sound.add ('egyptmusic')
+        // if (this.sound.locked)
+		// {
+		// 	this.add.text(this.scale.width * 0.5, 50, 'Tap to Play').setOrigin(0.5)
+		// 	this.sound.once(Phaser.Sound.Events.UNLOCKED, () => {
+		// 		music.play()
+		// 	})
+		// }
+		// else
+		// {
+		// 	music.play()
+		// }
 
-        // this.cameras.main.scrollY = 200  // moves camera down; starts at 0, 0 aka upper left corner
+        this.cameras.main.scrollY = 200  // moves camera down; starts at 0, 0 aka upper left corner
         this.cameras.main.setZoom(0.6,0.6)
         
         const objectLayer = this.map.getObjectLayer('objects')
@@ -183,7 +183,7 @@ export default class Game extends Phaser.Scene {
 
     // when scene ends, clean up scorpion events
     destroy() {
-        console.log("Destroying game")
+        console.log("Destroying game2")
         this.scene.stop('ui')
         this.scorpions.forEach(scorpion => scorpion.destroy())
     }

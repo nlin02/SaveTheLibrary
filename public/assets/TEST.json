@@ -1,4 +1,12 @@
 { "compressionlevel":-1,
+ "editorsettings":
+    {
+     "export":
+        {
+         "format":"json",
+         "target":"TEST.json"
+        }
+    },
  "height":50,
  "infinite":false,
  "layers":[
@@ -494,59 +502,70 @@
                  "y":2953.35
                 }, 
                 {
-                 "height":65.8728147960478,
+                 "height":65.8728,
                  "id":46,
                  "name":"scorpion",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":65.8728147960474,
-                 "x":3035.21662021789,
-                 "y":3458.3227767925
+                 "width":65.8728,
+                 "x":3035.22,
+                 "y":3458.32
                 }, 
                 {
-                 "height":60.8056751963518,
+                 "height":60.8057,
                  "id":47,
                  "name":"scorpion",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":63.3392449961993,
-                 "x":4258.93083354446,
-                 "y":3030.14948061819
+                 "width":63.3392,
+                 "x":4258.93,
+                 "y":3030.15
                 }, 
                 {
-                 "height":65.8728147960478,
+                 "height":65.8728,
                  "id":48,
                  "name":"scorpion",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":60.8056751963522,
-                 "x":5335.69799847986,
-                 "y":2956.6759564226
+                 "width":60.8057,
+                 "x":5335.7,
+                 "y":2956.68
                 }, 
                 {
-                 "height":63.3392449961998,
+                 "height":63.3392,
                  "id":49,
                  "name":"scorpion",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":63.3392449962012,
-                 "x":11738.0288826957,
-                 "y":2959.20952622245
+                 "width":63.3392,
+                 "x":11738,
+                 "y":2959.21
                 }, 
                 {
-                 "height":68.4063845958954,
+                 "height":68.4064,
                  "id":50,
                  "name":"scorpion",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":76.0070939954385,
-                 "x":12171.2693184697,
-                 "y":2954.14238662275
+                 "width":76.0071,
+                 "x":12171.3,
+                 "y":2954.14
+                }, 
+                {
+                 "height":127.388535031847,
+                 "id":51,
+                 "name":"piglet",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":134.093194770365,
+                 "x":7127.89138451223,
+                 "y":2811.05753113799
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -555,7 +574,7 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":51,
+ "nextobjectid":52,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.8.2",

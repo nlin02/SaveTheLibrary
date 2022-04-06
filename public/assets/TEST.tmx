@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="250" height="50" tilewidth="72" tileheight="72" infinite="0" nextlayerid="4" nextobjectid="51">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="250" height="50" tilewidth="72" tileheight="72" infinite="0" nextlayerid="4" nextobjectid="52">
  <editorsettings>
-  <export target="TEST.json" format="json"/>
+  <export format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="AllTilesLarge" tilewidth="72" tileheight="72" tilecount="475" columns="19">
   <image source="AllTilesLarge.png" width="1368" height="1800"/>
@@ -2539,5 +2539,6 @@
   <object id="48" name="scorpion" x="5335.7" y="2956.68" width="60.8057" height="65.8728"/>
   <object id="49" name="scorpion" x="11738" y="2959.21" width="63.3392" height="63.3392"/>
   <object id="50" name="scorpion" x="12171.3" y="2954.14" width="76.0071" height="68.4064"/>
+  <object id="51" name="piglet" x="7127.89" y="2811.06" width="134.093" height="127.389"/>
  </objectgroup>
 </map>

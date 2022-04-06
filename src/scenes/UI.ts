@@ -13,11 +13,10 @@ export default class UI extends Phaser.Scene
 
     private testLabel!: Phaser.GameObjects.Text  // testLabel
     private accumulatedTime // =100
-    private header !: Phaser.GameObjects.Graphics
-    private timeLeft // = true; //testing this
 
     private timePos !: Phaser.GameObjects.Rectangle // represents positive time
     private timeNeg !: Phaser.GameObjects.Rectangle // represents negative time
+    private gameOverText!: Phaser.GameObjects.Text
     
 
 
@@ -32,8 +31,8 @@ export default class UI extends Phaser.Scene
     init()
     {
         this.starsCollected = 0 // reset to 0
-        this.accumulatedTime = 500
-        this.timeLeft = true;
+        this.accumulatedTime = 350
+
     }
      
     create()
@@ -69,7 +68,6 @@ export default class UI extends Phaser.Scene
         const percent = Phaser.Math.Clamp(value, 0, 100) / 100 // normalize within 0 and 1
         // console.log(value)
         this.graphics.clear() //clearing it out since this gets reset often
-        // this.createHeader()
         this.graphics.fillStyle(0x808080) // set the back bar to be gray
         this.graphics.fillRoundedRect(100,10,width,20, 5)
         if (percent > 0){
@@ -105,7 +103,7 @@ export default class UI extends Phaser.Scene
     }
 
     private updateTime(){
-        if(this.accumulatedTime >= 0 && this.timeLeft) {
+        if(this.accumulatedTime >= 0 ) {
             this.accumulatedTime -= .1
             this.testLabel.text = `Time: ${this.accumulatedTime}`
             // update position and width of rec
@@ -113,25 +111,19 @@ export default class UI extends Phaser.Scene
             this.timePos.setPosition(500 - .1/2, 25)
             
         }
-        else if (this.accumulatedTime <= 0 && this.timeLeft){
+        else if (this.accumulatedTime <= 0 ){
             console.log("TIMES UP")
-            this.timeLeft = false;
             events.emit('times-up', PlayerController)
             this.accumulatedTime = 0;
+            this.gameOverText = this.add.text(250,250, 'Times Up!',{
+                fontSize: '32px'
+            })
 
         }
         else{
             // do nothing
         }
 
-    }
-
-    private createHeader(){
-        const width = 780
-
-        this.graphics.fillStyle(0xacc8d0) // set the back bar to be gray
-        this.graphics.fillRoundedRect(10,10,width, 100, 5)
- 
     }
 
 
