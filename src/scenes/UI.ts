@@ -12,8 +12,9 @@ export default class UI extends Phaser.Scene
     
 
     private testLabel!: Phaser.GameObjects.Text  // testLabel
-    private accumulatedTime = 100
+    private accumulatedTime // =100
     private header !: Phaser.GameObjects.Graphics
+    private timeLeft // = true; //testing this
 
     private timePos !: Phaser.GameObjects.Rectangle // represents positive time
     private timeNeg !: Phaser.GameObjects.Rectangle // represents negative time
@@ -31,6 +32,8 @@ export default class UI extends Phaser.Scene
     init()
     {
         this.starsCollected = 0 // reset to 0
+        this.accumulatedTime = 100
+        this.timeLeft = true;
     }
      
     create()
@@ -102,7 +105,7 @@ export default class UI extends Phaser.Scene
     }
 
     private updateTime(){
-        if(this.accumulatedTime >= 0) {
+        if(this.accumulatedTime >= 0 && this.timeLeft) {
             this.accumulatedTime -= .1
             this.testLabel.text = `Time: ${this.accumulatedTime}`
             // update position and width of rec
@@ -110,11 +113,14 @@ export default class UI extends Phaser.Scene
             this.timePos.setPosition(500 - .1/2, 25)
             
         }
-        else{
+        else if (this.accumulatedTime <= 0 && this.timeLeft){
+            console.log("TIMES UP")
+            this.timeLeft = false;
             events.emit('times-up', PlayerController)
-            console.log("time over is detected, event has been called")
             this.accumulatedTime = 0;
-
+        }
+        else{
+            // do nothing
         }
 
     }
