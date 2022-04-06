@@ -46,14 +46,14 @@ export default class SnowmanController {
         this.sprite.anims.create({
             key: 'idle',
             // key of the texture (game.ts preload)
-            frames: [{key: 'snowman', frame: 'snowman_left_1.png'}]
+            frames: [{key: 'scorpion', frame: 'scorpForward1.png'}]
         })
         this.sprite.anims.create({ 
             key: 'move-left',
-            frames: this.sprite.anims.generateFrameNames('snowman', {
+            frames: this.sprite.anims.generateFrameNames('scorpion', {
                 start: 1,
-                end: 2,
-                prefix: 'snowman_left_',
+                end: 4,
+                prefix: 'scorpBackward',
                 suffix: '.png' 
             }),
             frameRate: 5,
@@ -61,10 +61,10 @@ export default class SnowmanController {
         })
         this.sprite.anims.create({
             key: 'move-right',
-            frames: this.sprite.anims.generateFrameNames('snowman', {
+            frames: this.sprite.anims.generateFrameNames('scorpion', {
                 start: 1,
-                end: 2,
-                prefix: 'snowman_right_',
+                end: 4,
+                prefix: 'scorpForward',
                 suffix: '.png'
             }),
             frameRate: 5,

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="250" height="50" tilewidth="72" tileheight="72" infinite="0" nextlayerid="4" nextobjectid="46">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="250" height="50" tilewidth="72" tileheight="72" infinite="0" nextlayerid="4" nextobjectid="51">
  <editorsettings>
   <export target="TEST.json" format="json"/>
  </editorsettings>
@@ -2491,7 +2491,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,211,211,211,211,211,211,211,211,211,211,211,211,211,211,211,211,211,211,211,211,211,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="2" name="objects" visible="0">
+ <objectgroup id="2" name="objects">
   <object id="1" name="penguin-spawn" x="57.4674" y="2916.37" width="93.3852" height="93.3852"/>
   <object id="2" name="star" x="1171.49" y="2743.47" width="69.4783" height="69.4783"/>
   <object id="3" name="star" x="3436.08" y="2432.19" width="69.4783" height="69.4783"/>
@@ -2534,5 +2534,10 @@
   <object id="42" name="spikes-moveup" x="2594.16" y="2307.31" width="139.686" height="137.191"/>
   <object id="43" name="spikes-moveup" x="6622.6" y="2232.48" width="144.674" height="139.686"/>
   <object id="44" name="spikes-moveside" x="11526.6" y="2953.35" width="137.191" height="69.8429"/>
+  <object id="46" name="scorpion" x="3035.22" y="3458.32" width="65.8728" height="65.8728"/>
+  <object id="47" name="scorpion" x="4258.93" y="3030.15" width="63.3392" height="60.8057"/>
+  <object id="48" name="scorpion" x="5335.7" y="2956.68" width="60.8057" height="65.8728"/>
+  <object id="49" name="scorpion" x="11738" y="2959.21" width="63.3392" height="63.3392"/>
+  <object id="50" name="scorpion" x="12171.3" y="2954.14" width="76.0071" height="68.4064"/>
  </objectgroup>
 </map>

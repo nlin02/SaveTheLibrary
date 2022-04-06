@@ -77,11 +77,11 @@ export default class PlayerController {
                 return
             }
 
-            if (this.obstacles.is('snowman', body)) {
+            if (this.obstacles.is('scorpion', body)) {
                 this.lastSnowman = body.gameObject
 
                 // if sprite is on top of snowman, stomp and kill snowman
-                if(this.sprite.y < body.position.y) {
+                if(this.sprite.y + 20 < body.position.y) {
                     this.stateMachine.setState('snowman-stomp')
                 }
                 // hit by snowman, penguin gets hurt

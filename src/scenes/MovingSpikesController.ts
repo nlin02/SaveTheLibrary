@@ -84,6 +84,7 @@ export default class MovingSpikesController {
     private moveUpOnUpdate(dt: number) {
         this.moveTime += dt
         this.sprite.setVelocityY(-4)
+        // this.sprite.setX()
 
         // if moveTime is greater than 2000 ms, change state to right
         if(this.moveTime > 1200) {

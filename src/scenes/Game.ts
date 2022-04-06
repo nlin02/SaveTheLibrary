@@ -38,6 +38,7 @@ export default class Game extends Phaser.Scene {
     preload() {
         this.load.atlas('penguin', 'assets/penguin.png', 'assets/penguin.json')
         this.load.atlas('explorer', 'assets/explorer.png', 'assets/explorer.json')
+        this.load.atlas('scorpion', 'assets/scorpion.png', 'assets/scorpion.json')
         this.load.image('tiles', 'assets/AllTilesLarge.png')
         this.load.tilemapTiledJSON('tilemap', 'assets/TEST.json')
         this.load.image('star', 'assets/star.png')
@@ -96,6 +97,17 @@ export default class Game extends Phaser.Scene {
                     this.playerController = new PlayerController(this, this.penguin, this.cursors, this.obstacles, this.map)
 
                     this.cameras.main.startFollow(this.penguin, true)  // centers camera on penguin
+                    break
+                }
+
+                    case 'scorpion': {
+                    const scorpion = this.matter.add.sprite(x, y, 'scorpion')
+                        .setFixedRotation()
+                    this.snowmen.push(new SnowmanController(this, scorpion)) //add a snowman controller for each snowman in tiled
+                    
+                    // add snowmen to obstacles controller
+                    this.obstacles.add('scorpion', scorpion.body as MatterJS.BodyType)
+                    
                     break
                 }
 
