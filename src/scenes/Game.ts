@@ -41,7 +41,7 @@ export default class Game extends Phaser.Scene {
         this.load.atlas('explorer', 'assets/explorer.png', 'assets/explorer.json')
         this.load.atlas('scorpion', 'assets/scorpion.png', 'assets/scorpion.json')
         this.load.image('tiles', 'assets/AllTilesLarge.png')
-        this.load.tilemapTiledJSON('tilemap', 'assets/TESTwithTileProperties.json')
+        this.load.tilemapTiledJSON('tilemap', 'assets/Alexandria.json')
         this.load.image('star', 'assets/star.png')
         this.load.image('health', 'assets/health.png')
         this.load.image('piglet', 'assets/pigletCeasar.png')
@@ -100,7 +100,7 @@ export default class Game extends Phaser.Scene {
                     break
                 }
 
-                    case 'scorpion': {
+                case 'scorpion': {
                     const scorpion = this.matter.add.sprite(x, y, 'scorpion')
                         .setFixedRotation()
                     this.scorpions.push(new ScorpionController(this, scorpion)) //add a scorpion controller for each scorpion in tiled
