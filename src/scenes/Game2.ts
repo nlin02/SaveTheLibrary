@@ -13,6 +13,8 @@ export default class Game2 extends Phaser.Scene {
     private obstacles!: ObstaclesController
     private scorpions?: ScorpionController[] = [] //array of scorpion controllers since there can be more than 1
     private spikesMoveUp?: MovingSpikesController[] = []
+    private groundLayer?: Phaser.Tilemaps.TilemapLayer
+
 
     private map?: Phaser.Tilemaps.Tilemap
 
@@ -43,7 +45,7 @@ export default class Game2 extends Phaser.Scene {
         this.load.tilemapTiledJSON('level1', 'assets/DraftsTileMaps/Level1JSON.json')
         this.load.image('star', 'assets/star.png')
         this.load.image('health', 'assets/health.png')
-        this.load.image('piglet', 'assets/pigletCeasar.png')
+        this.load.image('timemachine', 'assets/timemachine.png')
         this.load.atlas('spikeMoveUp', 'assets/spikeMoveUp.png', 'assets/spikeMoveUp.json')
         this.load.audio('egyptmusic', ['/assets/audio/egyptmusic.mp3'])
     }
@@ -83,7 +85,7 @@ export default class Game2 extends Phaser.Scene {
                         .play('player-idle')
                         .setFixedRotation()
 
-                    this.playerController = new PlayerController(this, this.penguin, this.cursors, this.obstacles, this.map)
+                    this.playerController = new PlayerController(this, this.penguin, this.cursors, this.obstacles, this.map, this.groundLayer)
 
                     this.cameras.main.startFollow(this.penguin, true)  // centers camera on penguin
                     break
@@ -129,11 +131,14 @@ export default class Game2 extends Phaser.Scene {
                 }
 
                 case 'time-machine':{
-                    const timeMachine = this.matter.add.rectangle(x + (width * 0.5), y + (height * 0.5), width, height, {
-                        isStatic: true
+                    const timeMachine = this.matter.add.sprite(x,y, 'timemachine', undefined, {
+                        isStatic: true,
+                        isSensor: true
                     })
-                    
+
+                    timeMachine.setData('type', 'time-machine')
                     break
+
                 }
 
                 case 'star':{
