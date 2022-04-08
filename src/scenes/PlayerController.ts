@@ -53,7 +53,8 @@ export default class PlayerController {
         })
         .addState('climb', {
             onEnter: this.climbOnEnter,
-            onUpdate: this.climbOnUpdate
+            onUpdate: this.climbOnUpdate,
+            onExit: this.climbOnExit
         })
         .addState('spike-hit', {
             onEnter: this.spikeHitOnEnter
@@ -196,7 +197,6 @@ export default class PlayerController {
     }
 
     private walkOnUpdate(){
-
         if (this.cursors.left.isDown) {
             this.sprite.flipX = true
             this.sprite.setVelocityX(-this.speed)
@@ -248,7 +248,9 @@ export default class PlayerController {
     }
 
     private climbOnEnter(){
-       this.sprite.setVelocity(0,0)
+        console.log("climbing")
+        this.sprite.setIgnoreGravity(true)
+        this.sprite.setVelocity(0,0)
     }
 
     private climbOnUpdate(){
@@ -273,6 +275,10 @@ export default class PlayerController {
         if (!tile.properties.canClimb) {
             this.stateMachine.setState('idle');
         }
+    }
+
+    private climbOnExit() {
+        this.sprite.setIgnoreGravity(false)
     }
 
     private spikeHitOnEnter() {
