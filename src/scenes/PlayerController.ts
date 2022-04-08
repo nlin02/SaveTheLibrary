@@ -179,7 +179,7 @@ export default class PlayerController {
 
     update(dt: number) {
         this.stateMachine.update(dt)
-        timer.sharedText +=1 
+        timer.sharedText -= 0.1
         events.emit('timer-update', this.time) 
         events.on('times-up', this.timesUp, this)
     }
@@ -420,6 +420,7 @@ export default class PlayerController {
     
     private timesUp(){
         // this.sprite.setOnCollide(() => {})
+        timer.sharedText = 100 //reset
         this.stateMachine.setState("times-up")
         // this.scene.time.delayedCall(1, () => {
             this.scene.scene.start('game-over')

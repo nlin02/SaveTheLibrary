@@ -1,7 +1,7 @@
 import {makeAutoObservable} from 'mobx'
 
 class TimerState { 
-    sharedText = 0
+    sharedText = 100
 
     constructor() {
         makeAutoObservable(this)

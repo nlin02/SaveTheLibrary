@@ -57,8 +57,8 @@ export default class UI extends Phaser.Scene
             fontSize: '32px'
         })
 
-        this.timeNeg = this.add.rectangle(500,25, this.accumulatedTime, 20, 0x808080)
-        this.timePos = this.add.rectangle(500, 25, this.accumulatedTime, 20, 0xff0000)
+        this.timeNeg = this.add.rectangle(500,25, timer.sharedText, 20, 0x808080)
+        this.timePos = this.add.rectangle(500, 25, timer.sharedText, 20, 0xff0000)
 
         events.on('star-collected', this.handleStarCollected, this)
         events.on('health-changed', this.handleHealthChanged, this)
@@ -114,18 +114,17 @@ export default class UI extends Phaser.Scene
     }
 
     private updateTime(){
-        if(this.accumulatedTime >= 0 ) {
-            this.accumulatedTime -= .1
-            this.testLabel.text = `Time: ${this.accumulatedTime}`
+        if(timer.sharedText >= 0 ) {
+            // this.testLabel.text = `Time: ${this.accumulatedTime}`
             // update position and width of rec
-            this.timePos.setSize(this.accumulatedTime, 20)
+            this.timePos.setSize(timer.sharedText, 20)
             this.timePos.setPosition(500 - .1/2, 25)
             
         }
-        else if (this.accumulatedTime <= 0 ){
+        else if (timer.sharedText <= 0 ){
             console.log("TIMES UP")
             events.emit('times-up', PlayerController)
-            this.accumulatedTime = 0;
+            // this.accumulatedTime = 0;
             this.gameOverText = this.add.text(250,250, 'Times Up!',{
                 fontSize: '32px'
             })
