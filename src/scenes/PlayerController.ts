@@ -2,6 +2,9 @@ import Phaser from 'phaser'
 import StateMachine from '../StateMachine/StateMachine'
 import { sharedInstance as events } from './EventCenter'
 import ObstaclesController from './ObstaclesController'
+import { autorun } from 'mobx'
+import { timer } from './timer'
+
 
 type CursorKeys = Phaser.Types.Input.Keyboard.CursorKeys
 
@@ -176,6 +179,7 @@ export default class PlayerController {
 
     update(dt: number) {
         this.stateMachine.update(dt)
+        timer.sharedText +=1 
         events.emit('timer-update', this.time) 
         events.on('times-up', this.timesUp, this)
     }

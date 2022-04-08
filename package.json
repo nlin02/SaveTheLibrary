@@ -25,6 +25,7 @@
 		"typescript": "^3.8.3"
 	},
 	"dependencies": {
+		"mobx": "^6.5.0",
 		"phaser": "^3.55.2"
 	},
 	"parcelCleanPaths": [

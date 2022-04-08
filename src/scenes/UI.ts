@@ -1,7 +1,8 @@
+import { autorun } from 'mobx'
 import Phaser from 'phaser'
-import StateMachine from '../StateMachine/StateMachine'
 import { sharedInstance as events } from './EventCenter'
 import PlayerController from './PlayerController'
+import { timer } from './timer'
 
 export default class UI extends Phaser.Scene
 {
@@ -13,10 +14,12 @@ export default class UI extends Phaser.Scene
 
     private testLabel!: Phaser.GameObjects.Text  // testLabel
     private accumulatedTime // =100
+    private timerText!: Phaser.GameObjects.Text 
 
     private timePos !: Phaser.GameObjects.Rectangle // represents positive time
     private timeNeg !: Phaser.GameObjects.Rectangle // represents negative time
-    private gameOverText!: Phaser.GameObjects.Text
+    private gameOverText !: Phaser.GameObjects.Text // represents negative time
+
     
 
 
@@ -50,12 +53,20 @@ export default class UI extends Phaser.Scene
             fontSize: '32px'
         })
 
+        this.timerText = this.add.text(10,10, 'SHARED TIMER: 0', {
+            fontSize: '32px'
+        })
+
         this.timeNeg = this.add.rectangle(500,25, this.accumulatedTime, 20, 0x808080)
         this.timePos = this.add.rectangle(500, 25, this.accumulatedTime, 20, 0xff0000)
 
         events.on('star-collected', this.handleStarCollected, this)
         events.on('health-changed', this.handleHealthChanged, this)
         events.on('timer-update', this.updateTime, this)
+
+        autorun(() => {
+            this.timerText.text = `SHARED TIMER: ${timer.sharedText}`
+        })
 
         // clean up of resources that we know we need for later.. 
         this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
