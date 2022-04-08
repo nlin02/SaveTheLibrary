@@ -31,7 +31,7 @@ export default class UI extends Phaser.Scene
     init()
     {
         this.starsCollected = 0 // reset to 0
-        this.accumulatedTime = 350
+        this.accumulatedTime = 1000/0
 
     }
      

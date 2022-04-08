@@ -94,7 +94,7 @@ export default class ScorpionController {
         this.sprite.setVelocityX(-3)
 
         // if moveTime is greater than 2000 ms, change state to right
-        if(this.moveTime > 2000) {
+        if(this.moveTime > 2500) {
             this.stateMachine.setState('move-right')
         }
     }
@@ -109,7 +109,7 @@ export default class ScorpionController {
         this.sprite.setVelocityX(3)
 
         // if moveTime is greater than 2000 ms, change state to left
-        if(this.moveTime > 2000) {
+        if(this.moveTime > 2500) {
             this.stateMachine.setState('move-left')
         }
     }

@@ -1,4 +1,4 @@
-import Phaser from 'phaser'
+import Phaser, { Physics } from 'phaser'
 import MovingSpikesController from './MovingSpikesController'
 import ObstaclesController from './ObstaclesController'
 import PlayerController from './PlayerController'
@@ -90,10 +90,12 @@ export default class Game extends Phaser.Scene {
 
             switch(name) {
                 case 'penguin-spawn': {
-                    this.penguin = this.matter.add.sprite(x + (width * 0.5), y, 'explorer')  // add penguin to server
+                    // var playerConfig = 
+                    this.penguin = this.matter.add.sprite(x + (width * 0.5), y, 'explorer', 'explorer_walk01.png', {circleRadius: (width *0.5)-10, friction: 0.45})  // add penguin to server
                         .play('player-idle')
+                        // .setCircle((width/2)-10)
+                        // .setFrictionStatic(4)
                         .setFixedRotation()
-
                     this.playerController = new PlayerController(this, this.penguin, this.cursors, this.obstacles, this.map, this.groundLayer)
 
                     this.cameras.main.startFollow(this.penguin, true)  // centers camera on penguin
@@ -115,6 +117,7 @@ export default class Game extends Phaser.Scene {
                 case 'spikes-moveup': {
                     const spikeMoveUp = this.matter.add.sprite(x, y, 'spikeMoveUp')
                         .setFixedRotation()
+                    
                     
                     // spikeMoveUp.setStatic(true)
                     
