@@ -48,7 +48,8 @@ export default class PlayerController {
         })
         .addState('jump', {
             onEnter: this.jumpOnEnter,
-            onUpdate: this.jumpOnUpdate
+            onUpdate: this.jumpOnUpdate,
+            onExit: this.jumpOnExit
         })
         .addState('climb', {
             onEnter: this.climbOnEnter,
@@ -105,46 +106,18 @@ export default class PlayerController {
             }
 
             if(this.stateMachine.isCurrentState('jump')) {
-                this.sprite.setFriction(0) //make the sprite slippery in the air
                 const tile = this.map.getTileAt(
                     Math.floor((this.sprite.getBottomCenter().x) / 72),
                     Math.floor((this.sprite.getBottomCenter().y + 1) / 72),
                     true, this.groundLayer);
                 if (tile) {
-                    console.log("----------> landed??????", tile)
-                    // rectangle around tile that sprite lands on for debugging
-                    var rect = this.scene.add.rectangle(tile.getCenterX(), tile.getCenterY(), tile.width, tile.height)
-                    rect.setStrokeStyle(1, 0)
-
-                    console.log(`Sprite bottom y: ${this.sprite.getBottomCenter().y}, Tile top y: ${tile.getTop()}`)
                     if(tile.properties.collides) {
-                        this.sprite.setFriction(0.45)
-                        console.log("----------> landed!")
                         this.stateMachine.setState('idle')
                     }
                 }
             }
 
-            //if (gameObject instanceof Phaser.Physics.Matter.TileBody){ // allows double jumps
-                
-            // if(this.stateMachine.isCurrentState('jump')) {
-                
-            //     var allContactsBelow = true
-            //     console.log("----------------", data.activeContacts.length)
-            //     for (var contact of data.activeContacts) {
-            //         console.log(`Contact point: ${contact.vertex.x}, ${contact.vertex.y}, Sprite: ${this.sprite.getBottomCenter().y}`, contact.vertex.y > this.sprite.getBottomCenter().y)
-            //         if(Math.abs(contact.vertex.y - this.sprite.getBottomCenter().y) > 1) {
-            //             allContactsBelow = false
-            //             break;
-            //         }
-            //     }
-            //     console.log(`All below: ${allContactsBelow}`)
-            //     if (allContactsBelow) {
-            //         this.stateMachine.setState('idle')
-            //     }
-            // }
-                // return 
-            // }
+
             const sprite = gameObject as Phaser.Physics.Matter.Sprite
             const type = sprite.getData('type') // as long as it has a type, we will get not get undefined 
             
@@ -254,6 +227,7 @@ export default class PlayerController {
     }
 
     private jumpOnEnter(){
+        this.sprite.setFriction(0) //make the sprite slippery in the air
         this.sprite.setVelocityY(-15)
     }
 
@@ -267,6 +241,10 @@ export default class PlayerController {
             this.sprite.flipX = false
             this.sprite.setVelocityX(this.speed)
         }
+    }
+
+    private jumpOnExit() {
+        this.sprite.setFriction(0.45)
     }
 
     private climbOnEnter(){

@@ -93,7 +93,7 @@ export default class Game extends Phaser.Scene {
             switch(name) {
                 case 'penguin-spawn': {
                     // var playerConfig = 
-                    this.penguin = this.matter.add.sprite(x + (width * 0.5), y, 'explorer', 'explorer_walk01.png', {circleRadius: (width *0.5)-10, friction: 0.45})  // add penguin to server
+                    this.penguin = this.matter.add.sprite(x + (width * 0.5), y, 'explorer', 'explorer_walk01.png', {friction: 0.45, chamfer: { radius: 20 } })  // add penguin to server
                         .play('player-idle')
                         // .setCircle((width/2)-10)
                         // .setFrictionStatic(4)
