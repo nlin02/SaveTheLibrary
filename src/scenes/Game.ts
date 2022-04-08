@@ -4,6 +4,7 @@ import ObstaclesController from './ObstaclesController'
 import PlayerController from './PlayerController'
 import ScorpionController from './ScorpionController'
 // import CountdownController from './CountdownController'
+import Slopes from 'phaser-slopes'
 
 export default class Game extends Phaser.Scene {
 
@@ -37,6 +38,7 @@ export default class Game extends Phaser.Scene {
     }
 
     preload() {
+        this.load.scenePlugin('Slopes', Slopes);
         this.load.atlas('penguin', 'assets/penguin.png', 'assets/penguin.json')
         this.load.atlas('explorer', 'assets/explorer.png', 'assets/explorer.json')
         this.load.atlas('scorpion', 'assets/scorpion.png', 'assets/scorpion.json')
