@@ -5,6 +5,7 @@ import PlayerController from './PlayerController'
 import ScorpionController from './ScorpionController'
 // import CountdownController from './CountdownController'
 import Slopes from 'phaser-slopes'
+import PhysicsTimer from './PhysicsTimer'
 
 export default class Game extends Phaser.Scene {
 
@@ -17,6 +18,8 @@ export default class Game extends Phaser.Scene {
 
     private map?: Phaser.Tilemaps.Tilemap
     private groundLayer?: Phaser.Tilemaps.TilemapLayer
+
+    private physicsTimer: PhysicsTimer
 
 
     // /** @type {CountdownController} */
@@ -54,6 +57,10 @@ export default class Game extends Phaser.Scene {
     create() {
         console.log("Launching Game!")
         this.scene.launch('ui') //runs parallel scenes (aka UI.. )
+
+        //Physics Timer
+        this.matter.world.autoUpdate = false;
+        this.physicsTimer = new PhysicsTimer(() => this.matter.world.step())
 
         // Sets width and height to the scale
         const {width, height} = this.scale
@@ -194,6 +201,8 @@ export default class Game extends Phaser.Scene {
 
 
     update(t: number, dt: number) {
+        // Physics Timer
+        this.physicsTimer.update()  // you can pass dt to use Phaser's timer instead of the clock, but I find this is actually smoother
 
         this.playerController?.update(dt)
 
