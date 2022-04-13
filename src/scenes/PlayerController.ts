@@ -259,20 +259,29 @@ export default class PlayerController {
         // Handle climbing movement
         if (this.cursors.up.isDown) {
             this.sprite.setVelocityY(-this.speed)
+            this.sprite.setIgnoreGravity(true)
         } 
         else if (this.cursors.down.isDown) {
             this.sprite.setVelocityY(this.speed)
+            this.sprite.setIgnoreGravity(true)
         }
         else if (this.cursors.left.isDown) {
             this.sprite.flipX = true
             this.sprite.setVelocityX(-this.speed)
+            this.sprite.setIgnoreGravity(true)
         }
         else if (this.cursors.right.isDown) {
             this.sprite.flipX = false
             this.sprite.setVelocityX(this.speed)
+            this.sprite.setIgnoreGravity(true)
+        }
+        else if (this.stateMachine.isCurrentState('climb')) {
+            this.sprite.setVelocity(0,0)
+            this.sprite.setIgnoreGravity(true)
         }
 
         if (!tile.properties.canClimb) {
+            this.sprite.setIgnoreGravity(false)
             this.stateMachine.setState('idle');
         }
     }
