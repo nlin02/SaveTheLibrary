@@ -2,7 +2,7 @@ import { autorun } from 'mobx'
 import Phaser from 'phaser'
 import { sharedInstance as events } from '../EventCenter'
 import PlayerController from '.././controllers/PlayerController'
-import { timer } from './timer'
+import { timer } from './Timer'
 
 export default class UI extends Phaser.Scene
 {

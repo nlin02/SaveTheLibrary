@@ -3,7 +3,7 @@ import StateMachine from '../StateMachine/StateMachine'
 import { sharedInstance as events } from '../EventCenter'
 import ObstaclesController from './ObstaclesController'
 import { autorun } from 'mobx'
-import { timer } from '.././scenes/timer'
+import { timer } from '../scenes/Timer'
 
 
 type CursorKeys = Phaser.Types.Input.Keyboard.CursorKeys
