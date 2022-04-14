@@ -1,6 +1,6 @@
 import { Physics } from "phaser";
 import StateMachine from "../StateMachine/StateMachine";
-import { sharedInstance as events} from "./EventCenter";
+import { sharedInstance as events} from ".././scenes/EventCenter";
 
 export default class ScorpionController {
     private scene: Phaser.Scene

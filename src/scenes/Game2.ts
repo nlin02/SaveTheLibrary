@@ -1,8 +1,8 @@
 import Phaser from 'phaser'
-import MovingSpikesController from './MovingSpikesController'
-import ObstaclesController from './ObstaclesController'
-import PlayerController from './PlayerController'
-import ScorpionController from './ScorpionController'
+import MovingSpikesController from '../controllers/MovingSpikesController'
+import ObstaclesController from '.././controllers/ObstaclesController'
+import PlayerController from '.././controllers/PlayerController'
+import ScorpionController from '.././controllers/ScorpionController'
 // import CountdownController from './CountdownController'
 
 export default class Game2 extends Phaser.Scene {
