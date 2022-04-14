@@ -1,6 +1,6 @@
 import Phaser from 'phaser'
 import StateMachine from '../StateMachine/StateMachine'
-import { sharedInstance as events } from '.././scenes/EventCenter'
+import { sharedInstance as events } from '../EventCenter'
 import ObstaclesController from './ObstaclesController'
 import { autorun } from 'mobx'
 import { timer } from '.././scenes/timer'
