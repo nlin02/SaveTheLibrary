@@ -27,7 +27,8 @@
 	"dependencies": {
 		"mobx": "^6.5.0",
 		"phaser": "^3.55.2",
-		"phaser-slopes": "^0.1.1"
+		"phaser-slopes": "^0.1.1",
+		"physics-timer": "^1.0.1"
 	},
 	"parcelCleanPaths": [
 		"dist"

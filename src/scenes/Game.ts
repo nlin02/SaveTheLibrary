@@ -5,7 +5,7 @@ import PlayerController from './PlayerController'
 import ScorpionController from './ScorpionController'
 // import CountdownController from './CountdownController'
 import Slopes from 'phaser-slopes'
-import PhysicsTimer from './PhysicsTimer'
+import PhysicsTimer from 'physics-timer'
 
 export default class Game extends Phaser.Scene {
 
