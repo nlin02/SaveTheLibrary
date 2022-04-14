@@ -2,7 +2,7 @@ import Phaser from 'phaser'
 
 import Game from './scenes/Game'
 import Game2 from './scenes/Game2'
-import UI from './scenes/StatusDisplay'
+import UI from './header/StatusDisplay'
 import GameOver from './screens/GameOverScreen'
 import TitleScene from './screens/HomeScreen'
 import Win from './screens/WinScreen'
