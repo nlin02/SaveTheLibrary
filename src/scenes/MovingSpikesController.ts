@@ -28,6 +28,9 @@ export default class MovingSpikesController {
                 onUpdate: this.moveDownOnUpdate
             })
             .setState('move-down')
+        
+        this.sprite.setMass(10000000)
+        this.sprite.setIgnoreGravity(true)
 
     }
 
