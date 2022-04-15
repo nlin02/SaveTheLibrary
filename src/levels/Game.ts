@@ -46,7 +46,7 @@ export default class Game extends Phaser.Scene {
         this.load.atlas('explorer', 'assets/explorer.png', 'assets/explorer.json')
         this.load.atlas('scorpion', 'assets/scorpion.png', 'assets/scorpion.json')
         this.load.image('tiles', 'assets/AllTilesLarge.png')
-        this.load.tilemapTiledJSON('tilemap', 'assets/Alexandria.json')
+        this.load.tilemapTiledJSON('tilemap', 'assets/Level1.json')
         this.load.image('star', 'assets/star.png')
         this.load.image('health', 'assets/health.png')
         this.load.image('piglet', 'assets/pigletCeasar.png')
