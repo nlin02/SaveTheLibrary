@@ -1,6 +1,6 @@
 import { autorun } from 'mobx'
 import Phaser from 'phaser'
-import { sharedInstance as events } from '../EventCenter'
+import { sharedInstance as events } from '../eventcenter/EventCenter'
 import PlayerController from '../controllers/PlayerController'
 import { timer } from './Timer'
 

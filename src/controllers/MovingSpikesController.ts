@@ -1,6 +1,6 @@
 import { Physics } from "phaser";
 import StateMachine from "../StateMachine/StateMachine";
-import { sharedInstance as events} from "../EventCenter";
+import { sharedInstance as events} from "../eventcenter/EventCenter";
 
 export default class MovingSpikesController {
     private scene: Phaser.Scene
