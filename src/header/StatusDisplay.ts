@@ -33,16 +33,12 @@ export default class UI extends Phaser.Scene
      
     create()
     {
-    
+        
         this.graphics = this.add.graphics()
 
         this.setHealthBar(100)
         
         this.starsLabel = this.add.text(10,35, 'Stars: 0',{
-            fontSize: '32px'
-        })
-
-        this.timerText = this.add.text(10,10, 'SHARED TIMER: 0', {
             fontSize: '32px'
         })
 
@@ -52,9 +48,11 @@ export default class UI extends Phaser.Scene
         events.on('star-collected', this.handleStarCollected, this)
         events.on('health-changed', this.handleHealthChanged, this)
 
-        // autorun(() => {
-        //     this.timerText.text = `SHARED TIMER: ${timer.sharedText}`
-        // })
+        autorun(() => {
+            if(timer.remainingTime >= 0 ) {
+                this.updateTime()   
+            }
+        })
 
         // clean up of resources that we know we need for later.. 
         this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
@@ -82,6 +80,12 @@ export default class UI extends Phaser.Scene
         this.starsCollected +=1 // can also do ++this.starsCollected
         this.starsLabel.text = `Stars:  ${this.starsCollected}` // string interpolation :) 
 
+    }
+
+    private updateTime(){
+        console.log("calling UpdateTime in StatusDis.")
+        this.timePos.setSize(timer.remainingTime, 20)
+        this.timePos.setPosition(500 - .1/2, 25)
     }
 
     private handleHealthChanged(value: number)

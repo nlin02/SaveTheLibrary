@@ -23,8 +23,8 @@ export default class PlayerController {
 
     private stateMachine: StateMachine
     private health = 100
-    private time = 100;
     private speed = 7
+    private aboveZero
 
     private lastscorpion?: Phaser.Physics.Matter.Sprite
 
@@ -37,6 +37,8 @@ export default class PlayerController {
         this.groundLayer = layer
         this.createAnimations()
         this.stateMachine = new StateMachine(this, 'player')
+        this.aboveZero = true
+        timer.remainingTime = 100 //TO DO: Figure out how to reset remainingTime universally !!!
 
         this.stateMachine.addState('idle', {
             onEnter: this.idleOnEnter,
@@ -150,8 +152,11 @@ export default class PlayerController {
 
     update(dt: number) {
         this.stateMachine.update(dt)
-        
         console.log(timer.remainingTime)
+        if (this.aboveZero){ // duplication code, but ensures that method updateTime is not being called ALL THE TIME 
+            this.updateTime()
+        }
+
     }
 
     private setHealth(value: number){
@@ -190,6 +195,19 @@ export default class PlayerController {
 
     private walkOnEnter(){
         this.sprite.play('player-walk')
+    }
+
+    private updateTime(){
+        if(timer.remainingTime > 0){
+            timer.remainingTime -= 0.1
+        }
+        else {
+            console.log("ELSE STATEMENT INVOKED")
+            this.aboveZero = false
+            timer.remainingTime = -1 // does this matter?? 
+            this.scene.scene.start('game-over')
+        }
+
     }
 
     private walkOnUpdate(){
