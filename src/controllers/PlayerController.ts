@@ -38,7 +38,7 @@ export default class PlayerController {
         this.createAnimations()
         this.stateMachine = new StateMachine(this, 'player')
         this.aboveZero = true
-        timer.remainingTime = 100 //TO DO: Figure out how to reset remainingTime universally !!!
+        timer.remainingTime = 500 //TO DO: Figure out how to reset remainingTime universally !!!
 
         this.stateMachine.addState('idle', {
             onEnter: this.idleOnEnter,
@@ -139,9 +139,7 @@ export default class PlayerController {
                 }
 
                 case 'piglet':{
-                    console.log('touched piglet!')
-                    Phaser.Scenes.Events.SHUTDOWN
-                    this.scene.scene.start('levelTwo')
+                    events.emit('launchLevelTwo')
                     break
                 }
             }
@@ -152,7 +150,6 @@ export default class PlayerController {
 
     update(dt: number) {
         this.stateMachine.update(dt)
-        console.log(timer.remainingTime)
         if (this.aboveZero){ // duplication code, but ensures that method updateTime is not being called ALL THE TIME 
             this.updateTime()
         }

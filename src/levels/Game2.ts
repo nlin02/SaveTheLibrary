@@ -52,125 +52,125 @@ export default class Game2 extends Phaser.Scene {
 
     create() {
         console.log("Launching Game2!")
-        this.scene.launch('ui') //runs parallel scenes (aka UI.. )
+        // this.scene.launch('ui') //runs parallel scenes (aka UI.. )
 
-        // Sets width and height to the scale
-        const {width, height} = this.scale
-        this.cameras.main.setBackgroundColor('rgb(193,147,107)')
+        // // Sets width and height to the scale
+        // const {width, height} = this.scale
+        // this.cameras.main.setBackgroundColor('rgb(193,147,107)')
 
-        // this.add.image(width * 0.5, height * 0.5, 'penguin', 'penguin_die04.png')
+        // // this.add.image(width * 0.5, height * 0.5, 'penguin', 'penguin_die04.png')
         
-        // adds tilemap
-        this.map = this.make.tilemap({ key: 'level1' })
-        const tileset = this.map.addTilesetImage('AllTilesLarge', 'tiles')
+        // // adds tilemap
+        // this.map = this.make.tilemap({ key: 'level1' })
+        // const tileset = this.map.addTilesetImage('AllTilesLarge', 'tiles')
 
-        const ground = this.map.createLayer('ground', tileset)   // creates the game layer
-        this.map.createLayer('obstacles', tileset)
-        ground.setCollisionByProperty({ collides: true })   // sets collision property
+        // const ground = this.map.createLayer('ground', tileset)   // creates the game layer
+        // this.map.createLayer('obstacles', tileset)
+        // ground.setCollisionByProperty({ collides: true })   // sets collision property
 
-        this.matter.world.convertTilemapLayer(ground)   // add matter to tilemap aka blue lines in the server; makes tiles static
+        // this.matter.world.convertTilemapLayer(ground)   // add matter to tilemap aka blue lines in the server; makes tiles static
     
 
-        this.cameras.main.scrollY = 200  // moves camera down; starts at 0, 0 aka upper left corner
-        this.cameras.main.setZoom(0.6,0.6)
+        // this.cameras.main.scrollY = 200  // moves camera down; starts at 0, 0 aka upper left corner
+        // this.cameras.main.setZoom(0.6,0.6)
         
-        const objectLayer = this.map.getObjectLayer('objects')
+        // const objectLayer = this.map.getObjectLayer('objects')
 
-        objectLayer.objects.forEach(objData => {
-            const{ x = 0, y = 0, name, width = 0, height = 0 } = objData
+        // objectLayer.objects.forEach(objData => {
+        //     const{ x = 0, y = 0, name, width = 0, height = 0 } = objData
 
-            switch(name) {
-                case 'penguin-spawn': {
-                    this.penguin = this.matter.add.sprite(x + (width * 0.5), y, 'explorer')  // add penguin to server
-                        .play('player-idle')
-                        .setFixedRotation()
+        //     switch(name) {
+        //         case 'penguin-spawn': {
+        //             this.penguin = this.matter.add.sprite(x + (width * 0.5), y, 'explorer')  // add penguin to server
+        //                 .play('player-idle')
+        //                 .setFixedRotation()
 
-                    this.playerController = new PlayerController(this, this.penguin, this.cursors, this.obstacles, this.map, this.groundLayer)
+        //             this.playerController = new PlayerController(this, this.penguin, this.cursors, this.obstacles, this.map, this.groundLayer)
 
-                    this.cameras.main.startFollow(this.penguin, true)  // centers camera on penguin
-                    break
-                }
+        //             this.cameras.main.startFollow(this.penguin, true)  // centers camera on penguin
+        //             break
+        //         }
 
-                    case 'scorpion': {
-                    const scorpion = this.matter.add.sprite(x, y, 'scorpion')
-                        .setFixedRotation()
-                    this.scorpions.push(new ScorpionController(this, scorpion)) //add a scorpion controller for each scorpion in tiled
+        //             case 'scorpion': {
+        //             const scorpion = this.matter.add.sprite(x, y, 'scorpion')
+        //                 .setFixedRotation()
+        //             this.scorpions.push(new ScorpionController(this, scorpion)) //add a scorpion controller for each scorpion in tiled
                     
-                    // add scorpions to obstacles controller
-                    this.obstacles.add('scorpion', scorpion.body as MatterJS.BodyType)
+        //             // add scorpions to obstacles controller
+        //             this.obstacles.add('scorpion', scorpion.body as MatterJS.BodyType)
                     
-                    break
-                }
+        //             break
+        //         }
 
 
-                case 'spikes-moveup': {
-                    const spikeMoveUp = this.matter.add.sprite(x, y, 'spikeMoveUp')
-                        .setFixedRotation()
+        //         case 'spikes-moveup': {
+        //             const spikeMoveUp = this.matter.add.sprite(x, y, 'spikeMoveUp')
+        //                 .setFixedRotation()
                     
-                    // spikeMoveUp.setStatic(true)
+        //             // spikeMoveUp.setStatic(true)
                     
-                    // spikeMoveUp.setBody('STATIC_BODY')
+        //             // spikeMoveUp.setBody('STATIC_BODY')
                         
                     
-                    // spikeMoveUp.setIgnoreGravity(true).disableInteractive()
-                    // spikeMoveUp.setBody
+        //             // spikeMoveUp.setIgnoreGravity(true).disableInteractive()
+        //             // spikeMoveUp.setBody
                     
-                    // spikeMoveUp.setOnCollideWith(this.penguin, () => {
-                    //     spikeMoveUp.setX(x)
-                    // })
+        //             // spikeMoveUp.setOnCollideWith(this.penguin, () => {
+        //             //     spikeMoveUp.setX(x)
+        //             // })
 
-                    // spikeMoveUp.setMass(10000)
+        //             // spikeMoveUp.setMass(10000)
                     
-                    // spikeMoveUp.body.immovable = true;
+        //             // spikeMoveUp.body.immovable = true;
                         
-                    this.spikesMoveUp.push(new MovingSpikesController(this, spikeMoveUp as Phaser.Physics.Matter.Sprite)) //add a scorpion controller for each scorpion in tiled
+        //             this.spikesMoveUp.push(new MovingSpikesController(this, spikeMoveUp as Phaser.Physics.Matter.Sprite)) //add a scorpion controller for each scorpion in tiled
                     
-                    this.obstacles.add('spikeMoveUp', spikeMoveUp.body as MatterJS.BodyType)
+        //             this.obstacles.add('spikeMoveUp', spikeMoveUp.body as MatterJS.BodyType)
                     
-                    break
-                }
+        //             break
+        //         }
 
-                case 'time-machine':{
-                    const timeMachine = this.matter.add.sprite(x,y, 'timemachine', undefined, {
-                        isStatic: true,
-                        isSensor: true
-                    })
+        //         case 'time-machine':{
+        //             const timeMachine = this.matter.add.sprite(x,y, 'timemachine', undefined, {
+        //                 isStatic: true,
+        //                 isSensor: true
+        //             })
 
-                    timeMachine.setData('type', 'time-machine')
-                    break
+        //             timeMachine.setData('type', 'time-machine')
+        //             break
 
-                }
+        //         }
 
-                case 'star':{
-                    const star = this.matter.add.sprite(x, y, 'star', undefined,{
-                        isStatic: true,
-                        isSensor: true
-                    })
-                    star.setData('type', 'star') // set the Data of the star so that when collieded, we know it's a star
-                    break
-                }
+        //         case 'star':{
+        //             const star = this.matter.add.sprite(x, y, 'star', undefined,{
+        //                 isStatic: true,
+        //                 isSensor: true
+        //             })
+        //             star.setData('type', 'star') // set the Data of the star so that when collieded, we know it's a star
+        //             break
+        //         }
 
-                case 'health': {
-                    const health = this.matter.add.sprite(x,y, 'health', undefined, {
-                        isStatic: true,
-                        isSensor: true
-                    })
+        //         case 'health': {
+        //             const health = this.matter.add.sprite(x,y, 'health', undefined, {
+        //                 isStatic: true,
+        //                 isSensor: true
+        //             })
 
-                    health.setData('type', 'health')
-                    health.setData('healthPoints', 10)
-                    break
-                }
+        //             health.setData('type', 'health')
+        //             health.setData('healthPoints', 10)
+        //             break
+        //         }
 
-                case 'spikes': {
-                    const spike = this.matter.add.rectangle(x + (width * 0.5), y + (height * 0.5), width, height, {
-                        isStatic: true
-                    })
-                    this.obstacles.add('spikes', spike)
-                    break
-                }
+        //         case 'spikes': {
+        //             const spike = this.matter.add.rectangle(x + (width * 0.5), y + (height * 0.5), width, height, {
+        //                 isStatic: true
+        //             })
+        //             this.obstacles.add('spikes', spike)
+        //             break
+        //         }
 
-            }
-        })
+        //     }
+        // })
     }
 
     // when scene ends, clean up scorpion events

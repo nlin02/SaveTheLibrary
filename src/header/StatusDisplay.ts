@@ -4,7 +4,7 @@ import { sharedInstance as events } from '../eventcenter/EventCenter'
 import PlayerController from '../controllers/PlayerController'
 import { timer } from './Timer'
 
-export default class UI extends Phaser.Scene
+export default class StatusDisplay extends Phaser.Scene
 {
     private starsLabel!: Phaser.GameObjects.Text //!: tells us it won't be null
     private starsCollected = 0
@@ -20,7 +20,7 @@ export default class UI extends Phaser.Scene
     constructor()
     {
         super({//the key of our scene; it will be playing simultaneously as Game scene
-            key: 'ui'
+            key: 'status-display'
         })
     }
 
@@ -83,7 +83,6 @@ export default class UI extends Phaser.Scene
     }
 
     private updateTime(){
-        console.log("calling UpdateTime in StatusDis.")
         this.timePos.setSize(timer.remainingTime, 20)
         this.timePos.setPosition(500 - .1/2, 25)
     }
