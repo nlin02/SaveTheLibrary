@@ -39,7 +39,7 @@
                  "type":"",
                  "visible":true,
                  "width":93.3852,
-                 "x":777.4674,
+                 "x":777.467,
                  "y":2916.37
                 }, 
                 {
@@ -116,7 +116,7 @@
                  "type":"",
                  "visible":true,
                  "width":77.1036,
-                 "x":1648.595,
+                 "x":1648.6,
                  "y":3235
                 }, 
                 {
@@ -314,7 +314,7 @@
                  "type":"",
                  "visible":true,
                  "width":124.036,
-                 "x":10230.56,
+                 "x":10230.6,
                  "y":3389.21
                 }, 
                 {
@@ -325,7 +325,7 @@
                  "type":"",
                  "visible":true,
                  "width":50.2849,
-                 "x":10304.31,
+                 "x":10304.3,
                  "y":3100.91
                 }, 
                 {
@@ -552,6 +552,12 @@
                  "height":127.389,
                  "id":51,
                  "name":"piglet",
+                 "properties":[
+                        {
+                         "name":"targetScene",
+                         "type":"string",
+                         "value":"nextLevel"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
