@@ -7,6 +7,7 @@ import GameOver from './screens/GameOverScreen'
 import TitleScene from './screens/HomeScreen'
 import Win from './screens/WinScreen'
 import LevelAlexandria from './levels/LevelAlexandria'
+import LevelHouse from './levels/LevelHouse'
 
 var config = {
 	type: Phaser.AUTO,

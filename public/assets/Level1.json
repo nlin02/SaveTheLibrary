@@ -556,7 +556,7 @@
                         {
                          "name":"targetScene",
                          "type":"string",
-                         "value":"nextLevel"
+                         "value":"LevelHouse"
                         }],
                  "rotation":0,
                  "type":"",

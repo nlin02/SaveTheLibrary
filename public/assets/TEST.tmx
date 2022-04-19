@@ -2571,7 +2571,7 @@
   <object id="50" name="scorpion" x="12891.3" y="2954.14" width="76.0071" height="68.4064"/>
   <object id="51" name="piglet" x="7847.89" y="2811.06" width="134.093" height="127.389">
    <properties>
-    <property name="targetScene" value="nextLevel"/>
+    <property name="targetScene" value="LevelHouse"/>
    </properties>
   </object>
  </objectgroup>

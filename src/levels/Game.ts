@@ -65,7 +65,7 @@ export default class Game extends Phaser.Scene {
         this.launchLevelOne()
         // this.launchLevelTwo()
 
-        // events.on('launchLevelTwo', this.launchLevelTwo, this)
+        events.on('changeScene', this.changeScene, this)
     }
 
     // when scene ends, clean up scorpion events
@@ -92,6 +92,10 @@ export default class Game extends Phaser.Scene {
         //     this.launchLevelTwo()
         // }
 
+    }
+
+    changeScene(nextScene: Phaser.Scene) {
+        this.scene.start(nextScene)
     }
 
     launchLevelOne(){
@@ -276,11 +280,9 @@ export default class Game extends Phaser.Scene {
                         isStatic: true,
                         isSensor: true
                     })
-                    for (var property in objData.properties) {
-                        console.log('piglet property', objData.properties[property].name, objData.properties[property].value)
+                    for (var property of objData.properties) {
+                        piglet.setData(property.name, property.value)
                     }
-
-                    // console.log("objData", objData)
 
                     piglet.setData('type', 'piglet') // set the Data of the star so that when collieded, we know it's a star
                     break

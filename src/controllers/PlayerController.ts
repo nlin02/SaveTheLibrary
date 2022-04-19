@@ -142,7 +142,7 @@ export default class PlayerController {
                 // }
 
                 case 'piglet':{
-                    events.emit('launchLevelTwo')
+                    events.emit('changeScene', sprite.getData('targetScene'))
                     break
                 }
             }
