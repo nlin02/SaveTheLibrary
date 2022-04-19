@@ -156,7 +156,6 @@ export default class PlayerController {
         if (this.aboveZero){ // duplication code, but ensures that method updateTime is not being called ALL THE TIME 
             this.updateTime()
 
-            console.log(`stunned: ${this.isStunned}`)
             if(this.isStunned) {
                 if (this.stunTime > 300) {
                     this.isStunned = false
