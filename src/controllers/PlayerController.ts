@@ -26,6 +26,9 @@ export default class PlayerController {
     private speed = 7
     private aboveZero
 
+    private isStunned = false
+    private stunTime = 0
+
     private lastscorpion?: Phaser.Physics.Matter.Sprite
 
     constructor(scene: Phaser.Scene, sprite: Phaser.Physics.Matter.Sprite, cursors: CursorKeys, obstacles: ObstaclesController, map: Phaser.Tilemaps.Tilemap, layer: Phaser.Tilemaps.TilemapLayer) {
@@ -152,6 +155,17 @@ export default class PlayerController {
         this.stateMachine.update(dt)
         if (this.aboveZero){ // duplication code, but ensures that method updateTime is not being called ALL THE TIME 
             this.updateTime()
+
+            if(this.isStunned) {
+                if (this.stunTime > 300) {
+                    this.isStunned = false
+                    this.stunTime = 0
+                    this.speed = 7
+                    console.log("not stunned!")
+                }
+                this.stunTime ++
+
+            }
         }
 
     }
@@ -303,15 +317,10 @@ export default class PlayerController {
 
     private spikeHitOnEnter() {
         this.sprite.setVelocityY(-12)
-        
-        if(this.speed <= 1) {
-            this.speed = 1
-        }
-        else {
-            // this.speed = this.speed - 2
-            console.log(`speed: ${this.speed}`)
-        }
 
+        this.isStunned = true
+        this.speed = 4
+       
         // red and white color
         const startColor = Phaser.Display.Color.ValueToColor(0xffffff)
         const endColor = Phaser.Display.Color.ValueToColor(0xff0000)
@@ -362,13 +371,8 @@ export default class PlayerController {
             this.sprite.setVelocityY(-20)
         }
 
-        if(this.speed <= 1) {
-            this.speed = 1
-        }
-        else {
-            this.speed = this.speed - 1
-            console.log(`speed: ${this.speed}`)
-        }
+        this.isStunned = true
+        this.speed = 4
 
         // blue and white color
         const startColor = Phaser.Display.Color.ValueToColor(0xffffff)
