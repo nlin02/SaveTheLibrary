@@ -133,13 +133,13 @@ export default class PlayerController {
                         break
                     }
 
-                case 'health':{
-                    const value = sprite.getData('healthPoints') ?? 10 // ?? means if there is no data, we default to the # following after. 
-                    this.health = Phaser.Math.Clamp(this.health + value, 0, 100)  // clamps to to 0 to 100, cannot exceed 100 
-                    events.emit('health-changed', this.health)
-                    sprite.destroy()
-                    break
-                }
+                // case 'health':{
+                //     const value = sprite.getData('healthPoints') ?? 10 // ?? means if there is no data, we default to the # following after. 
+                //     this.health = Phaser.Math.Clamp(this.health + value, 0, 100)  // clamps to to 0 to 100, cannot exceed 100 
+                //     events.emit('health-changed', this.health)
+                //     sprite.destroy()
+                //     break
+                // }
 
                 case 'piglet':{
                     events.emit('launchLevelTwo')
@@ -156,6 +156,7 @@ export default class PlayerController {
         if (this.aboveZero){ // duplication code, but ensures that method updateTime is not being called ALL THE TIME 
             this.updateTime()
 
+            console.log(`stunned: ${this.isStunned}`)
             if(this.isStunned) {
                 if (this.stunTime > 300) {
                     this.isStunned = false
@@ -319,6 +320,7 @@ export default class PlayerController {
         this.sprite.setVelocityY(-12)
 
         this.isStunned = true
+        console.log("stunned")
         this.speed = 4
        
         // red and white color
@@ -354,7 +356,7 @@ export default class PlayerController {
         })
         this.stateMachine.setState('idle')
 
-        this.setHealth(this.health-10)
+        // this.setHealth(this.health-10)
     }
 
     private scorpionHitOnEnter() {
@@ -372,6 +374,7 @@ export default class PlayerController {
         }
 
         this.isStunned = true
+        console.log("stunned")
         this.speed = 4
 
         // blue and white color
@@ -407,7 +410,7 @@ export default class PlayerController {
 
         this.stateMachine.setState('idle')
 
-        this.setHealth(this.health - 10)
+        // this.setHealth(this.health - 10)
 
         
     }

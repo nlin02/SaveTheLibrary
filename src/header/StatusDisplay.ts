@@ -36,7 +36,7 @@ export default class StatusDisplay extends Phaser.Scene
         
         this.graphics = this.add.graphics()
 
-        this.setHealthBar(100)
+        // this.setHealthBar(100)
         
         this.starsLabel = this.add.text(10,35, 'Stars: 0',{
             fontSize: '32px'
@@ -46,7 +46,7 @@ export default class StatusDisplay extends Phaser.Scene
         this.timePos = this.add.rectangle(500, 25, timer.remainingTime, 20, 0xff0000)
 
         events.on('star-collected', this.handleStarCollected, this)
-        events.on('health-changed', this.handleHealthChanged, this)
+        // events.on('health-changed', this.handleHealthChanged, this)
 
         autorun(() => {
             if(timer.remainingTime >= 0 ) {
