@@ -54,9 +54,11 @@ export default class Game extends Phaser.Scene {
         // this.load.tilemapTiledJSON('levelOne', 'assets/DraftsTileMaps/Level1JSON.json')
         this.load.image('star', 'assets/star.png')
         this.load.image('health', 'assets/health.png')
-        this.load.image('Julius', 'assets/Julius.png')
         this.load.atlas('spikeMoveUp', 'assets/spikeMoveUp.png', 'assets/spikeMoveUp.json')
         this.load.audio('egyptmusic', ['/assets/audio/egyptmusic.mp3'])
+
+        this.load.image('Julius', 'assets/Julius.png')
+        this.load.image('timeMachine', 'assets/timemachine.png')
     }
 
     create() {
@@ -176,6 +178,20 @@ export default class Game extends Phaser.Scene {
                     }
 
                     juliusSprite.setData('type', 'Julius') // set the Data of the star so that when collieded, we know it's a star
+                    break
+                }
+
+                case 'time-machine':{
+                    const machine = this.matter.add.sprite(x, y, 'timeMachine', undefined,{
+                        isStatic: true,
+                        isSensor: true
+                    })
+                    // for (var property of objData.properties) {
+                    //     machine.setData(property.name, property.value)
+                    //     // piglet.setData(property.name, 'game-over')
+                    // }
+
+                    machine.setData('type', 'time-machine') // set the Data of the star so that when collieded, we know it's a star
                     break
                 }
 
