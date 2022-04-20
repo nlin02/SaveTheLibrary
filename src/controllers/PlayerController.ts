@@ -141,7 +141,7 @@ export default class PlayerController {
                 //     break
                 // }
 
-                case 'Julius':{
+                case 'piglet':{
                     events.emit('changeScene', sprite.getData('targetScene'))
                     break
                 }
@@ -452,10 +452,10 @@ export default class PlayerController {
 
         this.sprite.anims.create({
             key: 'player-death',
-            frames: this.sprite.anims.generateFrameNames('penguin', {
+            frames: this.sprite.anims.generateFrameNames('explorerdie', {
                 start: 1,
-                end: 4, 
-                prefix: 'penguin_die',
+                end: 5, 
+                prefix: 'explorer_die0',
                 zeroPad: 2,
                 suffix: '.png'
             }),
