@@ -54,7 +54,7 @@ export default class Game extends Phaser.Scene {
         // this.load.tilemapTiledJSON('levelOne', 'assets/DraftsTileMaps/Level1JSON.json')
         this.load.image('star', 'assets/star.png')
         this.load.image('health', 'assets/health.png')
-        this.load.image('piglet', 'assets/pigletCeasar.png')
+        this.load.image('Julius', 'assets/Julius.png')
         this.load.atlas('spikeMoveUp', 'assets/spikeMoveUp.png', 'assets/spikeMoveUp.json')
         this.load.audio('egyptmusic', ['/assets/audio/egyptmusic.mp3'])
     }
@@ -165,17 +165,17 @@ export default class Game extends Phaser.Scene {
                     break
                 }
 
-                case 'piglet':{
-                    const piglet = this.matter.add.sprite(x, y, 'piglet', undefined,{
+                case 'julius':{
+                    const juliusSprite = this.matter.add.sprite(x, y, 'Julius', undefined,{
                         isStatic: true,
                         isSensor: true
                     })
                     for (var property of objData.properties) {
-                        piglet.setData(property.name, property.value)
+                        juliusSprite.setData(property.name, property.value)
                         // piglet.setData(property.name, 'game-over')
                     }
 
-                    piglet.setData('type', 'piglet') // set the Data of the star so that when collieded, we know it's a star
+                    juliusSprite.setData('type', 'Julius') // set the Data of the star so that when collieded, we know it's a star
                     break
                 }
 

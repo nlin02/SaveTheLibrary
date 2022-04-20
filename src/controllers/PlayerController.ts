@@ -141,7 +141,7 @@ export default class PlayerController {
                 //     break
                 // }
 
-                case 'piglet':{
+                case 'Julius':{
                     events.emit('changeScene', sprite.getData('targetScene'))
                     break
                 }
