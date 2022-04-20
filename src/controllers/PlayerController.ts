@@ -10,25 +10,23 @@ type CursorKeys = Phaser.Types.Input.Keyboard.CursorKeys
 export default class PlayerController {
 
     private scene: Phaser.Scene
+
+    private map: Phaser.Tilemaps.Tilemap
+    private groundLayer: Phaser.Tilemaps.TilemapLayer
     
     private sprite: Phaser.Physics.Matter.Sprite
+    private stateMachine: StateMachine
 
     private cursors: CursorKeys
 
     private obstacles: ObstaclesController
+    private lastscorpion?: Phaser.Physics.Matter.Sprite
 
-    private map: Phaser.Tilemaps.Tilemap
-    private groundLayer: Phaser.Tilemaps.TilemapLayer
-
-    private stateMachine: StateMachine
-    private health = 100
     private speed = 7
     private aboveZero
 
     private isStunned = false
     private stunTime = 0
-
-    private lastscorpion?: Phaser.Physics.Matter.Sprite
 
     constructor(scene: Phaser.Scene, sprite: Phaser.Physics.Matter.Sprite, cursors: CursorKeys, obstacles: ObstaclesController, map: Phaser.Tilemaps.Tilemap, layer: Phaser.Tilemaps.TilemapLayer) {
         this.scene = scene
@@ -37,10 +35,11 @@ export default class PlayerController {
         this.obstacles = obstacles
         this.map = map
         this.groundLayer = layer
-        this.createAnimations()
         this.stateMachine = new StateMachine(this, 'player')
         this.aboveZero = true
         timer.remainingTime = 500 //TO DO: Figure out how to reset remainingTime universally !!!
+
+        this.createAnimations()
 
         this.stateMachine.addState('idle', {
             onEnter: this.idleOnEnter,
@@ -94,13 +93,12 @@ export default class PlayerController {
             
             switch (type){ // do something depending on the type
                 case 'star': {
-                    events.emit('star-collected')
-                    sprite.destroy()
+                    this.collectStar(sprite)
                     break
                 }
 
                 case 'Julius': {
-                    events.emit('changeScene', sprite.getData('targetScene'))
+                    this.switchScene(sprite)
                     break
                 }
             }
@@ -395,6 +393,19 @@ export default class PlayerController {
             timer.remainingTime = -1 // does this matter?? 
             this.scene.scene.start('game-over')
         }
+    }
+
+    // ------------- Collect Star Method --------------
+
+    private collectStar(sprite: Phaser.Physics.Matter.Sprite) {
+        events.emit('star-collected')
+        sprite.destroy()
+    }
+
+    // ------------- Switch Scene Method --------------
+
+    private switchScene(sprite: Phaser.Physics.Matter.Sprite) {
+        events.emit('changeScene', sprite.getData('targetScene'))
     }
 
     // ------------- Create Animations --------------
