@@ -98,17 +98,17 @@ export default class PlayerController {
                 }
 
                 case 'Julius': {
-                    console.log("Sprite's info is "+ sprite)
                     this.switchScene(sprite)
                     break
                 }
 
                 case 'time-machine': {
-                    // console.log("touching time-machine")
-                    // console.log("Sprite's info is" + sprite)
-                    // this.switchScene(sprite)
-                    // this.scene.scene.start('LevelAlexandria')
                     this.scene.scene.start('LevelDungeon')
+                    break
+                }
+
+                case 'exit-door': {
+                    this.scene.scene.start('LevelAlexandria')
                     break
                 }
             }

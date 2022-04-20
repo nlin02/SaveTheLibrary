@@ -59,6 +59,7 @@ export default class Game extends Phaser.Scene {
 
         this.load.image('Julius', 'assets/Julius.png')
         this.load.image('timeMachine', 'assets/timemachine.png')
+        this.load.image('door', 'assets/pigletCeasar.png')
     }
 
     create() {
@@ -220,6 +221,16 @@ export default class Game extends Phaser.Scene {
                     })
                     this.obstacles.add('spikes', spike)
                     break
+                }
+
+                case 'exitdoor': {
+                    const door = this.matter.add.sprite(x, y, 'door', undefined,{
+                        isStatic: true,
+                        isSensor: true
+                    })
+                    door.setData('type', 'exit-door') // set the Data of the star so that when collieded, we know it's a star
+                    break
+                    
                 }
 
             }

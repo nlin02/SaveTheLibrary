@@ -164,6 +164,17 @@
                  "width":144.674,
                  "x":605.157199535963,
                  "y":2412.75560788863
+                }, 
+                {
+                 "height":125.290023201856,
+                 "id":14,
+                 "name":"exitdoor",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":46.4037122969837,
+                 "x":1740.13921113689,
+                 "y":157.772621809745
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -172,7 +183,7 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":14,
+ "nextobjectid":15,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.8.2",
