@@ -89,11 +89,10 @@ export default class Game extends Phaser.Scene {
         this.spikesMoveUp.forEach(spikeMoveUp => spikeMoveUp.update(dt))
         
         // TODO: Delete later !! 
-        const keyH = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.H)
-        if (Phaser.Input.Keyboard.JustDown(keyH)) {
-            this.scene.start('LevelAlexandria')
-            // this.scene.start("LevelAlexandria","assets/Level1.json")
-        }
+        // const keyH = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.H)
+        // if (Phaser.Input.Keyboard.JustDown(keyH)) {
+        //     this.scene.start('LevelAlexandria')
+        // }
 
     }
 
@@ -190,7 +189,7 @@ export default class Game extends Phaser.Scene {
                     //     machine.setData(property.name, property.value)
                     //     // piglet.setData(property.name, 'game-over')
                     // }
-
+                    machine.setData('targetScene', 'LevelDungeon')
                     machine.setData('type', 'time-machine') // set the Data of the star so that when collieded, we know it's a star
                     break
                 }

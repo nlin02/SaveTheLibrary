@@ -6,6 +6,7 @@ import TitleScene from './screens/HomeScreen'
 import Win from './screens/WinScreen'
 import LevelAlexandria from './levels/LevelAlexandria'
 import LevelHouse from './levels/LevelHouse'
+import LevelDungeon from './levels/LevelDungeon'
 
 var config = {
 	type: Phaser.AUTO,
@@ -17,7 +18,7 @@ var config = {
 			debug: true
 		}
 	},
-	scene: [TitleScene, LevelAlexandria, LevelHouse, UI, GameOver, Win]
+	scene: [TitleScene, LevelAlexandria, LevelHouse, LevelDungeon, UI, GameOver, Win]
 }
 
 export default new Phaser.Game(config)
