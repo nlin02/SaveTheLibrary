@@ -129,14 +129,6 @@ export default class PlayerController {
                     break
                 }
 
-                // case 'health': {
-                //     const value = sprite.getData('healthPoints') ?? 10 // ?? means if there is no data, we default to the # following after. 
-                //     this.health = Phaser.Math.Clamp(this.health + value, 0, 100)  // clamps to to 0 to 100, cannot exceed 100 
-                //     events.emit('health-changed', this.health)
-                //     sprite.destroy()
-                //     break
-                // }
-
                 case 'Julius': {
                     events.emit('changeScene', sprite.getData('targetScene'))
                     break
@@ -161,15 +153,6 @@ export default class PlayerController {
             }
         }
 
-    }
-
-    private setHealth(value: number) {
-        this.health = value // this is it.
-        events.emit('health-changed', this.health)
-
-        if (this.health <= 0) {
-            this.stateMachine.setState('dead')
-        }
     }
 
     private idleOnEnter() {
@@ -291,9 +274,7 @@ export default class PlayerController {
         this.sprite.setIgnoreGravity(false)
     }
 
-    private spikeHitOnEnter() {
-        this.sprite.setVelocityY(-12)
-
+    private stunPlayer() {
         this.isStunned = true
         console.log("stunned")
         this.speed = 4
@@ -330,8 +311,12 @@ export default class PlayerController {
             }
         })
         this.stateMachine.setState('idle')
+    }
 
-        // this.setHealth(this.health-10)
+    private spikeHitOnEnter() {
+        this.sprite.setVelocityY(-12)
+
+        this.stunPlayer()
     }
 
     private scorpionHitOnEnter() {
@@ -348,43 +333,7 @@ export default class PlayerController {
             this.sprite.setVelocityY(-20)
         }
 
-        this.isStunned = true
-        console.log("stunned")
-        this.speed = 4
-
-        // blue and white color
-        const startColor = Phaser.Display.Color.ValueToColor(0xffffff)
-        const endColor = Phaser.Display.Color.ValueToColor(0x00ff00)
-
-        // sets penguin tint to move from white to red every 100ms when a spike is hit
-        this.scene.tweens.addCounter({
-            from: 0,
-            to: 100,
-            duration: 100,
-            repeat: 2,
-            yoyo: true,
-            ease: Phaser.Math.Easing.Sine.InOut,
-            onUpdate: tween => {
-                const value = tween.getValue()
-                const colorObject = Phaser.Display.Color.Interpolate.ColorWithColor(
-                    startColor,
-                    endColor,
-                    100,
-                    value
-                )
-                const color = Phaser.Display.Color.GetColor(
-                    colorObject.r,
-                    colorObject.g,
-                    colorObject.b
-                )
-
-                this.sprite.setTint(color)
-            }
-        })
-
-        this.stateMachine.setState('idle')
-
-        // this.setHealth(this.health - 10)
+        this.stunPlayer()
     }
 
     private scorpionStompOnEnter() {
@@ -457,7 +406,5 @@ export default class PlayerController {
             }),
             frameRate: 10
         })
-
-        // NEED TO CREATE CLIMBING ANIMATION!!!!!
     }
 }
