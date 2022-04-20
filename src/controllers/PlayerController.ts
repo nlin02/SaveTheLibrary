@@ -462,6 +462,18 @@ export default class PlayerController {
             frameRate: 10
         })
 
+        this.sprite.anims.create({
+            key: 'player-climb',
+            frames: this.sprite.anims.generateFrameNames('explorer', {
+                start: 1,
+                end: 3, 
+                prefix: 'explorer_climb0',
+                zeroPad: 2,
+                suffix: '.png'
+            }),
+            frameRate: 10
+        })
+
         // NEED TO CREATE CLIMBING ANIMATION!!!!!
     }
 }
