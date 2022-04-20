@@ -79,27 +79,7 @@ export default class PlayerController {
             const body = data.bodyB as MatterJS.BodyType // body being collided on
             const gameObject = body.gameObject
             
-            if (this.obstacles.is('spikes', body)) {
-                this.stateMachine.setState('spike-hit')
-                return
-            }
-
-            if (this.obstacles.is('spikeMoveUp', body)) {
-                this.stateMachine.setState('spike-hit')
-                return
-            }
-
-            if (this.obstacles.is('scorpion', body)) {
-                this.lastscorpion = body.gameObject
-
-                // if sprite is on top of scorpion, stomp and kill scorpion
-                if(this.sprite.y + 20 < body.position.y) {
-                    this.stateMachine.setState('scorpion-stomp')
-                }
-                // hit by scorpion, penguin gets hurt
-                else {
-                    this.stateMachine.setState('scorpion-hit')
-                }
+            if (this.checkCollisionForDamage(body)) {
                 return
             }
 
@@ -107,17 +87,7 @@ export default class PlayerController {
                 return
             }
 
-            if(this.stateMachine.isCurrentState('jump')) {
-                const tile = this.map.getTileAt(
-                    Math.floor((this.sprite.getBottomCenter().x) / 72),
-                    Math.floor((this.sprite.getBottomCenter().y + 1) / 72),
-                    true, this.groundLayer);
-                if (tile) {
-                    if(tile.properties.collides) {
-                        this.stateMachine.setState('idle')
-                    }
-                }
-            }
+            this.checkLandingAfterJump()
 
             const sprite = gameObject as Phaser.Physics.Matter.Sprite
             const type = sprite.getData('type') // as long as it has a type, we will get not get undefined 
@@ -155,6 +125,8 @@ export default class PlayerController {
 
     }
 
+    // ------------- Idle State --------------
+
     private idleOnEnter() {
         this.sprite.play('player-idle')
     }
@@ -171,6 +143,8 @@ export default class PlayerController {
 
         this.checkClimbing()
     }
+
+    // ------------- Walk State --------------
 
     private walkOnEnter() {
         this.sprite.play('player-walk')
@@ -199,6 +173,8 @@ export default class PlayerController {
 
     }
 
+    // ------------- Jump State --------------
+
     private jumpOnEnter() {
         this.sprite.setFriction(0) //make the sprite slippery in the air
         this.sprite.setVelocityY(-15)
@@ -221,8 +197,25 @@ export default class PlayerController {
         this.sprite.setFriction(0.45)
     }
 
+    // ------------- Check Landing After Jump Handler --------------
+
+    private checkLandingAfterJump() {
+        if(this.stateMachine.isCurrentState('jump')) {
+            const tile = this.map.getTileAt(
+                Math.floor((this.sprite.getBottomCenter().x) / 72),
+                Math.floor((this.sprite.getBottomCenter().y + 1) / 72),
+                true, this.groundLayer);
+            if (tile) {
+                if(tile.properties.collides) {
+                    this.stateMachine.setState('idle')
+                }
+            }
+        }
+    }
+
+    // ------------- Check Climbing Handler --------------
+
     private checkClimbing() {
-        // Handle hero climbing
         if ((this.cursors.up.isDown || this.cursors.down.isDown) && !this.stateMachine.isCurrentState('climb')) {
             const tile = this.map.getTileAt(Math.floor(this.sprite.x / 72), Math.floor(this.sprite.y / 72), true, this.groundLayer);
 
@@ -232,6 +225,8 @@ export default class PlayerController {
         }
     }
 
+    // ------------- Climb State --------------
+
     private climbOnEnter() {
         this.sprite.setIgnoreGravity(true)
         this.sprite.setVelocity(0,0)
@@ -240,7 +235,6 @@ export default class PlayerController {
     private climbOnUpdate() {
         const tile = this.map.getTileAt(Math.floor(this.sprite.x / 72), Math.floor(this.sprite.y / 72), true, this.groundLayer);
 
-        // Handle climbing movement
         if (this.cursors.up.isDown) {
             this.sprite.setVelocityY(-this.speed)
             this.sprite.setIgnoreGravity(true)
@@ -273,6 +267,38 @@ export default class PlayerController {
     private climbOnExit() {
         this.sprite.setIgnoreGravity(false)
     }
+
+    // ------------- Check Collision For Damage Handler --------------
+
+    private checkCollisionForDamage(body: MatterJS.BodyType) {
+        if (this.obstacles.is('spikes', body)) {
+            this.stateMachine.setState('spike-hit')
+            return true
+        }
+
+        if (this.obstacles.is('spikeMoveUp', body)) {
+            this.stateMachine.setState('spike-hit')
+            return true
+        }
+
+        if (this.obstacles.is('scorpion', body)) {
+            this.lastscorpion = body.gameObject
+
+            // if sprite is on top of scorpion, stomp and kill scorpion
+            if(this.sprite.y + 20 < body.position.y) {
+                this.stateMachine.setState('scorpion-stomp')
+            }
+            // hit by scorpion, penguin gets hurt
+            else {
+                this.stateMachine.setState('scorpion-hit')
+            }
+            return true
+        }
+
+        return false
+    }
+
+    // ------------- Stun Player Handler --------------
 
     private stunPlayer() {
         this.isStunned = true
@@ -313,11 +339,14 @@ export default class PlayerController {
         this.stateMachine.setState('idle')
     }
 
+    // ------------- Spike Hit State --------------
+
     private spikeHitOnEnter() {
         this.sprite.setVelocityY(-12)
-
         this.stunPlayer()
     }
+
+    // ------------- Scorpion Hit State --------------
 
     private scorpionHitOnEnter() {
         if (this.lastscorpion) {
@@ -336,11 +365,15 @@ export default class PlayerController {
         this.stunPlayer()
     }
 
+    // ------------- Scorpion Stomp State --------------
+
     private scorpionStompOnEnter() {
         this.sprite.setVelocityY(-10)
         events.emit('scorpion-stomped', this.lastscorpion)
         this.stateMachine.setState('idle')
     }
+
+    // ------------- Dead State --------------
 
     private deadOnEnter() {
         this.sprite.play('player-death')
@@ -349,6 +382,8 @@ export default class PlayerController {
             this.scene.scene.start('game-over')
         })
     }
+
+    // ------------- Update Time Handler --------------
 
     private updateTime() {
         if (timer.remainingTime > 0) {
@@ -361,6 +396,8 @@ export default class PlayerController {
             this.scene.scene.start('game-over')
         }
     }
+
+    // ------------- Create Animations --------------
 
     private createAnimations() {
         this.sprite.anims.create({
