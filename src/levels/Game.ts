@@ -27,7 +27,8 @@ export default class Game extends Phaser.Scene {
 
     // constructor takes layermap name
     constructor(tilemapKey: string, tilemapJSONLocation: string) {
-        super('game')
+        // super('game')
+        super(tilemapKey)
         this.tilemapKey = tilemapKey
         this.tilemapJSONLocation = tilemapJSONLocation
     }
@@ -59,17 +60,18 @@ export default class Game extends Phaser.Scene {
     }
 
     create() {
+        console.log("Launching " + this.tilemapKey)
         this.scene.launch('status-display') //runs parallel scenes (aka UI.. )
         this.launchLevelOne()
         // this.launchLevelTwo()
 
-        events.on('changeScene', this.changeScene, this)
+        events.on('changeScene', this.changeScene, this) 
     }
 
     // when scene ends, clean up scorpion events
     destroy() {
         console.log("Destroying game")
-        this.scene.stop('ui')
+        this.scene.stop('status-display')
         this.scorpions.forEach(scorpion => scorpion.destroy())
     }
 
@@ -85,10 +87,11 @@ export default class Game extends Phaser.Scene {
         this.spikesMoveUp.forEach(spikeMoveUp => spikeMoveUp.update(dt))
         
         // TODO: Delete later !! 
-        // const keyH = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.H)
-        // if (Phaser.Input.Keyboard.JustDown(keyH)) {
-        //     this.launchLevelTwo()
-        // }
+        const keyH = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.H)
+        if (Phaser.Input.Keyboard.JustDown(keyH)) {
+            this.scene.start('LevelAlexandria')
+            // this.scene.start("LevelAlexandria","assets/Level1.json")
+        }
 
     }
 
@@ -169,6 +172,7 @@ export default class Game extends Phaser.Scene {
                     })
                     for (var property of objData.properties) {
                         piglet.setData(property.name, property.value)
+                        // piglet.setData(property.name, 'game-over')
                     }
 
                     piglet.setData('type', 'piglet') // set the Data of the star so that when collieded, we know it's a star

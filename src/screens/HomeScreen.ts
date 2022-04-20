@@ -16,7 +16,8 @@ export default class TitleScene extends Phaser.Scene{
         const button = this.add.rectangle(width * 0.5, height *0.55, 150, 75,0xffffff)
             .setInteractive()
             .on(Phaser.Input.Events.GAMEOBJECT_POINTER_UP, () => {
-                this.scene.start('game')
+                // this.scene.start('game')
+                this.scene.start('LevelAlexandria')
             })
 
         this.add.text(button.x, button.y, 'Start Game',{

@@ -17,7 +17,7 @@ var config = {
 			debug: true
 		}
 	},
-	scene: [TitleScene, LevelAlexandria, UI, GameOver, Win]
+	scene: [TitleScene, LevelAlexandria, LevelHouse, UI, GameOver, Win]
 }
 
 export default new Phaser.Game(config)
