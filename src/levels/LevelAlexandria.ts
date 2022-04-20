@@ -6,7 +6,7 @@ export default class LevelAlexandria extends Game {
     constructor() {
 
         let tilemapKey = "LevelAlexandria"
-        let tilemapJSONFileLocation = "assets/Level1.json"
+        let tilemapJSONFileLocation = "assets/AlexandriaMap.json"
     
         super(tilemapKey, tilemapJSONFileLocation)
     }
