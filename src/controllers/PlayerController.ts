@@ -2,7 +2,6 @@ import Phaser from 'phaser'
 import StateMachine from '../StateMachine/StateMachine'
 import { sharedInstance as events } from '../eventcenter/EventCenter'
 import ObstaclesController from './ObstaclesController'
-import { autorun } from 'mobx'
 import { timer } from '.././header/Timer'
 
 
@@ -104,7 +103,7 @@ export default class PlayerController {
                 return
             }
 
-            if (!gameObject){
+            if (!gameObject) {
                 return
             }
 
@@ -120,20 +119,17 @@ export default class PlayerController {
                 }
             }
 
-
             const sprite = gameObject as Phaser.Physics.Matter.Sprite
             const type = sprite.getData('type') // as long as it has a type, we will get not get undefined 
             
             switch (type){ // do something depending on the type
-                
-                case 'star':
-                    {
-                        events.emit('star-collected')
-                        sprite.destroy()
-                        break
-                    }
+                case 'star': {
+                    events.emit('star-collected')
+                    sprite.destroy()
+                    break
+                }
 
-                // case 'health':{
+                // case 'health': {
                 //     const value = sprite.getData('healthPoints') ?? 10 // ?? means if there is no data, we default to the # following after. 
                 //     this.health = Phaser.Math.Clamp(this.health + value, 0, 100)  // clamps to to 0 to 100, cannot exceed 100 
                 //     events.emit('health-changed', this.health)
@@ -141,19 +137,17 @@ export default class PlayerController {
                 //     break
                 // }
 
-                case 'piglet':{
+                case 'piglet': {
                     events.emit('changeScene', sprite.getData('targetScene'))
                     break
                 }
             }
-
-            
         })
     }
 
     update(dt: number) {
         this.stateMachine.update(dt)
-        if (this.aboveZero){ // duplication code, but ensures that method updateTime is not being called ALL THE TIME 
+        if (this.aboveZero) { // duplication code, but ensures that method updateTime is not being called ALL THE TIME 
             this.updateTime()
 
             if(this.isStunned) {
@@ -164,64 +158,42 @@ export default class PlayerController {
                     console.log("not stunned!")
                 }
                 this.stunTime ++
-
             }
         }
 
     }
 
-    private setHealth(value: number){
-        this.health = value // this is it. 
-
+    private setHealth(value: number) {
+        this.health = value // this is it.
         events.emit('health-changed', this.health)
 
         if (this.health <= 0) {
             this.stateMachine.setState('dead')
         }
-
     }
 
-    private idleOnEnter(){
+    private idleOnEnter() {
         this.sprite.play('player-idle')
     }
 
-    private idleOnUpdate(){
-        if (this.cursors.left.isDown || this.cursors.right.isDown){
+    private idleOnUpdate() {
+        if (this.cursors.left.isDown || this.cursors.right.isDown) {
             this.stateMachine.setState('walk')
         }
+        
         const spaceJustPressed = Phaser.Input.Keyboard.JustDown(this.cursors.space)
         if (spaceJustPressed) {
             this.stateMachine.setState('jump')
         }
 
-        // Handle hero climbing
-        if ((this.cursors.up.isDown || this.cursors.down.isDown) && !this.stateMachine.isCurrentState('climb')) {
-            const tile = this.map.getTileAt(Math.floor(this.sprite.x / 72), Math.floor(this.sprite.y / 72), true, this.groundLayer);
-
-            if (tile.properties.canClimb) {
-                this.stateMachine.setState('climb');
-            }
-        }
+        this.checkClimbing()
     }
 
-    private walkOnEnter(){
+    private walkOnEnter() {
         this.sprite.play('player-walk')
     }
 
-    private updateTime(){
-        if(timer.remainingTime > 0){
-            timer.remainingTime -= 0.1
-        }
-        else {
-            console.log("ELSE STATEMENT INVOKED")
-            this.aboveZero = false
-            timer.remainingTime = -1 // does this matter?? 
-            this.scene.scene.start('game-over')
-        }
-
-    }
-
-    private walkOnUpdate(){
+    private walkOnUpdate() {
         if (this.cursors.left.isDown) {
             this.sprite.flipX = true
             this.sprite.setVelocityX(-this.speed)
@@ -240,24 +212,16 @@ export default class PlayerController {
             this.stateMachine.setState('jump')
         }
 
-        // Handle hero climbing
-        if ((this.cursors.up.isDown || this.cursors.down.isDown) && !this.stateMachine.isCurrentState('climb')) {
-            const tile = this.map.getTileAt(Math.floor(this.sprite.x / 72), Math.floor(this.sprite.y / 72), true, this.groundLayer);
-
-            if (tile.properties.canClimb) {
-                this.stateMachine.setState('climb');
-            }
-        }
+        this.checkClimbing()
 
     }
 
-    private jumpOnEnter(){
+    private jumpOnEnter() {
         this.sprite.setFriction(0) //make the sprite slippery in the air
         this.sprite.setVelocityY(-15)
     }
 
-    private jumpOnUpdate(){
-        
+    private jumpOnUpdate() {
         if (this.cursors.left.isDown) {
             this.sprite.flipX = true
             this.sprite.setVelocityX(-this.speed)
@@ -266,19 +230,31 @@ export default class PlayerController {
             this.sprite.flipX = false
             this.sprite.setVelocityX(this.speed)
         }
+
+        this.checkClimbing()
     }
 
     private jumpOnExit() {
         this.sprite.setFriction(0.45)
     }
 
-    private climbOnEnter(){
-        console.log("climbing")
+    private checkClimbing() {
+        // Handle hero climbing
+        if ((this.cursors.up.isDown || this.cursors.down.isDown) && !this.stateMachine.isCurrentState('climb')) {
+            const tile = this.map.getTileAt(Math.floor(this.sprite.x / 72), Math.floor(this.sprite.y / 72), true, this.groundLayer);
+
+            if (tile.properties.canClimb) {
+                this.stateMachine.setState('climb');
+            }
+        }
+    }
+
+    private climbOnEnter() {
         this.sprite.setIgnoreGravity(true)
         this.sprite.setVelocity(0,0)
     }
 
-    private climbOnUpdate(){
+    private climbOnUpdate() {
         const tile = this.map.getTileAt(Math.floor(this.sprite.x / 72), Math.floor(this.sprite.y / 72), true, this.groundLayer);
 
         // Handle climbing movement
@@ -359,9 +335,9 @@ export default class PlayerController {
     }
 
     private scorpionHitOnEnter() {
-        if(this.lastscorpion) {
+        if (this.lastscorpion) {
             // move left if left of scorpion
-            if(this.sprite.x < this.lastscorpion.x) {
+            if (this.sprite.x < this.lastscorpion.x) {
                 this.sprite.setVelocityX(-20)
             }
             else {
@@ -379,7 +355,6 @@ export default class PlayerController {
         // blue and white color
         const startColor = Phaser.Display.Color.ValueToColor(0xffffff)
         const endColor = Phaser.Display.Color.ValueToColor(0x00ff00)
-
 
         // sets penguin tint to move from white to red every 100ms when a spike is hit
         this.scene.tweens.addCounter({
@@ -410,8 +385,6 @@ export default class PlayerController {
         this.stateMachine.setState('idle')
 
         // this.setHealth(this.health - 10)
-
-        
     }
 
     private scorpionStompOnEnter() {
@@ -420,7 +393,7 @@ export default class PlayerController {
         this.stateMachine.setState('idle')
     }
 
-    private deadOnEnter(){
+    private deadOnEnter() {
         this.sprite.play('player-death')
         this.sprite.setOnCollide(() => {})
         this.scene.time.delayedCall(1600, () => {
@@ -428,6 +401,17 @@ export default class PlayerController {
         })
     }
 
+    private updateTime() {
+        if (timer.remainingTime > 0) {
+            timer.remainingTime -= 0.1
+        }
+        else {
+            console.log("ELSE STATEMENT INVOKED")
+            this.aboveZero = false
+            timer.remainingTime = -1 // does this matter?? 
+            this.scene.scene.start('game-over')
+        }
+    }
 
     private createAnimations() {
         this.sprite.anims.create({
