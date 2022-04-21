@@ -2565,6 +2565,10 @@
   <object id="10" name="spikes" x="2077.68" y="1516.05" width="292.343" height="60.3248"/>
   <object id="12" name="spikes-moveup" x="2710.68" y="2606.3" width="144.674" height="139.686"/>
   <object id="13" name="spikes-moveup" x="1685.16" y="3348.76" width="144.674" height="139.686"/>
-  <object id="14" name="exitdoor" x="2820.14" y="1093.77" width="46.4037" height="125.29"/>
+  <object id="14" name="exitdoor" x="3611.26" y="3467.14" width="46.4037" height="125.29">
+   <properties>
+    <property name="targetScene" value="LevelAlexandria"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

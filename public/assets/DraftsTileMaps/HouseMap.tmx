@@ -2519,6 +2519,10 @@
   <object id="5" name="star" x="4572.69" y="3062.53" width="69.4783" height="69.4783"/>
   <object id="6" name="star" x="2802.24" y="2452.03" width="69.4783" height="69.4783"/>
   <object id="7" name="star" x="3742.41" y="1808.97" width="69.4783" height="69.4783"/>
-  <object id="8" name="time-machine" x="3413.62" y="2020.57" width="148.274" height="76.255"/>
+  <object id="8" name="time-machine" x="3413.62" y="2020.57" width="148.274" height="76.255">
+   <properties>
+    <property name="targetScene" value="LevelDungeon"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

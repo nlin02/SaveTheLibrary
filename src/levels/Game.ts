@@ -176,7 +176,6 @@ export default class Game extends Phaser.Scene {
                         juliusSprite.setData(property.name, property.value)
                         // piglet.setData(property.name, 'game-over')
                     }
-
                     juliusSprite.setData('type', 'Julius') // set the Data of the star so that when collieded, we know it's a star
                     break
                 }
@@ -186,11 +185,10 @@ export default class Game extends Phaser.Scene {
                         isStatic: true,
                         isSensor: true
                     })
-                    // for (var property of objData.properties) {
-                    //     machine.setData(property.name, property.value)
-                    //     // piglet.setData(property.name, 'game-over')
-                    // }
-                    machine.setData('targetScene', 'LevelDungeon')
+                    for (var property of objData.properties) {
+                        machine.setData(property.name, property.value)
+                    }
+                    // machine.setData('targetScene', 'LevelDungeon')
                     machine.setData('type', 'time-machine') // set the Data of the star so that when collieded, we know it's a star
                     break
                 }
@@ -228,6 +226,9 @@ export default class Game extends Phaser.Scene {
                         isStatic: true,
                         isSensor: true
                     })
+                    for (var property of objData.properties) {
+                        door.setData(property.name, property.value)
+                    }
                     door.setData('type', 'exit-door') // set the Data of the star so that when collieded, we know it's a star
                     break
                     
