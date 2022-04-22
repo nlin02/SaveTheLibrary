@@ -210,11 +210,11 @@ export default class PlayerController {
     private jumpOnUpdate() {
         if (this.cursors.left.isDown) {
             this.sprite.flipX = true
-            this.sprite.setVelocityX(-this.speed)
+            this.sprite.setVelocityX(-5)
         }
         else if (this.cursors.right.isDown) {
             this.sprite.flipX = false
-            this.sprite.setVelocityX(this.speed)
+            this.sprite.setVelocityX(5)
         }
 
         this.checkClimbing()
