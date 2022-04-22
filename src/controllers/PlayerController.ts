@@ -238,6 +238,7 @@ export default class PlayerController {
     private climbOnEnter() {
         this.sprite.setIgnoreGravity(true)
         this.sprite.setVelocity(0,0)
+        this.sprite.play('player-climb')
     }
 
     private climbOnUpdate() {
@@ -425,7 +426,7 @@ export default class PlayerController {
             key: 'player-idle',
             frames: [{
                 key: 'explorer',
-                frame: 'explorer_walk.png'
+                frame: 'explorer_walk01.png'
             }]
         })
 
@@ -443,7 +444,7 @@ export default class PlayerController {
 
         this.sprite.anims.create({
             key: 'player-death',
-            frames: this.sprite.anims.generateFrameNames('explorerdie', {
+            frames: this.sprite.anims.generateFrameNames('explorer', {
                 start: 1,
                 end: 5, 
                 prefix: 'explorer_die0',
@@ -459,10 +460,9 @@ export default class PlayerController {
                 start: 1,
                 end: 3, 
                 prefix: 'explorer_climb0',
-                zeroPad: 2,
                 suffix: '.png'
             }),
-            frameRate: 10
+            repeat: -1
         })
     }
 }
