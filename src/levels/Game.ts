@@ -48,9 +48,8 @@ export default class Game extends Phaser.Scene {
         this.load.scenePlugin('Slopes', Slopes);
         this.load.atlas('explorer', 'assets/explorer/explorer.png', 'assets/explorer/explorer.json')
         this.load.atlas('scorpion', 'assets/scorpion.png', 'assets/scorpion.json')
-        this.load.image('tiles', 'assets/AllTilesLarge.png')
+        this.load.image('tiles', 'assets/tilemaps/AllTilesLarge.png')
         this.load.tilemapTiledJSON(this.tilemapKey, this.tilemapJSONLocation)
-        // this.load.tilemapTiledJSON('levelOne', 'assets/DraftsTileMaps/Level1JSON.json')
         this.load.image('star', 'assets/star.png')
         this.load.image('health', 'assets/health.png')
         this.load.atlas('spikeMoveUp', 'assets/spikeMoveUp.png', 'assets/spikeMoveUp.json')
@@ -64,7 +63,7 @@ export default class Game extends Phaser.Scene {
     create() {
         console.log("Launching " + this.tilemapKey)
         this.scene.launch('status-display') //runs parallel scenes (aka UI.. )
-        this.launchLevelOne()
+        this.setUpTileMap()
         // this.launchLevelTwo()
 
         events.on('changeScene', this.changeScene, this) 
@@ -100,7 +99,7 @@ export default class Game extends Phaser.Scene {
         this.scene.start(nextScene)
     }
 
-    launchLevelOne(){
+    setUpTileMap(){
 
         this.matter.world.autoUpdate = false;
         this.physicsTimer = new PhysicsTimer(() => this.matter.world.step())
