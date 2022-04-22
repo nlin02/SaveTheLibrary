@@ -387,7 +387,7 @@ export default class PlayerController {
     private deadOnEnter() {
         this.sprite.play('player-death')
         this.sprite.setOnCollide(() => {})
-        this.scene.time.delayedCall(1600, () => {
+        this.scene.time.delayedCall(1500, () => {
             this.scene.scene.start('game-over')
         })
     }
@@ -402,7 +402,7 @@ export default class PlayerController {
             console.log("ELSE STATEMENT INVOKED")
             this.aboveZero = false
             timer.remainingTime = -1 // does this matter?? 
-            this.scene.scene.start('game-over')
+            this.stateMachine.setState('dead')
         }
     }
 
@@ -448,10 +448,8 @@ export default class PlayerController {
                 start: 1,
                 end: 5, 
                 prefix: 'explorer_die0',
-                zeroPad: 2,
                 suffix: '.png'
-            }),
-            frameRate: 10
+            })
         })
 
         this.sprite.anims.create({
