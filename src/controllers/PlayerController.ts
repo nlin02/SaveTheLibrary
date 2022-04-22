@@ -125,28 +125,31 @@ export default class PlayerController {
         this.stateMachine.update(dt)
         if (this.aboveZero) { // duplication code, but ensures that method updateTime is not being called ALL THE TIME 
             this.updateTime()
-
-            if(this.isStunned) {
-                if (this.stunTime > 300) {
-                    this.isStunned = false
-                    this.stunTime = 0
-                    this.speed = 7
-                }
-                this.stunTime ++
-            }
-
-            if(this.isSuperSpeed) {
-                if (this.speedTime > 300) {
-                    this.isSuperSpeed = false
-                    this.speedTime = 0
-                    this.speed = 7
-                    this.sprite.clearTint()
-                    console.log("not fast anymore!")
-                }
-                this.speedTime ++
-            }
+            this.handleSpeedStunLogic()
         }
 
+    }
+
+    private handleSpeedStunLogic() {
+        if(this.isStunned) {
+            if (this.stunTime > 300) {
+                this.isStunned = false
+                this.stunTime = 0
+                this.speed = 7
+            }
+            this.stunTime ++
+        }
+
+        if(this.isSuperSpeed) {
+            if (this.speedTime > 300) {
+                this.isSuperSpeed = false
+                this.speedTime = 0
+                this.speed = 7
+                this.sprite.clearTint()
+                console.log("not fast anymore!")
+            }
+            this.speedTime ++
+        }
     }
 
     // ------------- Idle State --------------
