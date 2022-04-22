@@ -27,6 +27,8 @@ export default class PlayerController {
 
     private isStunned = false
     private stunTime = 0
+    private isSuperSpeed = false
+    private speedTime = 0
 
     constructor(scene: Phaser.Scene, sprite: Phaser.Physics.Matter.Sprite, cursors: CursorKeys, obstacles: ObstaclesController, map: Phaser.Tilemaps.Tilemap, layer: Phaser.Tilemaps.TilemapLayer) {
         this.scene = scene
@@ -65,6 +67,9 @@ export default class PlayerController {
         .addState('scorpion-hit', {
             onEnter: this.scorpionHitOnEnter
         })
+        .addState('star-speed', {
+            onEnter: this.starSpeedOnEnter
+        })
         .addState('scorpion-stomp', {
             onEnter: this.scorpionStompOnEnter
         })
@@ -93,7 +98,8 @@ export default class PlayerController {
             
             switch (type){ // do something depending on the type
                 case 'star': {
-                    this.collectStar(sprite)
+                    this.destroyStar(sprite)
+                    this.stateMachine.setState('star-speed')
                     break
                 }
 
@@ -125,9 +131,19 @@ export default class PlayerController {
                     this.isStunned = false
                     this.stunTime = 0
                     this.speed = 7
-                    console.log("not stunned!")
                 }
                 this.stunTime ++
+            }
+
+            if(this.isSuperSpeed) {
+                if (this.speedTime > 300) {
+                    this.isSuperSpeed = false
+                    this.speedTime = 0
+                    this.speed = 7
+                    this.sprite.clearTint()
+                    console.log("not fast anymore!")
+                }
+                this.speedTime ++
             }
         }
 
@@ -311,7 +327,6 @@ export default class PlayerController {
 
     private stunPlayer() {
         this.isStunned = true
-        console.log("stunned")
         this.speed = 4
        
         // red and white color
@@ -411,6 +426,30 @@ export default class PlayerController {
     private collectStar(sprite: Phaser.Physics.Matter.Sprite) {
         events.emit('star-collected')
         sprite.destroy()
+    }
+
+
+
+    // ---------------- Super Speed Method --------------
+    private starSpeedOnEnter() {
+        this.superSpeed()
+    }
+
+    private destroyStar(sprite: Phaser.Physics.Matter.Sprite) {
+        sprite.destroy()
+    }
+
+
+    private superSpeed() {
+        this.isSuperSpeed = true
+        this.speed = 9
+        console.log("super speed!!")
+       
+        // yellow and white color
+        // const yellow = Phaser.Display.Color.ValueToColor(0xffff00)
+        this.sprite.setTint(0xffff00)
+        this.stateMachine.setState('idle')
+
     }
 
     // ------------- Switch Scene Method --------------
