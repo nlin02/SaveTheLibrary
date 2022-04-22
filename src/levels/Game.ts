@@ -10,7 +10,7 @@ import { sharedInstance as events } from '../eventcenter/EventCenter'
 export default class Game extends Phaser.Scene {
 
     private cursors!: Phaser.Types.Input.Keyboard.CursorKeys
-    private penguin?: Phaser.Physics.Matter.Sprite    // ? = could be undefined
+    private explorer?: Phaser.Physics.Matter.Sprite    // ? = could be undefined
     private playerController?: PlayerController
     private obstacles!: ObstaclesController
     private scorpions?: ScorpionController[] = [] //array of scorpion controllers since there can be more than 1
@@ -46,8 +46,7 @@ export default class Game extends Phaser.Scene {
 
     preload() {
         this.load.scenePlugin('Slopes', Slopes);
-        this.load.atlas('penguin', 'assets/penguin.png', 'assets/penguin.json')
-        this.load.atlas('explorer', 'assets/explorer.png', 'assets/explorer.json')
+        this.load.atlas('explorer', 'assets/explorer/explorer.png', 'assets/explorer/explorer.json')
         this.load.atlas('scorpion', 'assets/scorpion.png', 'assets/scorpion.json')
         this.load.image('tiles', 'assets/AllTilesLarge.png')
         this.load.tilemapTiledJSON(this.tilemapKey, this.tilemapJSONLocation)
@@ -137,11 +136,11 @@ export default class Game extends Phaser.Scene {
 
             switch(name) {
                 case 'penguin-spawn': {
-                    this.penguin = this.matter.add.sprite(x + (width * 0.5), y, 'explorer', 'explorer_walk01.png', {friction: 0.45, chamfer: { radius: 20 } })  // add penguin to server
+                    this.explorer = this.matter.add.sprite(x + (width * 0.5), y, 'explorer', 'explorer_walk01.png', {friction: 0.45, chamfer: { radius: 20 } })  // add explorer to server
                         .play('player-idle')
                         .setFixedRotation()
-                    this.playerController = new PlayerController(this, this.penguin, this.cursors, this.obstacles, this.map, this.groundLayer)
-                    this.cameras.main.startFollow(this.penguin, true) 
+                    this.playerController = new PlayerController(this, this.explorer, this.cursors, this.obstacles, this.map, this.groundLayer)
+                    this.cameras.main.startFollow(this.explorer, true) 
                     break
                 }
 
