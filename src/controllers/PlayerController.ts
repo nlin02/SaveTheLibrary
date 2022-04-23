@@ -2,7 +2,6 @@ import Phaser from 'phaser'
 import StateMachine from '../StateMachine/StateMachine'
 import { sharedInstance as events } from '../eventcenter/EventCenter'
 import ObstaclesController from './ObstaclesController'
-import { timer } from '.././header/Timer'
 
 
 type CursorKeys = Phaser.Types.Input.Keyboard.CursorKeys
@@ -24,6 +23,7 @@ export default class PlayerController {
 
     private speed = 7
     private aboveZero
+    remTime = 20 // TODO: UPDATE
 
     private isStunned = false
     private stunTime = 0
@@ -39,8 +39,7 @@ export default class PlayerController {
         this.groundLayer = layer
         this.stateMachine = new StateMachine(this, 'player')
         this.aboveZero = true
-        timer.remainingTime = 500 //TO DO: Figure out how to reset remainingTime universally !!!
-
+    
         this.createAnimations()
 
         this.stateMachine.addState('idle', {
@@ -99,6 +98,7 @@ export default class PlayerController {
             switch (type){ // do something depending on the type
                 case 'star': {
                     this.destroyStar(sprite)
+                    events.emit('star-collected')
                     this.stateMachine.setState('star-speed')
                     break
                 }
@@ -413,13 +413,13 @@ export default class PlayerController {
     // ------------- Update Time Handler --------------
 
     private updateTime() {
-        if (timer.remainingTime > 0) {
-            timer.remainingTime -= 0.1
+        if (this.remTime > 0) {
+            this.remTime -= 0.1
+            events.emit('timerIncrement', this.remTime)
         }
         else {
             console.log("ELSE STATEMENT INVOKED")
             this.aboveZero = false
-            timer.remainingTime = -1 // does this matter?? 
             this.stateMachine.setState('dead')
         }
     }

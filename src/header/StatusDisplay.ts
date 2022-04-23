@@ -2,7 +2,6 @@ import { autorun } from 'mobx'
 import Phaser from 'phaser'
 import { sharedInstance as events } from '../eventcenter/EventCenter'
 import PlayerController from '../controllers/PlayerController'
-import { timer } from './Timer'
 
 export default class StatusDisplay extends Phaser.Scene
 {
@@ -10,8 +9,6 @@ export default class StatusDisplay extends Phaser.Scene
     private starsCollected = 0
     private graphics!: Phaser.GameObjects.Graphics
     private lastHealth = 100
-
-    private timerText!: Phaser.GameObjects.Text 
 
     private timePos !: Phaser.GameObjects.Rectangle // represents positive time
     private timeNeg !: Phaser.GameObjects.Rectangle // represents negative time
@@ -42,17 +39,11 @@ export default class StatusDisplay extends Phaser.Scene
             fontSize: '32px'
         })
 
-        this.timeNeg = this.add.rectangle(500,25, timer.remainingTime, 20, 0x808080)
-        this.timePos = this.add.rectangle(500, 25, timer.remainingTime, 20, 0xff0000)
+        this.setUpTime(20)
 
+        events.on('setup-time', this.setUpTime, this)
         events.on('star-collected', this.handleStarCollected, this)
-        // events.on('health-changed', this.handleHealthChanged, this)
-
-        autorun(() => {
-            if(timer.remainingTime >= 0 ) {
-                this.updateTime()   
-            }
-        })
+        events.on('timerIncrement', this.updateTime, this)
 
         // clean up of resources that we know we need for later.. 
         this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
@@ -82,8 +73,13 @@ export default class StatusDisplay extends Phaser.Scene
 
     }
 
-    private updateTime(){
-        this.timePos.setSize(timer.remainingTime, 20)
+    private setUpTime(dt:number){
+        this.timeNeg = this.add.rectangle(500,25, dt, 20, 0x808080)
+        this.timePos = this.add.rectangle(500, 25, dt, 20, 0xff0000)
+    }
+
+    private updateTime(dt: number){ 
+        this.timePos.setSize(dt, 20)
         this.timePos.setPosition(500 - .1/2, 25)
     }
 

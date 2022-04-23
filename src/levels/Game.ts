@@ -65,7 +65,7 @@ export default class Game extends Phaser.Scene {
         this.scene.launch('status-display') //runs parallel scenes (aka UI.. )
         this.setUpTileMap()
         // this.launchLevelTwo()
-
+        
         events.on('changeScene', this.changeScene, this) 
     }
 
