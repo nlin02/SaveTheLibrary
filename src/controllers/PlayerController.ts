@@ -531,7 +531,8 @@ export default class PlayerController {
                 prefix: 'explorer_climb0',
                 suffix: '.png'
             }),
-            repeat: -1
+            repeat: -1,
+            frameRate: 10
         })
 
         this.sprite.anims.create({
