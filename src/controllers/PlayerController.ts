@@ -533,6 +533,8 @@ export default class PlayerController {
             }),
             repeat: -1
         })
+
+        this.sprite.anims.create({
             key: 'player-climb-idle',
             frames: [{
                 key: 'explorer',
