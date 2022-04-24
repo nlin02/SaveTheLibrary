@@ -23,7 +23,7 @@ export default class PlayerController {
 
     private speed = 7
     private aboveZero
-    remTime = 20 // TODO: UPDATE
+    remTime = 100 // TODO: UPDATE
 
     private isStunned = false
     private stunTime = 0
@@ -59,6 +59,10 @@ export default class PlayerController {
             onEnter: this.climbOnEnter,
             onUpdate: this.climbOnUpdate,
             onExit: this.climbOnExit
+        })
+        .addState('climb-idle', {
+            onEnter: this.climbIdleOnEnter,
+            onUpdate: this.climbIdleOnUpdate,
         })
         .addState('spike-hit', {
             onEnter: this.spikeHitOnEnter
@@ -284,6 +288,7 @@ export default class PlayerController {
         else if (this.stateMachine.isCurrentState('climb')) {
             this.sprite.setVelocity(0,0)
             this.sprite.setIgnoreGravity(true)
+            this.stateMachine.setState('climb-idle');
         }
 
         if (!tile.properties.canClimb) {
@@ -294,6 +299,30 @@ export default class PlayerController {
 
     private climbOnExit() {
         this.sprite.setIgnoreGravity(false)
+    }
+
+    // ------------- Climb Idle State --------------
+    
+    private climbIdleOnEnter() {
+        this.sprite.setIgnoreGravity(true)
+        this.sprite.setVelocity(0,0)
+        this.sprite.play('player-climb-idle')
+    }
+
+    private climbIdleOnUpdate() {
+        const tile = this.map.getTileAt(Math.floor(this.sprite.x / 72), Math.floor(this.sprite.y / 72), true, this.groundLayer);
+
+        if (this.cursors.up.isDown || this.cursors.down.isDown) {
+            this.stateMachine.setState('climb')
+        }
+        else if (this.cursors.left.isDown || this.cursors.right.isDown) {
+            this.stateMachine.setState('climb')
+        }
+
+        if (!tile.properties.canClimb) {
+            this.sprite.setIgnoreGravity(false)
+            this.stateMachine.setState('idle');
+        }
     }
 
     // ------------- Check Collision For Damage Handler --------------
@@ -503,6 +532,12 @@ export default class PlayerController {
                 suffix: '.png'
             }),
             repeat: -1
+        })
+            key: 'player-climb-idle',
+            frames: [{
+                key: 'explorer',
+                frame: 'explorer_climb02.png'          
+            }]
         })
     }
 }
