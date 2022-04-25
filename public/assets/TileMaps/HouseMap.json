@@ -113,8 +113,8 @@
                  "type":"",
                  "visible":true,
                  "width":148.274,
-                 "x":3413.62,
-                 "y":2020.57
+                 "x":3387.54599950335,
+                 "y":2031.74457164142
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -132,7 +132,7 @@
         {
          "columns":19,
          "firstgid":1,
-         "image":"..\/AllTilesLarge.png",
+         "image":"AllTilesLarge.png",
          "imageheight":1800,
          "imagewidth":1368,
          "margin":0,
@@ -4430,7 +4430,7 @@
         }, 
         {
          "firstgid":476,
-         "source":"..\/AllTilesLarge.tsx"
+         "source":"AllTilesLarge.tsx"
         }],
  "tilewidth":72,
  "type":"map",
