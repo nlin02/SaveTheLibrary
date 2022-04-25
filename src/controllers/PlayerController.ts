@@ -28,8 +28,11 @@ export default class PlayerController {
 
     private isStunned = false
     private stunTime = 0
+    private stunLength = 300
+
     private isSuperSpeed = false
     private speedTime = 0
+    private speedLength = 300
 
     constructor(scene: Phaser.Scene, sprite: Phaser.Physics.Matter.Sprite, cursors: CursorKeys, obstacles: ObstaclesController, map: Phaser.Tilemaps.Tilemap, layer: Phaser.Tilemaps.TilemapLayer, levelTime: number) {
         this.scene = scene
@@ -138,25 +141,34 @@ export default class PlayerController {
     }
 
     private handleSpeedStunLogic() {
-        if(this.isStunned) {
-            if (this.stunTime > 300) {
+        if(this.isStunned && !this.isSuperSpeed) {
+            if (this.stunTime > this.stunLength) {
                 this.isStunned = false
                 this.stunTime = 0
                 this.speed = 7
+                this.sprite.clearTint()
             }
             this.stunTime ++
         }
 
-        if(this.isSuperSpeed) {
-            if (this.speedTime > 300) {
+        if(this.isSuperSpeed && !this.isStunned) {
+            if (this.speedTime > this.speedLength) {
                 this.isSuperSpeed = false
                 this.speedTime = 0
                 this.speed = 7
                 this.sprite.clearTint()
-                console.log("not fast anymore!")
             }
             this.speedTime ++
         }
+    }
+
+    private resetSpeedStunLogic() {
+        this.sprite.clearTint()
+        this.speed = 7
+        this.isStunned = false
+        this.isSuperSpeed = false
+        this.stunTime = 0
+        this.speedTime = 0
     }
 
     // ------------- Idle State --------------
@@ -366,9 +378,7 @@ export default class PlayerController {
        
         // red and white color
         const startColor = Phaser.Display.Color.ValueToColor(0xffffff)
-        const endColor = Phaser.Display.Color.ValueToColor(0xff0000)
-
-        this.stateMachine.setState('idle')
+        const endColor = Phaser.Display.Color.ValueToColor(0xc22626)
 
         // sets penguin tint to move from white to red every 100ms when a spike is hit
         this.scene.tweens.addCounter({
@@ -391,19 +401,30 @@ export default class PlayerController {
                     colorObject.g,
                     colorObject.b
                 )
-
                 this.sprite.setTint(color)
+            },
+            onComplete: () => {
+                this.sprite.setTint(0xc22626)
             }
         })
         this.stateMachine.setState('idle')
     }
 
+
     // ------------- Spike Hit State --------------
 
     private spikeHitOnEnter() {
+        this.sprite.clearTint()
         this.sprite.setVelocityY(-12)
+
+        if(this.isSuperSpeed) {
+            this.resetSpeedStunLogic()
+            this.stateMachine.setState('idle')
+            return
+        }
         this.stunPlayer()
     }
+
 
     // ------------- Scorpion Hit State --------------
 
@@ -470,12 +491,14 @@ export default class PlayerController {
 
     // ---------------- Super Speed Method --------------
     private starSpeedOnEnter() {
+        if(this.isStunned) {
+            this.resetSpeedStunLogic()
+            this.stateMachine.setState('idle')
+            return
+        }
         this.isSuperSpeed = true
-        this.speed = 9
-        console.log("super speed!!")
-       
-        // yellow color
-        this.sprite.setTint(0xffff00)
+        this.speed = 9       
+        this.sprite.setTint(0xffff00) //yellow
         this.stateMachine.setState('idle')
     }
 
