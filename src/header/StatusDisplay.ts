@@ -42,21 +42,21 @@ export default class StatusDisplay extends Phaser.Scene
 
         // this.setHealthBar(100)
 
-        this.starsLabel = this.add.text(10,35, 'Stars: 0',{
-            fontSize: '0px'
-        })
+        // this.starsLabel = this.add.text(10,35, 'Stars: 0',{
+        //     fontSize: '0px'
+        // })
 
         this.setUpTime()
 
-        events.on('star-collected', this.handleStarCollected, this)
+        // events.on('star-collected', this.handleStarCollected, this)
         events.on('timerIncrement', this.updateTimeBar, this)
         events.on('startedTime', this.setStartTime, this)
 
 
-        // clean up of resources that we know we need for later.. 
-        this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
-            events.off('star-collected', this.handleStarCollected, this)
-        })
+        // // clean up of resources that we know we need for later.. 
+        // this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
+        //     events.off('star-collected', this.handleStarCollected, this)
+        // })
     }
     
     // private setHealthBar(value: number){
@@ -78,12 +78,12 @@ export default class StatusDisplay extends Phaser.Scene
         console.log("set initial time", initialTime, this.initialTime)
     }
 
-    private handleStarCollected()
-    {
-        this.starsCollected +=1 // can also do ++this.starsCollected
-        this.starsLabel.text = `Stars:  ${this.starsCollected}` // string interpolation :) 
+    // private handleStarCollected()
+    // {
+    //     this.starsCollected +=1 // can also do ++this.starsCollected
+    //     this.starsLabel.text = `Stars:  ${this.starsCollected}` // string interpolation :) 
 
-    }
+    // }
 
     private setUpTime(){
         this.timeNeg = this.add.rectangle(this.timeBarX, this.timeBarY, this.initialTimeBarLength, this.timeBarHeight, 0x808080)
