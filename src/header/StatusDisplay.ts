@@ -12,7 +12,13 @@ export default class StatusDisplay extends Phaser.Scene
 
     private timePos !: Phaser.GameObjects.Rectangle // represents positive time
     private timeNeg !: Phaser.GameObjects.Rectangle // represents negative time
+    
+    private initialTime: number
+    private initialTimeBarLength = 150
 
+    private timeBarX = 150
+    private timeBarY = 30
+    private timeBarHeight = 20
 
     constructor()
     {
@@ -25,25 +31,27 @@ export default class StatusDisplay extends Phaser.Scene
     init()
     {
         this.starsCollected = 0 // reset to 0
-
     }
-     
+
     create()
     {
-        
+        this.add.image(this.timeBarX - 100, this.timeBarY, 'clock')
+            .setDisplaySize(this.timeBarHeight + 10, this.timeBarHeight + 10)
+
         this.graphics = this.add.graphics()
 
         // this.setHealthBar(100)
-        
+
         this.starsLabel = this.add.text(10,35, 'Stars: 0',{
-            fontSize: '32px'
+            fontSize: '0px'
         })
 
-        this.setUpTime(500) //TODO: This has to be hard coded !! 
+        this.setUpTime()
 
-        events.on('setup-time', this.setUpTime, this)
         events.on('star-collected', this.handleStarCollected, this)
-        events.on('timerIncrement', this.updateTime, this)
+        events.on('timerIncrement', this.updateTimeBar, this)
+        events.on('startedTime', this.setStartTime, this)
+
 
         // clean up of resources that we know we need for later.. 
         this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
@@ -51,20 +59,24 @@ export default class StatusDisplay extends Phaser.Scene
         })
     }
     
-    private setHealthBar(value: number){
-        const width = 200
-        const percent = Phaser.Math.Clamp(value, 0, 100) / 100 // normalize within 0 and 1
-        // console.log(value)
-        this.graphics.clear() //clearing it out since this gets reset often
-        this.graphics.fillStyle(0x808080) // set the back bar to be gray
-        this.graphics.fillRoundedRect(100,10,width,20, 5)
-        if (percent > 0){
-            this.graphics.fillStyle(0x00ff00) // set another rectangle that is green
-            this.graphics.fillRoundedRect(10,10,width * percent,20, 5) // fit it within the bar    
-        } 
+    // private setHealthBar(value: number){
+    //     const width = 200
+    //     const percent = Phaser.Math.Clamp(value, 0, 100) / 100 // normalize within 0 and 1
+    //     // console.log(value)
+    //     this.graphics.clear() //clearing it out since this gets reset often
+    //     this.graphics.fillStyle(0x808080) // set the back bar to be gray
+    //     this.graphics.fillRoundedRect(100,10,width,20, 5)
+    //     if (percent > 0){
+    //         this.graphics.fillStyle(0x00ff00) // set another rectangle that is green
+    //         this.graphics.fillRoundedRect(10,10,width * percent,20, 5) // fit it within the bar    
+    //     } 
         
-    }
+    // }
 
+    private setStartTime(initialTime:number) {
+        this.initialTime = initialTime
+        console.log("set initial time", initialTime, this.initialTime)
+    }
 
     private handleStarCollected()
     {
@@ -73,32 +85,42 @@ export default class StatusDisplay extends Phaser.Scene
 
     }
 
-    private setUpTime(dt:number){
-        this.timeNeg = this.add.rectangle(500,25, dt, 20, 0x808080)
-        this.timePos = this.add.rectangle(500, 25, dt, 20, 0xff0000)
+    private setUpTime(){
+        this.timeNeg = this.add.rectangle(this.timeBarX, this.timeBarY, this.initialTimeBarLength, this.timeBarHeight, 0x808080)
+        this.timePos = this.add.rectangle(this.timeBarX, this.timeBarY, this.initialTimeBarLength, this.timeBarHeight, 0x2c58aa)
     }
 
-    private updateTime(dt: number){ 
-        this.timePos.setSize(dt, 20)
-        this.timePos.setPosition(500 - .1/2, 25)
+    private updateTimeBar(currentTime: number){ 
+        const lengthPerTime = this.initialTimeBarLength / this.initialTime
+        this.timePos.setSize(Math.ceil(lengthPerTime * currentTime), this.timeBarHeight)
+        this.timePos.setPosition(this.timeBarX - .1/2, this.timeBarY)
+
+        if (currentTime < 0.5 * this.initialTime && currentTime > 0.25 * this.initialTime) {
+            this.timePos.fillColor = 0x614d79
+        }
+        else if(currentTime < 0.25 * this.initialTime) {
+            this.timePos.fillColor = 0xc22626
+        }
+
+        
     }
 
-    private handleHealthChanged(value: number)
-    {
-        this.tweens.addCounter({
-            from: this.lastHealth,
-            to: value,
-            duration: 200,
-            onUpdate: tween => {
-                const value = tween.getValue() //value between from and two
-                // console.log(value)
-                this.setHealthBar(value)
-            }
-        })
+    // private handleHealthChanged(value: number)
+    // {
+    //     this.tweens.addCounter({
+    //         from: this.lastHealth,
+    //         to: value,
+    //         duration: 200,
+    //         onUpdate: tween => {
+    //             const value = tween.getValue() //value between from and two
+    //             // console.log(value)
+    //             this.setHealthBar(value)
+    //         }
+    //     })
         
         
-        this.lastHealth = value
-    }
+    //     this.lastHealth = value
+    // }
 
 
 

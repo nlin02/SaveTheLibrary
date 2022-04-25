@@ -23,14 +23,18 @@ export default class PlayerController {
 
     private speed = 7
     private aboveZero
-    remTime = 500 // TODO: UPDATE
+    private startTime:number
+    private remTime:number // TODO: UPDATE
 
     private isStunned = false
     private stunTime = 0
+    private stunLength = 300
+
     private isSuperSpeed = false
     private speedTime = 0
+    private speedLength = 300
 
-    constructor(scene: Phaser.Scene, sprite: Phaser.Physics.Matter.Sprite, cursors: CursorKeys, obstacles: ObstaclesController, map: Phaser.Tilemaps.Tilemap, layer: Phaser.Tilemaps.TilemapLayer) {
+    constructor(scene: Phaser.Scene, sprite: Phaser.Physics.Matter.Sprite, cursors: CursorKeys, obstacles: ObstaclesController, map: Phaser.Tilemaps.Tilemap, layer: Phaser.Tilemaps.TilemapLayer, levelTime: number) {
         this.scene = scene
         this.sprite = sprite
         this.cursors = cursors
@@ -39,6 +43,8 @@ export default class PlayerController {
         this.groundLayer = layer
         this.stateMachine = new StateMachine(this, 'player')
         this.aboveZero = true
+        this.startTime = levelTime
+        this.remTime = this.startTime
     
         this.createAnimations()
 
@@ -59,6 +65,10 @@ export default class PlayerController {
             onEnter: this.climbOnEnter,
             onUpdate: this.climbOnUpdate,
             onExit: this.climbOnExit
+        })
+        .addState('climb-idle', {
+            onEnter: this.climbIdleOnEnter,
+            onUpdate: this.climbIdleOnUpdate,
         })
         .addState('spike-hit', {
             onEnter: this.spikeHitOnEnter
@@ -131,25 +141,34 @@ export default class PlayerController {
     }
 
     private handleSpeedStunLogic() {
-        if(this.isStunned) {
-            if (this.stunTime > 300) {
+        if(this.isStunned && !this.isSuperSpeed) {
+            if (this.stunTime > this.stunLength) {
                 this.isStunned = false
                 this.stunTime = 0
                 this.speed = 7
+                this.sprite.clearTint()
             }
             this.stunTime ++
         }
 
-        if(this.isSuperSpeed) {
-            if (this.speedTime > 300) {
+        if(this.isSuperSpeed && !this.isStunned) {
+            if (this.speedTime > this.speedLength) {
                 this.isSuperSpeed = false
                 this.speedTime = 0
                 this.speed = 7
                 this.sprite.clearTint()
-                console.log("not fast anymore!")
             }
             this.speedTime ++
         }
+    }
+
+    private resetSpeedStunLogic() {
+        this.sprite.clearTint()
+        this.speed = 7
+        this.isStunned = false
+        this.isSuperSpeed = false
+        this.stunTime = 0
+        this.speedTime = 0
     }
 
     // ------------- Idle State --------------
@@ -284,6 +303,7 @@ export default class PlayerController {
         else if (this.stateMachine.isCurrentState('climb')) {
             this.sprite.setVelocity(0,0)
             this.sprite.setIgnoreGravity(true)
+            this.stateMachine.setState('climb-idle');
         }
 
         if (!tile.properties.canClimb) {
@@ -294,6 +314,30 @@ export default class PlayerController {
 
     private climbOnExit() {
         this.sprite.setIgnoreGravity(false)
+    }
+
+    // ------------- Climb Idle State --------------
+    
+    private climbIdleOnEnter() {
+        this.sprite.setIgnoreGravity(true)
+        this.sprite.setVelocity(0,0)
+        this.sprite.play('player-climb-idle')
+    }
+
+    private climbIdleOnUpdate() {
+        const tile = this.map.getTileAt(Math.floor(this.sprite.x / 72), Math.floor(this.sprite.y / 72), true, this.groundLayer);
+
+        if (this.cursors.up.isDown || this.cursors.down.isDown) {
+            this.stateMachine.setState('climb')
+        }
+        else if (this.cursors.left.isDown || this.cursors.right.isDown) {
+            this.stateMachine.setState('climb')
+        }
+
+        if (!tile.properties.canClimb) {
+            this.sprite.setIgnoreGravity(false)
+            this.stateMachine.setState('idle');
+        }
     }
 
     // ------------- Check Collision For Damage Handler --------------
@@ -334,9 +378,7 @@ export default class PlayerController {
        
         // red and white color
         const startColor = Phaser.Display.Color.ValueToColor(0xffffff)
-        const endColor = Phaser.Display.Color.ValueToColor(0xff0000)
-
-        this.stateMachine.setState('idle')
+        const endColor = Phaser.Display.Color.ValueToColor(0xc22626)
 
         // sets penguin tint to move from white to red every 100ms when a spike is hit
         this.scene.tweens.addCounter({
@@ -359,19 +401,30 @@ export default class PlayerController {
                     colorObject.g,
                     colorObject.b
                 )
-
                 this.sprite.setTint(color)
+            },
+            onComplete: () => {
+                this.sprite.setTint(0xc22626)
             }
         })
         this.stateMachine.setState('idle')
     }
 
+
     // ------------- Spike Hit State --------------
 
     private spikeHitOnEnter() {
+        this.sprite.clearTint()
         this.sprite.setVelocityY(-12)
+
+        if(this.isSuperSpeed) {
+            this.resetSpeedStunLogic()
+            this.stateMachine.setState('idle')
+            return
+        }
         this.stunPlayer()
     }
+
 
     // ------------- Scorpion Hit State --------------
 
@@ -413,6 +466,9 @@ export default class PlayerController {
     // ------------- Update Time Handler --------------
 
     private updateTime() {
+        if(this.remTime === this.startTime) {
+            events.emit('startedTime', this.remTime)
+        }
         if (this.remTime > 0) {
             this.remTime -= 0.1
             events.emit('timerIncrement', this.remTime)
@@ -435,25 +491,21 @@ export default class PlayerController {
 
     // ---------------- Super Speed Method --------------
     private starSpeedOnEnter() {
-        this.superSpeed()
+        if(this.isStunned) {
+            this.resetSpeedStunLogic()
+            this.stateMachine.setState('idle')
+            return
+        }
+        this.isSuperSpeed = true
+        this.speed = 9       
+        this.sprite.setTint(0xffff00) //yellow
+        this.stateMachine.setState('idle')
     }
 
     private destroyStar(sprite: Phaser.Physics.Matter.Sprite) {
         sprite.destroy()
     }
 
-
-    private superSpeed() {
-        this.isSuperSpeed = true
-        this.speed = 9
-        console.log("super speed!!")
-       
-        // yellow and white color
-        // const yellow = Phaser.Display.Color.ValueToColor(0xffff00)
-        this.sprite.setTint(0xffff00)
-        this.stateMachine.setState('idle')
-
-    }
 
     // ------------- Switch Scene Method --------------
 
@@ -502,7 +554,16 @@ export default class PlayerController {
                 prefix: 'explorer_climb0',
                 suffix: '.png'
             }),
-            repeat: -1
+            repeat: -1,
+            frameRate: 10
+        })
+
+        this.sprite.anims.create({
+            key: 'player-climb-idle',
+            frames: [{
+                key: 'explorer',
+                frame: 'explorer_climb02.png'          
+            }]
         })
     }
 }
