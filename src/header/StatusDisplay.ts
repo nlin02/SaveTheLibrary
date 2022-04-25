@@ -14,7 +14,11 @@ export default class StatusDisplay extends Phaser.Scene
     private timeNeg !: Phaser.GameObjects.Rectangle // represents negative time
     
     private initialTime: number
-    private initialLength = 200
+    private initialTimeBarLength = 150
+
+    private timeBarX = 200
+    private timeBarY = 30
+    private timeBarHeight = 20
 
     constructor()
     {
@@ -41,11 +45,10 @@ export default class StatusDisplay extends Phaser.Scene
             fontSize: '0px'
         })
 
-        this.setUpTime(this.initialLength)
+        this.setUpTime()
 
-        events.on('setup-time', this.setUpTime, this)
         events.on('star-collected', this.handleStarCollected, this)
-        events.on('timerIncrement', this.updateTime, this)
+        events.on('timerIncrement', this.updateTimeBar, this)
         events.on('startedTime', this.setStartTime, this)
 
 
@@ -81,15 +84,24 @@ export default class StatusDisplay extends Phaser.Scene
 
     }
 
-    private setUpTime(dt:number){
-        this.timeNeg = this.add.rectangle(200,25, dt, 20, 0x808080)
-        this.timePos = this.add.rectangle(200, 25, dt, 20, 0xff0000)
+    private setUpTime(){
+        this.timeNeg = this.add.rectangle(this.timeBarX, this.timeBarY, this.initialTimeBarLength, this.timeBarHeight, 0x808080)
+        this.timePos = this.add.rectangle(this.timeBarX, this.timeBarY, this.initialTimeBarLength, this.timeBarHeight, 0x2c58aa)
     }
 
-    private updateTime(dt: number){ 
-        const timeperLength = this.initialLength / this.initialTime
-        this.timePos.setSize(Math.ceil(timeperLength * dt) , 20)
-        this.timePos.setPosition(this.initialLength - .1/2, 25)
+    private updateTimeBar(currentTime: number){ 
+        const lengthPerTime = this.initialTimeBarLength / this.initialTime
+        this.timePos.setSize(Math.ceil(lengthPerTime * currentTime), this.timeBarHeight)
+        this.timePos.setPosition(this.timeBarX - .1/2, this.timeBarY)
+
+        if (currentTime < 0.5 * this.initialTime && currentTime > 0.25 * this.initialTime) {
+            this.timePos.fillColor = 0x614d79
+        }
+        else if(currentTime < 0.25 * this.initialTime) {
+            this.timePos.fillColor = 0xc22626
+        }
+
+        
     }
 
     // private handleHealthChanged(value: number)
