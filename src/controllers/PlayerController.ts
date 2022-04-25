@@ -469,25 +469,19 @@ export default class PlayerController {
 
     // ---------------- Super Speed Method --------------
     private starSpeedOnEnter() {
-        this.superSpeed()
+        this.isSuperSpeed = true
+        this.speed = 9
+        console.log("super speed!!")
+       
+        // yellow color
+        this.sprite.setTint(0xffff00)
+        this.stateMachine.setState('idle')
     }
 
     private destroyStar(sprite: Phaser.Physics.Matter.Sprite) {
         sprite.destroy()
     }
 
-
-    private superSpeed() {
-        this.isSuperSpeed = true
-        this.speed = 9
-        console.log("super speed!!")
-       
-        // yellow and white color
-        // const yellow = Phaser.Display.Color.ValueToColor(0xffff00)
-        this.sprite.setTint(0xffff00)
-        this.stateMachine.setState('idle')
-
-    }
 
     // ------------- Switch Scene Method --------------
 

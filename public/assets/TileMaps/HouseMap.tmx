@@ -4,7 +4,7 @@
   <export target="HouseMap.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="AllTilesLarge" tilewidth="72" tileheight="72" tilecount="475" columns="19">
-  <image source="../AllTilesLarge.png" width="1368" height="1800"/>
+  <image source="AllTilesLarge.png" width="1368" height="1800"/>
   <tile id="0">
    <properties>
     <property name="collides" type="bool" value="true"/>
@@ -2383,7 +2383,7 @@
    </properties>
   </tile>
  </tileset>
- <tileset firstgid="476" source="../AllTilesLarge.tsx"/>
+ <tileset firstgid="476" source="AllTilesLarge.tsx"/>
  <layer id="1" name="ground" width="80" height="60" offsetx="0.506201" offsety="-1.0124">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -2519,7 +2519,7 @@
   <object id="5" name="star" x="4572.69" y="3062.53" width="69.4783" height="69.4783"/>
   <object id="6" name="star" x="2802.24" y="2452.03" width="69.4783" height="69.4783"/>
   <object id="7" name="star" x="3742.41" y="1808.97" width="69.4783" height="69.4783"/>
-  <object id="8" name="time-machine" x="3413.62" y="2020.57" width="148.274" height="76.255">
+  <object id="8" name="time-machine" x="3387.55" y="2031.74" width="148.274" height="76.255">
    <properties>
     <property name="targetScene" value="LevelDungeon"/>
    </properties>
