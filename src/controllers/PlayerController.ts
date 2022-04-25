@@ -23,7 +23,8 @@ export default class PlayerController {
 
     private speed = 7
     private aboveZero
-    remTime = 300 // TODO: UPDATE
+    private startTime = 300
+    private remTime:number // TODO: UPDATE
 
     private isStunned = false
     private stunTime = 0
@@ -39,6 +40,7 @@ export default class PlayerController {
         this.groundLayer = layer
         this.stateMachine = new StateMachine(this, 'player')
         this.aboveZero = true
+        this.remTime = this.startTime
     
         this.createAnimations()
 
@@ -442,6 +444,9 @@ export default class PlayerController {
     // ------------- Update Time Handler --------------
 
     private updateTime() {
+        if(this.remTime === this.startTime) {
+            events.emit('startedTime', this.remTime)
+        }
         if (this.remTime > 0) {
             this.remTime -= 0.1
             events.emit('timerIncrement', this.remTime)
