@@ -6,7 +6,8 @@ export default class LevelDungeon extends Game {
     constructor() {
         let tilemapKey = "LevelDungeon"
         let tilemapJSONFileLocation = "assets/tilemaps/DungeonMap.json"
+        let levelTime = 300
 
-        super (tilemapKey, tilemapJSONFileLocation, 300)
+        super(tilemapKey, tilemapJSONFileLocation, levelTime)
     }
 }
