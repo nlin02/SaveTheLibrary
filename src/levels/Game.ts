@@ -113,8 +113,10 @@ export default class Game extends Phaser.Scene {
         const tileset = this.map.addTilesetImage('AllTilesLarge', 'tiles')
 
         this.groundLayer = this.map.createLayer('ground', tileset)   // creates the game layer
-        this.map.createLayer('obstacles', tileset)
         this.groundLayer.setCollisionByProperty({ collides: true })   // sets collision property
+        this.map.createLayer('obstacles', tileset)
+        this.map.createLayer('background', tileset)
+        
 
         this.matter.world.convertTilemapLayer(this.groundLayer)   // add matter to tilemap aka blue lines in the server; makes tiles static
         

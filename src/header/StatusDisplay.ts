@@ -39,7 +39,7 @@ export default class StatusDisplay extends Phaser.Scene
             fontSize: '32px'
         })
 
-        this.setUpTime(20)
+        this.setUpTime(500) //TODO: This has to be hard coded !! 
 
         events.on('setup-time', this.setUpTime, this)
         events.on('star-collected', this.handleStarCollected, this)

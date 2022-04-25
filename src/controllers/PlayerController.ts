@@ -23,7 +23,7 @@ export default class PlayerController {
 
     private speed = 7
     private aboveZero
-    remTime = 20 // TODO: UPDATE
+    remTime = 500 // TODO: UPDATE
 
     private isStunned = false
     private stunTime = 0
