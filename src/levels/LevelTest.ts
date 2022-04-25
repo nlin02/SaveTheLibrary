@@ -8,6 +8,6 @@ export default class LevelTest extends Game {
         let tilemapKey = "LevelTest"
         let tilemapJSONFileLocation = "assets/tilemaps/NewHouseMap.json"
     
-        super(tilemapKey, tilemapJSONFileLocation)
+        super(tilemapKey, tilemapJSONFileLocation, 200)
     }
 }
