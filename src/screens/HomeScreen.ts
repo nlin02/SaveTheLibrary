@@ -31,7 +31,7 @@ export default class TitleScene extends Phaser.Scene{
         })
         .setOrigin(0.5)
         .setFontFamily("Redressed")
-        .setShadow(3,4,"#C2B280", 1.4)
+        .setShadow(3,4,"#C2B280", 4)
         
         
         const button = this.add.rectangle(width * 0.5, height *0.7, 150, 75,0xffffff)
