@@ -429,6 +429,7 @@ export default class PlayerController {
     // ------------- Scorpion Hit State --------------
 
     private scorpionHitOnEnter() {
+        this.sprite.clearTint()
         if (this.lastscorpion) {
             // move left if left of scorpion
             if (this.sprite.x < this.lastscorpion.x) {
@@ -442,6 +443,11 @@ export default class PlayerController {
             this.sprite.setVelocityY(-20)
         }
 
+        if(this.isSuperSpeed) {
+            this.resetSpeedStunLogic()
+            this.stateMachine.setState('idle')
+            return
+        }
         this.stunPlayer()
     }
 
