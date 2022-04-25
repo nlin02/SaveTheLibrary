@@ -1,4 +1,5 @@
-// Web Font Loader from Supertommy!!
+// Web Font Loader from Tommy Leung (SuperTommy)!!
+// https://blog.ourcade.co/posts/2020/phaser-3-google-fonts-webfontloader/
 
 import Phaser from 'phaser'
 
