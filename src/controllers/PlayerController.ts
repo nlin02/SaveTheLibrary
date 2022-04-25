@@ -23,7 +23,7 @@ export default class PlayerController {
 
     private speed = 7
     private aboveZero
-    private startTime = 300
+    private startTime:number
     private remTime:number // TODO: UPDATE
 
     private isStunned = false
@@ -31,7 +31,7 @@ export default class PlayerController {
     private isSuperSpeed = false
     private speedTime = 0
 
-    constructor(scene: Phaser.Scene, sprite: Phaser.Physics.Matter.Sprite, cursors: CursorKeys, obstacles: ObstaclesController, map: Phaser.Tilemaps.Tilemap, layer: Phaser.Tilemaps.TilemapLayer) {
+    constructor(scene: Phaser.Scene, sprite: Phaser.Physics.Matter.Sprite, cursors: CursorKeys, obstacles: ObstaclesController, map: Phaser.Tilemaps.Tilemap, layer: Phaser.Tilemaps.TilemapLayer, levelTime: number) {
         this.scene = scene
         this.sprite = sprite
         this.cursors = cursors
@@ -40,6 +40,7 @@ export default class PlayerController {
         this.groundLayer = layer
         this.stateMachine = new StateMachine(this, 'player')
         this.aboveZero = true
+        this.startTime = levelTime
         this.remTime = this.startTime
     
         this.createAnimations()

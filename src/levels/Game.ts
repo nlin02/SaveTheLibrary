@@ -23,14 +23,15 @@ export default class Game extends Phaser.Scene {
 
     private tilemapKey: string
     private tilemapJSONLocation: string
+    private levelTime: number
 
 
     // constructor takes layermap name
-    constructor(tilemapKey: string, tilemapJSONLocation: string) {
-        // super('game')
+    constructor(tilemapKey: string, tilemapJSONLocation: string, levelTime: number) {
         super(tilemapKey)
         this.tilemapKey = tilemapKey
         this.tilemapJSONLocation = tilemapJSONLocation
+        this.levelTime = levelTime
     }
 
     init() {
@@ -65,7 +66,6 @@ export default class Game extends Phaser.Scene {
         console.log("Launching " + this.tilemapKey)
         this.scene.launch('status-display') //runs parallel scenes (aka UI.. )
         this.setUpTileMap()
-        // this.launchLevelTwo()
         
         events.on('changeScene', this.changeScene, this) 
     }
@@ -83,8 +83,6 @@ export default class Game extends Phaser.Scene {
         this.physicsTimer.update()  // you can pass dt to use Phaser's timer instead of the clock, but I find this is actually smoother
 
         this.playerController?.update(dt)
-
-        // update scorpion controller every frame
         this.scorpions.forEach(scorpion => scorpion.update(dt))
         this.spikesMoveUp.forEach(spikeMoveUp => spikeMoveUp.update(dt))
         
@@ -139,7 +137,7 @@ export default class Game extends Phaser.Scene {
                     this.explorer = this.matter.add.sprite(x + (width * 0.5), y, 'explorer', 'explorer_walk01.png', {friction: 0.45, chamfer: { radius: 20 } })  // add explorer to server
                         .play('player-idle')
                         .setFixedRotation()
-                    this.playerController = new PlayerController(this, this.explorer, this.cursors, this.obstacles, this.map, this.groundLayer)
+                    this.playerController = new PlayerController(this, this.explorer, this.cursors, this.obstacles, this.map, this.groundLayer, this.levelTime)
                     this.cameras.main.startFollow(this.explorer, true) 
                     break
                 }
@@ -173,7 +171,6 @@ export default class Game extends Phaser.Scene {
                     })
                     for (var property of objData.properties) {
                         juliusSprite.setData(property.name, property.value)
-                        // piglet.setData(property.name, 'game-over')
                     }
                     juliusSprite.setData('type', 'Julius') // set the Data of the star so that when collieded, we know it's a star
                     break

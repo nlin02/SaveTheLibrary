@@ -7,6 +7,6 @@ export default class LevelDungeon extends Game {
         let tilemapKey = "LevelDungeon"
         let tilemapJSONFileLocation = "assets/tilemaps/DungeonMap.json"
 
-        super (tilemapKey, tilemapJSONFileLocation)
+        super (tilemapKey, tilemapJSONFileLocation, 300)
     }
 }
