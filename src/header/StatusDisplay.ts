@@ -16,7 +16,7 @@ export default class StatusDisplay extends Phaser.Scene
     private initialTime: number
     private initialTimeBarLength = 150
 
-    private timeBarX = 200
+    private timeBarX = 150
     private timeBarY = 30
     private timeBarHeight = 20
 
@@ -31,16 +31,17 @@ export default class StatusDisplay extends Phaser.Scene
     init()
     {
         this.starsCollected = 0 // reset to 0
-
     }
-     
+
     create()
     {
-        
+        this.add.image(this.timeBarX - 100, this.timeBarY, 'clock')
+            .setDisplaySize(this.timeBarHeight + 10, this.timeBarHeight + 10)
+
         this.graphics = this.add.graphics()
 
         // this.setHealthBar(100)
-        
+
         this.starsLabel = this.add.text(10,35, 'Stars: 0',{
             fontSize: '0px'
         })

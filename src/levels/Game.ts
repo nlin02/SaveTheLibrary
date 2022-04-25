@@ -55,6 +55,7 @@ export default class Game extends Phaser.Scene {
         this.load.atlas('spikeMoveUp', 'assets/spikeMoveUp.png', 'assets/spikeMoveUp.json')
         this.load.audio('egyptmusic', ['/assets/audio/egyptmusic.mp3'])
 
+        this.load.image('clock', 'assets/greyClock.png')
         this.load.image('Julius', 'assets/Julius.png')
         this.load.image('timeMachine', 'assets/timemachine.png')
         this.load.image('door', 'assets/pigletCeasar.png')
