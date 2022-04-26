@@ -16,7 +16,7 @@ var config = {
 	physics: {
 		default: 'matter',
 		matter: {
-			debug: true
+			debug: false
 		}
 	},
 	scene: [TitleScene, LevelAlexandria, LevelHouse, LevelDungeon, LevelTest, UI, GameOver, Win]
