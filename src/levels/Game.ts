@@ -47,13 +47,16 @@ export default class Game extends Phaser.Scene {
 
     preload() {
         this.load.scenePlugin('Slopes', Slopes);
+        
         this.load.atlas('explorer', 'assets/explorer/explorer.png', 'assets/explorer/explorer.json')
         this.load.atlas('scorpion', 'assets/scorpion.png', 'assets/scorpion.json')
+        this.load.atlas('spikesMoveUp', 'assets/spikesMoveUp.png', 'assets/spikesMoveUp.json')
+
         this.load.image('tiles', 'assets/tilemaps/AllTilesLarge.png')
         this.load.tilemapTiledJSON(this.tilemapKey, this.tilemapJSONLocation)
         this.load.image('star', 'assets/star.png')
         this.load.image('health', 'assets/health.png')
-        this.load.atlas('spikeMoveUp', 'assets/spikeMoveUp.png', 'assets/spikeMoveUp.json')
+
         this.load.audio('egyptmusic', ['/assets/audio/egyptmusic.mp3'])
 
         this.load.image('clock', 'assets/greyClock.png')
@@ -156,7 +159,7 @@ export default class Game extends Phaser.Scene {
 
 
                 case 'spikes-moveup': {
-                    const spikeMoveUp = this.matter.add.sprite(x, y, 'spikeMoveUp')
+                    const spikeMoveUp = this.matter.add.sprite(x, y, 'spikesMoveUp')
                         .setFixedRotation()
                         
                     this.spikesMoveUp.push(new MovingSpikesController(this, spikeMoveUp as Phaser.Physics.Matter.Sprite)) //add a scorpion controller for each scorpion in tiled

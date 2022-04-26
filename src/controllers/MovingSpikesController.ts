@@ -13,7 +13,7 @@ export default class MovingSpikesController {
         this.sprite = sprite
         this.stateMachine = new StateMachine(this, 'spikesMoveUp')
 
-        // this.createAnimations()
+        this.createAnimations()
 
         this.stateMachine.addState('idle')
             .addState('idle', {
@@ -39,37 +39,21 @@ export default class MovingSpikesController {
     }
 
     private createAnimations() {
-        this.sprite.anims.create({
-            key: 'idle',
-            // key of the texture (game.ts preload)
-            frames: [{key: 'spikeMoveUp', frame: 'spikeMoveUp.png'}]
-        })
         this.sprite.anims.create({ 
-            key: 'move-left',
-            frames: this.sprite.anims.generateFrameNames('snowman', {
+            key: 'move',
+            frames: this.sprite.anims.generateFrameNames('spikesMoveUp', {
                 start: 1,
-                end: 2,
-                prefix: 'snowman_left_',
+                end: 8,
+                prefix: 'spikeMoveUp0',
                 suffix: '.png' 
             }),
-            frameRate: 5,
-            repeat: -1
-        })
-        this.sprite.anims.create({
-            key: 'move-right',
-            frames: this.sprite.anims.generateFrameNames('snowman', {
-                start: 1,
-                end: 2,
-                prefix: 'snowman_right_',
-                suffix: '.png'
-            }),
-            frameRate: 5,
+            frameRate: 8,
             repeat: -1
         })
     }
 
     private idleOnEnter() {
-        this.sprite.play('idle')
+        this.sprite.play('move')
         const rand = Phaser.Math.Between(1,100)
         if(rand < 50) {
             this.stateMachine.setState('move-up')
@@ -81,7 +65,7 @@ export default class MovingSpikesController {
 
     private moveUpOnEnter() {
         this.moveTime = 0
-		// this.sprite.play('move-left')
+		this.sprite.play('move')
     }
 
     private moveUpOnUpdate(dt: number) {
@@ -97,7 +81,7 @@ export default class MovingSpikesController {
 
     private moveDownOnEnter() {
         this.moveTime = 0
-		// this.sprite.play('move-right')
+		this.sprite.play('move')
     }
 
     private moveDownOnUpdate(dt: number) {
