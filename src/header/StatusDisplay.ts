@@ -52,7 +52,6 @@ export default class StatusDisplay extends Phaser.Scene
         events.on('timerIncrement', this.updateTimeBar, this)
         events.on('startedTime', this.setStartTime, this)
 
-
         // // clean up of resources that we know we need for later.. 
         // this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
         //     events.off('star-collected', this.handleStarCollected, this)
