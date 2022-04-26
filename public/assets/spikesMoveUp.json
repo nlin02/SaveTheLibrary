@@ -1,0 +1,76 @@
+{"frames": [
+
+{
+	"filename": "spikeMoveUp01.png",
+	"frame": {"x":0,"y":0,"w":144,"h":144},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":144,"h":144},
+	"sourceSize": {"w":144,"h":144}
+},
+{
+	"filename": "spikeMoveUp02.png",
+	"frame": {"x":144,"y":0,"w":144,"h":144},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":144,"h":144},
+	"sourceSize": {"w":144,"h":144}
+},
+{
+	"filename": "spikeMoveUp03.png",
+	"frame": {"x":288,"y":0,"w":144,"h":144},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":144,"h":144},
+	"sourceSize": {"w":144,"h":144}
+},
+{
+	"filename": "spikeMoveUp04.png",
+	"frame": {"x":0,"y":144,"w":144,"h":144},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":144,"h":144},
+	"sourceSize": {"w":144,"h":144}
+},
+{
+	"filename": "spikeMoveUp05.png",
+	"frame": {"x":144,"y":144,"w":144,"h":144},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":144,"h":144},
+	"sourceSize": {"w":144,"h":144}
+},
+{
+	"filename": "spikeMoveUp06.png",
+	"frame": {"x":288,"y":144,"w":144,"h":144},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":144,"h":144},
+	"sourceSize": {"w":144,"h":144}
+},
+{
+	"filename": "spikeMoveUp07.png",
+	"frame": {"x":0,"y":288,"w":144,"h":144},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":144,"h":144},
+	"sourceSize": {"w":144,"h":144}
+},
+{
+	"filename": "spikeMoveUp08.png",
+	"frame": {"x":144,"y":288,"w":144,"h":144},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":144,"h":144},
+	"sourceSize": {"w":144,"h":144}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "spikesMoveUp.png",
+	"format": "RGBA8888",
+	"size": {"w":432,"h":432},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:c3dcf3c29a68363ce34fefb65386620d:6a6c76a40e482cd2b8a8eb72737845e4:baa5309082b2ea93443434e9f8529715$"
+}
+}
