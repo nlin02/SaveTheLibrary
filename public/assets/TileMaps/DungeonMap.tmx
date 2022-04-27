@@ -4,7 +4,7 @@
   <export target="DungeonMap.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="AllTilesLarge" tilewidth="72" tileheight="72" tilecount="475" columns="19">
-  <image source="../AllTilesLarge.png" width="1368" height="1800"/>
+  <image source="AllTilesLarge.png" width="1368" height="1800"/>
   <tile id="0">
    <properties>
     <property name="collides" type="bool" value="true"/>
@@ -2553,7 +2553,7 @@
 </data>
  </layer>
  <objectgroup id="3" name="objects">
-  <object id="1" name="penguin-spawn" x="1589.22" y="4340.49" width="93.3852" height="93.3852"/>
+  <object id="1" name="spawn" x="1589.22" y="4340.49" width="93.3852" height="93.3852"/>
   <object id="2" name="spikes" x="3816.39" y="3672.39" width="77.1036" height="77.1036"/>
   <object id="3" name="spikes" x="2159.78" y="2521.58" width="77.1036" height="77.1036"/>
   <object id="4" name="spikes" x="1069.29" y="4387.01" width="77.1036" height="77.1036"/>

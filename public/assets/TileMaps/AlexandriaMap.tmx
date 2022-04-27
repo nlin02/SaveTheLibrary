@@ -2522,7 +2522,7 @@
 </data>
  </layer>
  <objectgroup id="2" name="objects">
-  <object id="1" name="penguin-spawn" x="777.467" y="2916.37" width="93.3852" height="93.3852"/>
+  <object id="1" name="spawn" x="777.467" y="2916.37" width="93.3852" height="93.3852"/>
   <object id="2" name="star" x="1891.49" y="2743.47" width="69.4783" height="69.4783"/>
   <object id="3" name="star" x="4156.08" y="2432.19" width="69.4783" height="69.4783"/>
   <object id="4" name="star" x="5237.79" y="2346.58" width="69.4783" height="69.4783"/>

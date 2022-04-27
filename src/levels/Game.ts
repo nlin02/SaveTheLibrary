@@ -151,7 +151,7 @@ export default class Game extends Phaser.Scene {
             const { x = 0, y = 0, name, width = 0, height = 0 } = objData
 
             switch(name) {
-                case 'penguin-spawn': {
+                case 'spawn': {
                     this.explorer = this.matter.add.sprite(x + (width * 0.5), y, 'explorer', 'explorer_walk01.png', {friction: 0.45, chamfer: { radius: 20 } })  // add explorer to server
                         .play('player-idle')
                         .setFixedRotation()

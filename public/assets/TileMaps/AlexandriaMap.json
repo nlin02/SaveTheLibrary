@@ -34,7 +34,7 @@
                 {
                  "height":93.3852,
                  "id":1,
-                 "name":"penguin-spawn",
+                 "name":"spawn",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -562,8 +562,8 @@
                  "type":"",
                  "visible":true,
                  "width":134.093,
-                 "x":17675.3826647357,
-                 "y":1508.12989138306
+                 "x":17675.4,
+                 "y":1508.13
                 }],
          "opacity":1,
          "type":"objectgroup",
