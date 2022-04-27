@@ -69,8 +69,8 @@ export default class Game extends Phaser.Scene {
         console.log("Launching " + this.tilemapKey)
         this.scene.launch('status-display') //runs parallel scenes (aka UI.. )
         this.setUpTileMap()
-        
-        events.on('changeScene', this.changeScene, this) 
+
+        events.on('changeScene', this.changeScene, this)
     }
 
     // when scene ends, clean up scorpion events
@@ -98,7 +98,16 @@ export default class Game extends Phaser.Scene {
     }
 
     changeScene(nextScene: Phaser.Scene) {
-        this.scene.start(nextScene)
+        // Scene Transition (Fade Out)
+        console.log("Fade Out", this.cameras)
+
+        this.cameras.main.fadeOut(5000, 0, 100, 100)
+
+        this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
+            this.time.delayedCall(1000, () => {
+                this.scene.start(nextScene)
+            })
+        })
     }
 
     setUpTileMap(){
@@ -109,6 +118,10 @@ export default class Game extends Phaser.Scene {
         // Sets width and height to the scale
         const {width, height} = this.scale
         this.cameras.main.setBackgroundColor('rgb(193,147,107)')
+
+        // Add scene switch animations (Fade In)
+        console.log("Fade In", this.cameras)
+        this.cameras.main.fadeIn(1000, 100, 100, 0)
         
         // adds tilemap
         this.map = this.make.tilemap({ key: this.tilemapKey })
