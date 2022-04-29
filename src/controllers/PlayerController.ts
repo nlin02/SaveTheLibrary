@@ -54,6 +54,7 @@ export default class PlayerController {
         this.remTime = this.startTime
     
         this.createAnimations()
+        this.createParticleEmitter()
 
         this.stateMachine.addState('idle', {
             onEnter: this.idleOnEnter,
@@ -147,24 +148,32 @@ export default class PlayerController {
 
     }
 
+    private createParticleEmitter() {
+        this.particleEmitter = this.yellowParticles.createEmitter({
+            x: 50,
+            y: 0, 
+            speed: 200,
+            scale: { start: 0.7, end: 0 },
+            blendMode: 'ADD',
+            lifespan: 1000,
+            alpha: 0.3,
+            visible: false,
+            deathZone: { type: 'onEnter', source: this.sprite.getBounds() }
+        });
+        this.particleEmitter.startFollow(this.sprite, -5, 10);
+    }
+
     private handleSpeedStunLogic() {
         if(this.isStunned && !this.isSuperSpeed) {
             if (this.stunTime > this.stunLength) {
-                this.isStunned = false
-                this.stunTime = 0
-                this.speed = 7
-                this.sprite.clearTint()
+                this.resetSpeedStunLogic()
             }
             this.stunTime ++
         }
 
         if(this.isSuperSpeed && !this.isStunned) {
             if (this.speedTime > this.speedLength) {
-                this.isSuperSpeed = false
-                this.speedTime = 0
-                this.speed = 7
-                // this.particleEmitter.visible(false)
-                this.sprite.clearTint()
+                this.resetSpeedStunLogic()
             }
             this.speedTime ++
         }
@@ -172,7 +181,7 @@ export default class PlayerController {
 
     private resetSpeedStunLogic() {
         this.sprite.clearTint()
-        this.particleEmitter.on(false)
+        this.particleEmitter.setVisible(false)
         this.speed = 7
         this.isStunned = false
         this.isSuperSpeed = false
@@ -511,21 +520,8 @@ export default class PlayerController {
             this.stateMachine.setState('idle')
             return
         }
-        this.particleEmitter = this.yellowParticles.createEmitter({
-            x: 50,
-            y: 0, 
-            speed: 200,
-            scale: { start: 0.7, end: 0 },
-            blendMode: 'ADD',
-            lifespan: 1000,
-            alpha: 0.3,
-            visible: false,
-            deathZone: { type: 'onEnter', source: this.sprite.getBounds() }
-        });
         this.particleEmitter.setVisible(true)
-        this.particleEmitter.startFollow(this.sprite, -5, 10);
         
-
         this.isSuperSpeed = true
         this.speed = 9       
         this.sprite.setTint(0xffff00) //yellow
