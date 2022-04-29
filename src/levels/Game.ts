@@ -15,7 +15,8 @@ export default class Game extends Phaser.Scene {
     private obstacles!: ObstaclesController
     private scorpions?: ScorpionController[] = [] //array of scorpion controllers since there can be more than 1
     private spikesMoveUp?: MovingSpikesController[] = []
-
+    private blueParticles
+    private blueEmitter
     private map?: Phaser.Tilemaps.Tilemap
     private groundLayer?: Phaser.Tilemaps.TilemapLayer
 
@@ -159,7 +160,7 @@ export default class Game extends Phaser.Scene {
     }
 
     createObjects(layer: Phaser.Tilemaps.ObjectLayer){
-
+        this.createBlueEmitter()
         layer.objects.forEach(objData => {
             const { x = 0, y = 0, name, width = 0, height = 0 } = objData
 
@@ -232,16 +233,6 @@ export default class Game extends Phaser.Scene {
                 }
 
                 case 'time-machine':{
-                    var blueParticles = this.add.particles('blue');
-                    var blueEmitter = blueParticles.createEmitter({
-                        x: 100,
-                        y: 100, 
-                        speed: 100,
-                        scale: { start: 0.7, end: 0, ease: 'Quad.easeOut'},
-                        blendMode: 'HARD_LIGHT',
-                        lifespan: 4000,
-                        alpha: 0.8,
-                    });
 
                     const machine = this.matter.add.sprite(x, y, 'timeMachine', undefined,{
                         isStatic: true,
@@ -252,7 +243,7 @@ export default class Game extends Phaser.Scene {
                     }
                     // machine.setData('targetScene', 'LevelDungeon')
                     machine.setData('type', 'time-machine') // set the Data of the star so that when collieded, we know it's a star
-                    blueEmitter.startFollow(machine);
+                    this.blueEmitter.startFollow(machine);
 
                     break
                 }
@@ -294,12 +285,26 @@ export default class Game extends Phaser.Scene {
                         door.setData(property.name, property.value)
                     }
                     door.setData('type', 'exit-door') // set the Data of the star so that when collieded, we know it's a star
+                    this.blueEmitter.startFollow(door);
                     break
                     
                 }
 
             }
         })
+    }
+
+    createBlueEmitter() {
+        this.blueParticles = this.add.particles('blue');
+        this.blueEmitter = this.blueParticles.createEmitter({
+            x: 100,
+            y: 100, 
+            speed: 100,
+            scale: { start: 0.7, end: 0, ease: 'Quad.easeOut'},
+            blendMode: 'HARD_LIGHT',
+            lifespan: 4000,
+            alpha: 0.8,
+        });
     }
 
     deleteObjects(layer: Phaser.Tilemaps.ObjectLayer){

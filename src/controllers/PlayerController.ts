@@ -19,7 +19,7 @@ export default class PlayerController {
     private cursors: CursorKeys
 
     private yellowParticles
-    private particleEmitter
+    private yellowParticleEmitter
 
     private obstacles: ObstaclesController
     private lastscorpion?: Phaser.Physics.Matter.Sprite
@@ -149,7 +149,7 @@ export default class PlayerController {
     }
 
     private createParticleEmitter() {
-        this.particleEmitter = this.yellowParticles.createEmitter({
+        this.yellowParticleEmitter = this.yellowParticles.createEmitter({
             x: 30,
             y: 5, 
             speed: 200,
@@ -160,7 +160,7 @@ export default class PlayerController {
             visible: false,
             deathZone: { type: 'onEnter', source: this.sprite.getBounds() }
         });
-        this.particleEmitter.startFollow(this.sprite, -5, 30);
+        this.yellowParticleEmitter.startFollow(this.sprite, -5, 30);
     }
 
     private handleSpeedStunLogic() {
@@ -181,7 +181,7 @@ export default class PlayerController {
 
     private resetSpeedStunLogic() {
         this.sprite.clearTint()
-        this.particleEmitter.setVisible(false)
+        this.yellowParticleEmitter.setVisible(false)
         this.speed = 7
         this.isStunned = false
         this.isSuperSpeed = false
@@ -397,7 +397,6 @@ export default class PlayerController {
         const startColor = Phaser.Display.Color.ValueToColor(0xffffff)
         const endColor = Phaser.Display.Color.ValueToColor(0xc22626)
 
-        // sets penguin tint to move from white to red every 100ms when a spike is hit
         this.scene.tweens.addCounter({
             from: 0,
             to: 100,
@@ -519,7 +518,7 @@ export default class PlayerController {
             this.stateMachine.setState('idle')
             return
         }
-        this.particleEmitter.setVisible(true)
+        this.yellowParticleEmitter.setVisible(true)
         
         this.isSuperSpeed = true
         this.speed = 9       
