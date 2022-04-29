@@ -150,13 +150,13 @@ export default class PlayerController {
 
     private createParticleEmitter() {
         this.particleEmitter = this.yellowParticles.createEmitter({
-            x: 50,
-            y: 0, 
+            x: 30,
+            y: 5, 
             speed: 200,
-            scale: { start: 0.7, end: 0 },
+            scale: { start: 0.3, end: 0 },
             blendMode: 'ADD',
             lifespan: 1000,
-            alpha: 0.3,
+            alpha: 0.4,
             visible: false,
             deathZone: { type: 'onEnter', source: this.sprite.getBounds() }
         });
