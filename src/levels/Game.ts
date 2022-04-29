@@ -176,26 +176,17 @@ export default class Game extends Phaser.Scene {
                 }
 
                 case 'move-instr': {
-                    const moveInstruction = this.matter.add.sprite(x, y, 'moveInstr', undefined,{
-                        isStatic: true,
-                        isSensor: true
-                    })
+                    const moveInstruction = this.add.image(x, y, 'moveInstr', undefined)
                     break
                 }
 
                 case 'jump-instr': {
-                    const jumpInstruction = this.matter.add.sprite(x, y, 'jumpInstr', undefined,{
-                        isStatic: true,
-                        isSensor: true
-                    })
+                    const jumpInstruction = this.add.image(x, y, 'jumpInstr', undefined)
                     break
                 }
 
                 case 'climb-instr': {
-                    const climbInstruction = this.matter.add.sprite(x, y, 'climbInstr', undefined,{
-                        isStatic: true,
-                        isSensor: true
-                    })
+                    const climbInstruction = this.add.image(x, y, 'climbInstr', undefined)
                     break
                 }
 
