@@ -232,7 +232,6 @@ export default class PlayerController {
         if (spaceJustPressed) {
             this.stateMachine.setState('jump')
         }
-
         this.checkClimbing()
 
     }

@@ -15,7 +15,6 @@ export default class Game extends Phaser.Scene {
     private obstacles!: ObstaclesController
     private scorpions?: ScorpionController[] = [] //array of scorpion controllers since there can be more than 1
     private spikesMoveUp?: MovingSpikesController[] = []
-    private yellowParticles
 
     private map?: Phaser.Tilemaps.Tilemap
     private groundLayer?: Phaser.Tilemaps.TilemapLayer
@@ -164,11 +163,11 @@ export default class Game extends Phaser.Scene {
 
             switch(name) {
                 case 'spawn': {
-                    this.yellowParticles = this.add.particles('yellow');
+                    var yellowParticles = this.add.particles('yellow');
                     this.explorer = this.matter.add.sprite(x + (width * 0.5), y, 'explorer', 'explorer_walk01.png', {friction: 0.45, chamfer: { radius: 20 } })  // add explorer to server
                         .play('player-idle')
                         .setFixedRotation()
-                    this.playerController = new PlayerController(this, this.explorer, this.cursors, this.obstacles, this.map, this.groundLayer, this.levelTime, this.yellowParticles)
+                    this.playerController = new PlayerController(this, this.explorer, this.cursors, this.obstacles, this.map, this.groundLayer, this.levelTime, yellowParticles)
                     this.cameras.main.startFollow(this.explorer, true) 
                     break
                 }
