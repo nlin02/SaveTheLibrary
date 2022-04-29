@@ -63,6 +63,10 @@ export default class Game extends Phaser.Scene {
         this.load.image('yellow', 'assets/flares/yellow.png');
         this.load.image('red', 'assets/particles/red.png');
 
+        this.load.image('moveInstr', 'assets/instructions/moveInstruction.png')
+        this.load.image('climbInstr', 'assets/instructions/climbInstruction.png')
+        this.load.image('jumpInstr', 'assets/instructions/jumpInstruction.png')
+
         this.load.audio('egyptmusic', ['/assets/audio/egyptmusic.mp3'])
 
         this.load.image('clock', 'assets/greyClock.png')
@@ -169,6 +173,30 @@ export default class Game extends Phaser.Scene {
                     break
                 }
 
+                case 'move-instr': {
+                    const moveInstruction = this.matter.add.sprite(x, y, 'moveInstr', undefined,{
+                        isStatic: true,
+                        isSensor: true
+                    })
+                    break
+                }
+
+                case 'jump-instr': {
+                    const jumpInstruction = this.matter.add.sprite(x, y, 'jumpInstr', undefined,{
+                        isStatic: true,
+                        isSensor: true
+                    })
+                    break
+                }
+
+                case 'climb-instr': {
+                    const climbInstruction = this.matter.add.sprite(x, y, 'climbInstr', undefined,{
+                        isStatic: true,
+                        isSensor: true
+                    })
+                    break
+                }
+
                 case 'scorpion': {
                     const scorpion = this.matter.add.sprite(x, y, 'scorpion')
                         .setFixedRotation()
@@ -178,7 +206,6 @@ export default class Game extends Phaser.Scene {
                     
                     break
                 }
-
 
                 case 'spikes-moveup': {
                     const spikeMoveUp = this.matter.add.sprite(x, y, 'spikesMoveUp')

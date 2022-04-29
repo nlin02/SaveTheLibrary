@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="70" height="65" tilewidth="72" tileheight="72" infinite="0" nextlayerid="6" nextobjectid="12">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="70" height="65" tilewidth="72" tileheight="72" infinite="0" nextlayerid="6" nextobjectid="15">
+ <editorsettings>
+  <export target="NewHouseMap.json" format="json"/>
+ </editorsettings>
  <tileset firstgid="1" name="AllTilesLarge" tilewidth="72" tileheight="72" tilecount="475" columns="19">
   <image source="AllTilesLarge.png" width="1368" height="1800"/>
   <tile id="0">
@@ -2589,7 +2592,7 @@
 </data>
  </layer>
  <objectgroup id="3" name="objects">
-  <object id="1" name="spawn" x="1208.92" y="3436.89" width="86.2069" height="79.023"/>
+  <object id="1" name="spawn" x="1265.66" y="3440.23" width="86.2069" height="79.023"/>
   <object id="5" name="time-machine" x="2357.1" y="1102.72" width="230.726" height="135.059">
    <properties>
     <property name="targetScene" value="LevelTomb"/>
@@ -2600,5 +2603,8 @@
   <object id="9" name="star" x="4753.92" y="3016.82" width="69.4783" height="69.4783"/>
   <object id="10" name="star" x="3240.13" y="2797.35" width="69.4783" height="69.4783"/>
   <object id="11" name="star" x="2947.5" y="2015.13" width="69.4783" height="69.4783"/>
+  <object id="12" name="move-instr" x="1224.97" y="3240.99" width="267.023" height="106.809"/>
+  <object id="13" name="climb-instr" x="2603.47" y="3190.92" width="250.334" height="103.471"/>
+  <object id="14" name="jump-instr" x="1542.05" y="3294.39" width="260.347" height="123.498"/>
  </objectgroup>
 </map>
