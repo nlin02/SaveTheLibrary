@@ -153,7 +153,7 @@ export default class PlayerController {
             x: 30,
             y: 5, 
             speed: 200,
-            scale: { start: 0.3, end: 0 },
+            scale: { start: 0.3, end: 0, ease: 'Quad.easeOut'},
             blendMode: 'ADD',
             lifespan: 1000,
             alpha: 0.4,
