@@ -59,9 +59,9 @@ export default class Game extends Phaser.Scene {
         
         this.load.image('star', 'assets/star.png')
         this.load.image('health', 'assets/health.png')
-        this.load.image('yellow', 'assets/flares/yellow.png');
-        this.load.image('blue', 'assets/flares/blue.png');
-        this.load.image('smoke', 'assets/flares/smoke.png');
+        this.load.image('yellow', 'assets/particles/yellow.png');
+        this.load.image('blue', 'assets/particles/blue.png');
+        this.load.image('smoke', 'assets/particles/smoke.png');
         this.load.image('red', 'assets/particles/red.png');
 
         this.load.image('moveInstr', 'assets/instructions/moveInstruction.png')
