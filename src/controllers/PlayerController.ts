@@ -18,6 +18,9 @@ export default class PlayerController {
 
     private cursors: CursorKeys
 
+    private yellowParticles
+    private particleEmitter
+
     private obstacles: ObstaclesController
     private lastscorpion?: Phaser.Physics.Matter.Sprite
 
@@ -34,14 +37,18 @@ export default class PlayerController {
     private speedTime = 0
     private speedLength = 300
 
-    constructor(scene: Phaser.Scene, sprite: Phaser.Physics.Matter.Sprite, cursors: CursorKeys, obstacles: ObstaclesController, map: Phaser.Tilemaps.Tilemap, layer: Phaser.Tilemaps.TilemapLayer, levelTime: number) {
+    constructor(scene: Phaser.Scene, sprite: Phaser.Physics.Matter.Sprite, cursors: CursorKeys, obstacles: ObstaclesController, map: Phaser.Tilemaps.Tilemap, layer: Phaser.Tilemaps.TilemapLayer, levelTime: number, yellowParticles) {
         this.scene = scene
         this.sprite = sprite
+        this.yellowParticles = yellowParticles
         this.cursors = cursors
         this.obstacles = obstacles
+
         this.map = map
         this.groundLayer = layer
+
         this.stateMachine = new StateMachine(this, 'player')
+
         this.aboveZero = true
         this.startTime = levelTime
         this.remTime = this.startTime
@@ -156,6 +163,7 @@ export default class PlayerController {
                 this.isSuperSpeed = false
                 this.speedTime = 0
                 this.speed = 7
+                // this.particleEmitter.visible(false)
                 this.sprite.clearTint()
             }
             this.speedTime ++
@@ -164,6 +172,7 @@ export default class PlayerController {
 
     private resetSpeedStunLogic() {
         this.sprite.clearTint()
+        this.particleEmitter.on(false)
         this.speed = 7
         this.isStunned = false
         this.isSuperSpeed = false
@@ -502,6 +511,21 @@ export default class PlayerController {
             this.stateMachine.setState('idle')
             return
         }
+        this.particleEmitter = this.yellowParticles.createEmitter({
+            x: 50,
+            y: 0, 
+            speed: 200,
+            scale: { start: 0.7, end: 0 },
+            blendMode: 'ADD',
+            lifespan: 1000,
+            alpha: 0.3,
+            visible: false,
+            deathZone: { type: 'onEnter', source: this.sprite.getBounds() }
+        });
+        this.particleEmitter.setVisible(true)
+        this.particleEmitter.startFollow(this.sprite, -5, 10);
+        
+
         this.isSuperSpeed = true
         this.speed = 9       
         this.sprite.setTint(0xffff00) //yellow
