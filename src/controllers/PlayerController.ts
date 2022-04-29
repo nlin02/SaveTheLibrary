@@ -119,7 +119,7 @@ export default class PlayerController {
                 }
 
                 case 'time-machine': {
-                    this.scene.scene.start('LevelDungeon')
+                    this.scene.scene.start('LevelTomb')
                     break
                 }
 

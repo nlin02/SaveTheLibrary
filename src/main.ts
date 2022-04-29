@@ -8,6 +8,7 @@ import LevelAlexandria from './levels/LevelAlexandria'
 import LevelHouse from './levels/LevelHouse'
 import LevelDungeon from './levels/LevelDungeon'
 import LevelTest from './levels/LevelTest'
+import LevelTomb from './levels/LevelTomb'
 
 var config = {
 	type: Phaser.AUTO,
@@ -19,7 +20,7 @@ var config = {
 			debug: false
 		}
 	},
-	scene: [TitleScene, LevelAlexandria, LevelHouse, LevelDungeon, LevelTest, UI, GameOver, Win]
+	scene: [TitleScene, LevelAlexandria, LevelHouse, LevelDungeon, LevelTest, LevelTomb, UI, GameOver, Win]
 }
 
 export default new Phaser.Game(config)

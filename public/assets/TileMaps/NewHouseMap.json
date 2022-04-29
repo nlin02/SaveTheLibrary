@@ -46,7 +46,7 @@
                 {
                  "height":79.023,
                  "id":1,
-                 "name":"penguin-spawn",
+                 "name":"spawn",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -62,7 +62,7 @@
                         {
                          "name":"targetScene",
                          "type":"string",
-                         "value":"LevelDungeon"
+                         "value":"LevelTomb"
                         }],
                  "rotation":0,
                  "type":"",

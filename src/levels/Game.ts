@@ -53,6 +53,8 @@ export default class Game extends Phaser.Scene {
         this.load.atlas('spikesMoveUp', 'assets/spikesMoveUp.png', 'assets/spikesMoveUp.json')
 
         this.load.image('tiles', 'assets/tilemaps/AllTilesLarge.png')
+        this.load.image('tiles2', 'assets/tilemaps/TombTiles.png')
+        this.load.image('tiles3', 'assets/tilemaps/DarkTiles.png')
         this.load.tilemapTiledJSON(this.tilemapKey, this.tilemapJSONLocation)
         this.load.image('star', 'assets/star.png')
         this.load.image('health', 'assets/health.png')
@@ -126,11 +128,13 @@ export default class Game extends Phaser.Scene {
         // adds tilemap
         this.map = this.make.tilemap({ key: this.tilemapKey })
         const tileset = this.map.addTilesetImage('AllTilesLarge', 'tiles')
+        const tombTileSet = this.map.addTilesetImage('TombTiles', 'tiles2')
+        const darkTileSet = this.map.addTilesetImage('DarkTiles', 'tiles3')
         
-        this.map.createLayer('background', tileset)
-        this.groundLayer = this.map.createLayer('ground', tileset)   // creates the game layer
+        this.map.createLayer('background', [tileset, tombTileSet, darkTileSet])
+        this.groundLayer = this.map.createLayer('ground', [tileset, tombTileSet, darkTileSet])   // creates the game layer
         this.groundLayer.setCollisionByProperty({ collides: true })   // sets collision property
-        this.map.createLayer('obstacles', tileset)
+        this.map.createLayer('obstacles', [tileset, tombTileSet, darkTileSet])
         
 
         this.matter.world.convertTilemapLayer(this.groundLayer)   // add matter to tilemap aka blue lines in the server; makes tiles static
