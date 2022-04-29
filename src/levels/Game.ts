@@ -60,6 +60,8 @@ export default class Game extends Phaser.Scene {
         this.load.image('star', 'assets/star.png')
         this.load.image('health', 'assets/health.png')
         this.load.image('yellow', 'assets/flares/yellow.png');
+        this.load.image('blue', 'assets/flares/blue.png');
+        this.load.image('smoke', 'assets/flares/smoke.png');
         this.load.image('red', 'assets/particles/red.png');
 
         this.load.image('moveInstr', 'assets/instructions/moveInstruction.png')
@@ -230,6 +232,17 @@ export default class Game extends Phaser.Scene {
                 }
 
                 case 'time-machine':{
+                    var blueParticles = this.add.particles('blue');
+                    var blueEmitter = blueParticles.createEmitter({
+                        x: 100,
+                        y: 100, 
+                        speed: 100,
+                        scale: { start: 0.7, end: 0, ease: 'Quad.easeOut'},
+                        blendMode: 'HARD_LIGHT',
+                        lifespan: 4000,
+                        alpha: 0.8,
+                    });
+
                     const machine = this.matter.add.sprite(x, y, 'timeMachine', undefined,{
                         isStatic: true,
                         isSensor: true
@@ -239,6 +252,8 @@ export default class Game extends Phaser.Scene {
                     }
                     // machine.setData('targetScene', 'LevelDungeon')
                     machine.setData('type', 'time-machine') // set the Data of the star so that when collieded, we know it's a star
+                    blueEmitter.startFollow(machine);
+
                     break
                 }
 
