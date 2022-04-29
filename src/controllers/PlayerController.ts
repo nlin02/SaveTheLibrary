@@ -160,7 +160,7 @@ export default class PlayerController {
             visible: false,
             deathZone: { type: 'onEnter', source: this.sprite.getBounds() }
         });
-        this.particleEmitter.startFollow(this.sprite, -5, 10);
+        this.particleEmitter.startFollow(this.sprite, -5, 30);
     }
 
     private handleSpeedStunLogic() {
