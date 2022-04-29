@@ -123,7 +123,7 @@ export default class Game extends Phaser.Scene {
 
         // Add scene switch animations (Fade In)
         console.log("Fade In", this.cameras)
-        this.cameras.main.fadeIn(1000, 100, 100, 0)
+        this.cameras.main.fadeIn(1000, 0, 0, 0)
         
         // adds tilemap
         this.map = this.make.tilemap({ key: this.tilemapKey })
