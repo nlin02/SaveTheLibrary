@@ -5,7 +5,10 @@ export default class LevelTest extends Game {
     
     constructor() {
         let tilemapKey = "LevelTest"
-        let tilemapJSONFileLocation = "assets/tilemaps/NewHouseMap.json"
+        // let tilemapJSONFileLocation = "assets/tilemaps/NewHouseMap.json"
+        let tilemapJSONFileLocation = "assets/tilemaps/NewAlexandriaMap.json"
+        // let tilemapJSONFileLocation = "assets/tilemaps/TombMap.json"
+
         let levelTime = 500
     
         super(tilemapKey, tilemapJSONFileLocation, levelTime)
