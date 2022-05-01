@@ -74,6 +74,11 @@ export default class PlayerController {
             onUpdate: this.climbOnUpdate,
             onExit: this.climbOnExit
         })
+        .addState('swim', {
+            onEnter: this.swimOnEnter,
+            onUpdate: this.swimOnUpdate,
+            onExit: this.swimOnExit
+        })
         .addState('climb-idle', {
             onEnter: this.climbIdleOnEnter,
             onUpdate: this.climbIdleOnUpdate,
@@ -232,6 +237,7 @@ export default class PlayerController {
         if (spaceJustPressed) {
             this.stateMachine.setState('jump')
         }
+        this.checkSwimming()
         this.checkClimbing()
 
     }
@@ -252,7 +258,7 @@ export default class PlayerController {
             this.sprite.flipX = false
             this.sprite.setVelocityX(5)
         }
-
+        this.checkSwimming()
         this.checkClimbing()
     }
 
@@ -273,6 +279,87 @@ export default class PlayerController {
                     this.stateMachine.setState('idle')
                 }
             }
+        }
+    }
+
+    private checkSwimming() {
+        if (!this.stateMachine.isCurrentState('swim')) {
+            const tile = this.map.getTileAt(Math.floor(this.sprite.x / 72), Math.floor(this.sprite.y / 72), true, this.groundLayer);
+
+            if (tile.properties.canSwim) {
+                this.stateMachine.setState('swim');
+                // console.log("IN SWIMMING STATE")
+            }
+        }
+    }
+
+    // ------------- Swim State --------------
+
+    private swimOnEnter() {
+        this.sprite.setIgnoreGravity(true)
+        this.sprite.setVelocity(0,0)
+        // this.sprite.play('player-climb')
+    }
+
+    private swimOnUpdate() {
+        const tile = this.map.getTileAt(Math.floor(this.sprite.x / 72), Math.floor(this.sprite.y / 72), true, this.groundLayer);
+        const speedMod = 3
+
+        if (this.cursors.up.isDown) {
+            this.sprite.setVelocityY(-this.speed + speedMod) //this.sprite.setVelocityY(-this.speed) 
+            this.sprite.setIgnoreGravity(true)
+        } 
+        else if (this.cursors.down.isDown) {
+            this.sprite.setVelocityY(this.speed - speedMod)
+            this.sprite.setIgnoreGravity(true)
+        }
+        else if (this.cursors.left.isDown) {
+            this.sprite.flipX = true
+            this.sprite.setVelocityX(-this.speed + speedMod)
+            this.sprite.setIgnoreGravity(true)
+        }
+        else if (this.cursors.right.isDown) {
+            this.sprite.flipX = false
+            this.sprite.setVelocityX(this.speed - speedMod)
+            this.sprite.setIgnoreGravity(true)
+        }
+        else if (this.stateMachine.isCurrentState('swim')) {
+            this.sprite.setVelocity(0,0)
+            this.sprite.setIgnoreGravity(true)
+            // this.stateMachine.setState('climb-idle');
+        }
+
+        if (!tile.properties.canSwim) {
+            this.sprite.setIgnoreGravity(false)
+            this.stateMachine.setState('idle');
+        }
+    }
+
+    private swimOnExit() {
+        this.sprite.setIgnoreGravity(false)
+    }
+
+    // ------------- Climb Idle State --------------
+    
+    private swimIdleOnEnter() {
+        this.sprite.setIgnoreGravity(true)
+        this.sprite.setVelocity(0,0)
+        // this.sprite.play('player-climb-idle')
+    }
+
+    private swimIdleOnUpdate() {
+        const tile = this.map.getTileAt(Math.floor(this.sprite.x / 72), Math.floor(this.sprite.y / 72), true, this.groundLayer);
+
+        if (this.cursors.up.isDown || this.cursors.down.isDown) {
+            this.stateMachine.setState('swim')
+        }
+        else if (this.cursors.left.isDown || this.cursors.right.isDown) {
+            this.stateMachine.setState('swim')
+        }
+
+        if (!tile.properties.canClimb) {
+            this.sprite.setIgnoreGravity(false)
+            this.stateMachine.setState('idle');
         }
     }
 

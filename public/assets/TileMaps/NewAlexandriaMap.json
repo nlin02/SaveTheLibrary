@@ -5311,6 +5311,11 @@
                         {
                          "name":"canClimb",
                          "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"canSwim",
+                         "type":"bool",
                          "value":true
                         }, 
                         {

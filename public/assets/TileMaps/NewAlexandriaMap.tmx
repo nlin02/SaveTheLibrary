@@ -2655,7 +2655,8 @@
   </tile>
   <tile id="210">
    <properties>
-    <property name="canClimb" type="bool" value="true"/>
+    <property name="canClimb" type="bool" value="false"/>
+    <property name="canSwim" type="bool" value="true"/>
     <property name="collides" type="bool" value="false"/>
    </properties>
   </tile>
