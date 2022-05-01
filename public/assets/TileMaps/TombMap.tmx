@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="80" height="100" tilewidth="72" tileheight="72" infinite="0" nextlayerid="6" nextobjectid="22">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="80" height="100" tilewidth="72" tileheight="72" infinite="0" nextlayerid="6" nextobjectid="25">
  <editorsettings>
   <export target="LevelTomb.json" format="json"/>
  </editorsettings>
@@ -4684,5 +4684,8 @@
     <property name="targetScene" value="LevelAlexandria"/>
    </properties>
   </object>
+  <object id="22" name="star" x="4231.04" y="5523.51" width="69.4783" height="69.4783"/>
+  <object id="23" name="star" x="1470.12" y="4880.31" width="69.4783" height="69.4783"/>
+  <object id="24" name="star" x="3866.96" y="3375.46" width="69.4783" height="69.4783"/>
  </objectgroup>
 </map>
