@@ -58,7 +58,7 @@ export default class Game extends Phaser.Scene {
         this.load.image('tiles3', 'assets/tilemaps/DarkTiles.png')
         this.load.tilemapTiledJSON(this.tilemapKey, this.tilemapJSONLocation)
         
-        this.load.image('star', 'assets/star.png')
+        this.load.image('star', 'assets/newStar.png')
         this.load.image('health', 'assets/health.png')
         this.load.image('yellow', 'assets/particles/yellow.png');
         this.load.image('blue', 'assets/particles/blue.png');
