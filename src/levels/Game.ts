@@ -70,6 +70,7 @@ export default class Game extends Phaser.Scene {
         this.load.image('jumpInstr', 'assets/instructions/jumpInstruction.png')
 
         this.load.audio('egyptmusic', ['/assets/audio/egyptmusic.mp3'])
+        this.load.audio('powerup', ['/assets/audio/powerup.mp3']) //used in player controller
 
         this.load.image('clock', 'assets/greyClock.png')
         this.load.image('Julius', 'assets/Julius.png')
@@ -150,7 +151,7 @@ export default class Game extends Phaser.Scene {
         this.matter.world.convertTilemapLayer(this.groundLayer)   // add matter to tilemap aka blue lines in the server; makes tiles static
         
         const music = this.sound.add ('egyptmusic')
-        // this.createMusic(music)
+        this.createMusic(music)
 
         this.cameras.main.setZoom(0.6,0.6)
 
