@@ -127,17 +127,20 @@ export default class PlayerController {
                     break
                 }
 
-                case 'Julius': {
+                case 'Julius': {        
+                    this.scene.sound.play('levelchange')
                     this.switchScene(sprite)
                     break
                 }
 
                 case 'time-machine': {
+                    this.scene.sound.play('levelchange')
                     this.scene.scene.start('LevelTomb')
                     break
                 }
 
                 case 'exit-door': {
+                    this.scene.sound.play('levelchange')
                     this.scene.scene.start('LevelAlexandria')
                     break
                 }

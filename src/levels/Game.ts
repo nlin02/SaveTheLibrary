@@ -74,6 +74,7 @@ export default class Game extends Phaser.Scene {
         this.load.audio('spikehit', ['/assets/audio/spikehit.mp3']) //used in player controller
         this.load.audio('scorpionstomp', ['/assets/audio/scorpionstomp.mp3']) //used in player controller
         this.load.audio('scorpionhit', ['/assets/audio/scorpionhit.mp3']) //used in player controller
+        this.load.audio('levelchange', ['/assets/audio/levelchange.mp3']) //used in player controller
 
         this.load.image('clock', 'assets/greyClock.png')
         this.load.image('Julius', 'assets/Julius.png')
