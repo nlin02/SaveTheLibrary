@@ -36,7 +36,12 @@ export default class PlayerController {
     private isSuperSpeed = false
     private speedTime = 0
     private speedLength = 300
+    load: any
 
+    preload(): void{
+        this.load.audio('powerup', ['/assets/audio/powerup.mp3'])
+    }
+    
     constructor(scene: Phaser.Scene, sprite: Phaser.Physics.Matter.Sprite, cursors: CursorKeys, obstacles: ObstaclesController, map: Phaser.Tilemaps.Tilemap, layer: Phaser.Tilemaps.TilemapLayer, levelTime: number, yellowParticles) {
         this.scene = scene
         this.sprite = sprite
@@ -593,6 +598,8 @@ export default class PlayerController {
 
     private collectStar(sprite: Phaser.Physics.Matter.Sprite) {
         events.emit('star-collected')
+        var player = require('play-sound')
+        player.play('powerup.mp3')
         sprite.destroy()
     }
 
