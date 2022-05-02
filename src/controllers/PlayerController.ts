@@ -518,6 +518,7 @@ export default class PlayerController {
     // ------------- Spike Hit State --------------
 
     private spikeHitOnEnter() {
+        this.scene.sound.play('spikehit')
         this.sprite.clearTint()
         this.sprite.setVelocityY(-12)
 
@@ -533,6 +534,7 @@ export default class PlayerController {
     // ------------- Scorpion Hit State --------------
 
     private scorpionHitOnEnter() {
+        this.scene.sound.play('scorpionhit')
         this.sprite.clearTint()
         if (this.lastscorpion) {
             // move left if left of scorpion
@@ -558,6 +560,7 @@ export default class PlayerController {
     // ------------- Scorpion Stomp State --------------
 
     private scorpionStompOnEnter() {
+        this.scene.sound.play('scorpionstomp')
         this.sprite.setVelocityY(-10)
         events.emit('scorpion-stomped', this.lastscorpion)
         this.stateMachine.setState('idle')

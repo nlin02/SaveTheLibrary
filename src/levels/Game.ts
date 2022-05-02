@@ -71,6 +71,9 @@ export default class Game extends Phaser.Scene {
 
         this.load.audio('egyptmusic', ['/assets/audio/egyptmusic.mp3'])
         this.load.audio('powerup', ['/assets/audio/powerup.mp3']) //used in player controller
+        this.load.audio('spikehit', ['/assets/audio/spikehit.mp3']) //used in player controller
+        this.load.audio('scorpionstomp', ['/assets/audio/scorpionstomp.mp3']) //used in player controller
+        this.load.audio('scorpionhit', ['/assets/audio/scorpionhit.mp3']) //used in player controller
 
         this.load.image('clock', 'assets/greyClock.png')
         this.load.image('Julius', 'assets/Julius.png')
@@ -225,7 +228,6 @@ export default class Game extends Phaser.Scene {
                 }
 
                 case 'time-machine':{
-
                     const machine = this.matter.add.sprite(x, y, 'timeMachine', undefined,{
                         isStatic: true,
                         isSensor: true
