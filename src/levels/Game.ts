@@ -6,6 +6,7 @@ import ScorpionController from '../controllers/ScorpionController'
 import Slopes from 'phaser-slopes'
 import PhysicsTimer from 'physics-timer'
 import { sharedInstance as events } from '../eventcenter/EventCenter'
+import LevelHouse from './LevelHouse'
 
 export default class Game extends Phaser.Scene {
 
@@ -69,12 +70,15 @@ export default class Game extends Phaser.Scene {
         this.load.image('climbInstr', 'assets/instructions/climbInstruction.png')
         this.load.image('jumpInstr', 'assets/instructions/jumpInstruction.png')
 
+        //all audio is used in player controller
         this.load.audio('egyptmusic', ['/assets/audio/egyptmusic.mp3'])
-        this.load.audio('powerup', ['/assets/audio/powerup.mp3']) //used in player controller
-        this.load.audio('spikehit', ['/assets/audio/spikehit.mp3']) //used in player controller
-        this.load.audio('scorpionstomp', ['/assets/audio/scorpionstomp.mp3']) //used in player controller
-        this.load.audio('scorpionhit', ['/assets/audio/scorpionhit.mp3']) //used in player controller
-        this.load.audio('levelchange', ['/assets/audio/levelchange.mp3']) //used in player controller
+        this.load.audio('tombmusic', ['/assets/audio/tombmusic.mp3'])
+        this.load.audio('housemusic', ['/assets/audio/housemusic.mp3'])
+        this.load.audio('powerup', ['/assets/audio/powerup.mp3'])
+        this.load.audio('spikehit', ['/assets/audio/spikehit.mp3'])
+        this.load.audio('scorpionstomp', ['/assets/audio/scorpionstomp.mp3'])
+        this.load.audio('scorpionhit', ['/assets/audio/scorpionhit.mp3'])
+        this.load.audio('levelchange', ['/assets/audio/levelchange.mp3'])
 
         this.load.image('clock', 'assets/greyClock.png')
         this.load.image('Julius', 'assets/Julius.png')
@@ -154,13 +158,15 @@ export default class Game extends Phaser.Scene {
 
         this.matter.world.convertTilemapLayer(this.groundLayer)   // add matter to tilemap aka blue lines in the server; makes tiles static
         
-        const music = this.sound.add ('egyptmusic')
-        this.createMusic(music)
-
         this.cameras.main.setZoom(0.6,0.6)
 
         const objectLayer = this.map.getObjectLayer('objects')
         this.createObjects(objectLayer)
+
+        if (this.tilemapKey == "LevelHouse"){
+            const music = this.sound.add ('housemusic')
+            this.createMusic(music)
+        }
 
     }
 
