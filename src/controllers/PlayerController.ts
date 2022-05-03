@@ -465,6 +465,11 @@ export default class PlayerController {
             return true
         }
 
+        if (this.obstacles.is('fire', body)) {
+            this.stateMachine.setState('spike-hit')
+            return true
+        }
+
         if (this.obstacles.is('scorpion', body)) {
             this.lastscorpion = body.gameObject
 

@@ -13,4 +13,5 @@ export default class LevelTest extends Game {
     
         super(tilemapKey, tilemapJSONFileLocation, levelTime)
     }
+
 }

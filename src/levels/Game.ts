@@ -53,6 +53,7 @@ export default class Game extends Phaser.Scene {
         this.load.atlas('explorer', 'assets/explorer/explorer.png', 'assets/explorer/explorer.json')
         this.load.atlas('scorpion', 'assets/scorpion.png', 'assets/scorpion.json')
         this.load.atlas('spikesMoveUp', 'assets/spikesMoveUp.png', 'assets/spikesMoveUp.json')
+        this.load.atlas('fire', 'assets/fire.png', 'assets/fire.json')
 
         this.load.image('tiles', 'assets/tilemaps/AllTilesLarge.png')
         this.load.image('tiles2', 'assets/tilemaps/TombTiles.png')
@@ -222,6 +223,17 @@ export default class Game extends Phaser.Scene {
                     break
                 }
 
+                case 'fire':{
+                    const fire = this.matter.add.sprite(x, y, 'fire')
+                        .setFixedRotation()
+                                            
+                    this.obstacles.add('fire', fire.body as MatterJS.BodyType)
+
+                    this.animateFire(fire)
+              
+                    break
+                }
+
                 case 'julius':{
                     const juliusSprite = this.matter.add.sprite(x, y, 'Julius', undefined,{
                         isStatic: true,
@@ -308,6 +320,24 @@ export default class Game extends Phaser.Scene {
         });
     }
 
+    animateFire(fire: Physics.Matter.Sprite){
+        fire.anims.create({
+            key: 'flicker-fire',
+            frameRate: 10,
+            frames: fire.anims.generateFrameNames('fire', {
+                start: 1, 
+                end: 4, 
+                prefix: 'fire_0',
+                suffix: '.png'
+            }),
+            repeat: -1
+        })
+
+        fire.play('flicker-fire')
+        fire.setStatic(true)
+
+    }
+
     deleteObjects(layer: Phaser.Tilemaps.ObjectLayer){
         layer.objects.forEach(objData => {
             const{ x = 0, y = 0, name, width = 0, height = 0 } = objData
@@ -325,4 +355,5 @@ export default class Game extends Phaser.Scene {
 			song.play()
 		}
     }
+
 }
