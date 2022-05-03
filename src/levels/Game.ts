@@ -33,14 +33,16 @@ export default class Game extends Phaser.Scene {
     private tilemapKey: string
     private tilemapJSONLocation: string
     private levelTime: number
+    private musicKey:string
 
 
     // constructor takes layermap name
-    constructor(tilemapKey: string, tilemapJSONLocation: string, levelTime: number) {
+    constructor(tilemapKey: string, tilemapJSONLocation: string, levelTime: number, musicKey: string) {
         super(tilemapKey)
         this.tilemapKey = tilemapKey
         this.tilemapJSONLocation = tilemapJSONLocation
         this.levelTime = levelTime
+        this.musicKey = musicKey
     }
 
     init() {
@@ -100,6 +102,8 @@ export default class Game extends Phaser.Scene {
         console.log("Launching " + this.tilemapKey)
         this.scene.launch('status-display') //runs parallel scenes (aka UI.. )
         this.setUpTileMap()
+        const music = this.sound.add(this.musicKey)
+        this.createMusic(music)
 
         events.on('changeScene', this.changeScene, this)
         
@@ -174,10 +178,6 @@ export default class Game extends Phaser.Scene {
         const objectLayer = this.map.getObjectLayer('objects')
         this.createObjects(objectLayer)
 
-        if (this.tilemapKey == "LevelHouse"){
-            const music = this.sound.add ('housemusic')
-            this.createMusic(music)
-        }
 
     }
 

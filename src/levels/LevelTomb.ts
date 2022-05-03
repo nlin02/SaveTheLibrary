@@ -7,7 +7,8 @@ export default class LevelTomb extends Game {
         let tilemapKey = "LevelTomb"
         let tilemapJSONFileLocation = "assets/tilemaps/TombMap.json"
         let levelTime = 800
+        let musicKey = 'tombmusic'
     
-        super(tilemapKey, tilemapJSONFileLocation, levelTime)
+        super(tilemapKey, tilemapJSONFileLocation, levelTime, musicKey)
     }
 }

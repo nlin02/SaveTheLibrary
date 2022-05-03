@@ -10,8 +10,9 @@ export default class LevelTest extends Game {
         // let tilemapJSONFileLocation = "assets/tilemaps/TombMap.json"
 
         let levelTime = 500
+        let musicKey = 'housemusic'
     
-        super(tilemapKey, tilemapJSONFileLocation, levelTime)
+        super(tilemapKey, tilemapJSONFileLocation, levelTime, musicKey)
     }
 
 }
