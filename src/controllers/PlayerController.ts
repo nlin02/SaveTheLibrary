@@ -132,9 +132,11 @@ export default class PlayerController {
                     break
                 }
 
-                case 'Julius': {        
+                case 'Professor': {        
                     this.scene.sound.play('levelchange')
-                    this.switchScene(sprite)
+                    this.scene.sound.removeByKey('housemusic')
+                    this.scene.sound.play('tombmusic')
+                    this.scene.scene.start('win')
                     break
                 }
 
