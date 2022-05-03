@@ -9,7 +9,11 @@ export default class LevelHouse extends Game {
 
         let levelTime = 500
         let musicKey = 'housemusic'
+
+        let foregroundImageKey = 'houses'
+        let midgroundImageKey = 'clouds'
+        let backgroundImageKey = 'sky'
     
-        super(tilemapKey, tilemapJSONFileLocation, levelTime, musicKey)
+        super(tilemapKey, tilemapJSONFileLocation, levelTime, musicKey, foregroundImageKey, midgroundImageKey,backgroundImageKey)
     }
 }

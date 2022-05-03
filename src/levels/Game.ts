@@ -39,15 +39,15 @@ export default class Game extends Phaser.Scene {
 
     // constructor takes layermap name
     constructor(tilemapKey: string, tilemapJSONLocation: string, levelTime: number, musicKey: string,
-        backgroundImageKey?:string, midgroundImageKey?:string, foregroundImageKey?:string) {
+        foregroundImageKey?:string, midgroundImageKey?:string, backgroundImageKey?:string) {
         super(tilemapKey)
         this.tilemapKey = tilemapKey
         this.tilemapJSONLocation = tilemapJSONLocation
         this.levelTime = levelTime
         this.musicKey = musicKey
-        this.backgroundImageKey = backgroundImageKey
-        this.midgroundImageKey = midgroundImageKey
         this.foregroundImageKey = foregroundImageKey
+        this.midgroundImageKey = midgroundImageKey
+        this.backgroundImageKey = backgroundImageKey
     }
 
     init() {
@@ -164,11 +164,17 @@ export default class Game extends Phaser.Scene {
         // Background
         const totalWidth = this.map.widthInPixels + 500
 
-        this.add.image(width * 0.5, height * 0.5, 'sky')
+        if (this.backgroundImageKey) {
+            this.add.image(width * 0.5, height * 0.5, this.backgroundImageKey)
 		    .setScrollFactor(0)
+        }
 
-        createParallax(this, width * 0.5, totalWidth, 'clouds', 0.25)
-        createParallax(this, width * 0.5, totalWidth, 'houses', 0.5)  
+        if(this.midgroundImageKey) {
+            createParallax(this, width * 0.5, totalWidth, this.midgroundImageKey, 0.25)
+        } 
+        if (this.foregroundImageKey) {
+            createParallax(this, width * 0.5, totalWidth, this.foregroundImageKey, 0.5)  
+        }
 
         this.map.createLayer('background', [tileset, tombTileSet, darkTileSet])
         this.groundLayer = this.map.createLayer('ground', [tileset, tombTileSet, darkTileSet])   // creates the game layer
