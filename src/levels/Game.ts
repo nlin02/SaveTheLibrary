@@ -89,7 +89,7 @@ export default class Game extends Phaser.Scene {
         this.load.image('Julius', 'assets/Julius.png')
         this.load.image('timeMachine', 'assets/timemachine.png')
         this.load.image('door', 'assets/ExitDoor.png')
-        this.load.image('redDeathEdges', 'assets/redEdges.png')
+        this.load.image('redDeathEdges', 'assets/redEdges70.png')
 
     }
 
