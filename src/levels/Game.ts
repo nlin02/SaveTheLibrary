@@ -89,7 +89,7 @@ export default class Game extends Phaser.Scene {
         this.load.image('Julius', 'assets/Julius.png')
         this.load.image('timeMachine', 'assets/timemachine.png')
         this.load.image('door', 'assets/ExitDoor.png')
-        this.load.image('redDeathEdges', 'assets/redEdgesBlur.png')
+        this.load.image('redDeathEdges', 'assets/redEdges.png')
 
     }
 
@@ -99,7 +99,7 @@ export default class Game extends Phaser.Scene {
         this.setUpTileMap()
 
         events.on('changeScene', this.changeScene, this)
-        // events.on('nearDeath', this.nearDeath, this)
+        
     }
 
     // when scene ends, clean up scorpion events
@@ -138,7 +138,6 @@ export default class Game extends Phaser.Scene {
             })
         })
     }
-
 
     setUpTileMap(){
 
