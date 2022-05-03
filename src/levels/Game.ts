@@ -134,6 +134,8 @@ export default class Game extends Phaser.Scene {
 
     }
 
+    // New Update function so that the physics, playerController timer, scorpions and spikes
+    // are updated consistently by the physicsTimer
     fixedIntervalUpdate(dt:number) {
         this.matter.world.step()
         this.playerController?.update(dt)
