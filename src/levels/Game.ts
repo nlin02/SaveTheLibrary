@@ -31,15 +31,23 @@ export default class Game extends Phaser.Scene {
     private tilemapJSONLocation: string
     private levelTime: number
     private musicKey:string
+    
+    private backgroundImageKey:string
+    private midgroundImageKey: string
+    private foregroundImageKey: string
 
 
     // constructor takes layermap name
-    constructor(tilemapKey: string, tilemapJSONLocation: string, levelTime: number, musicKey: string) {
+    constructor(tilemapKey: string, tilemapJSONLocation: string, levelTime: number, musicKey: string,
+        backgroundImageKey?:string, midgroundImageKey?:string, foregroundImageKey?:string) {
         super(tilemapKey)
         this.tilemapKey = tilemapKey
         this.tilemapJSONLocation = tilemapJSONLocation
         this.levelTime = levelTime
         this.musicKey = musicKey
+        this.backgroundImageKey = backgroundImageKey
+        this.midgroundImageKey = midgroundImageKey
+        this.foregroundImageKey = foregroundImageKey
     }
 
     init() {
