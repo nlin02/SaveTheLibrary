@@ -16,8 +16,8 @@ export default class Game extends Phaser.Scene {
     private playerController?: PlayerController
     private obstacles!: ObstaclesController
     private scorpions?: ScorpionController[] = [] //array of scorpion controllers since there can be more than 1
-    // private spikesMoveUp?: MovingSpikesController[] = []
-    private spikesMoveUp?: MovingSpikeController[] = []
+    private spikesMoveUp?: MovingSpikesController[] = []
+    // private spikesMoveUp?: MovingSpikeController[] = []
 
     private blueParticles
     private blueEmitter
@@ -119,7 +119,7 @@ export default class Game extends Phaser.Scene {
 
         this.playerController?.update(dt)
         this.scorpions.forEach(scorpion => scorpion.update(dt))
-        // this.spikesMoveUp.forEach(spikeMoveUp => spikeMoveUp.update(dt))
+        this.spikesMoveUp.forEach(spikeMoveUp => spikeMoveUp.update(dt))
         
         // TODO: Delete later !! 
         // const keyH = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.H)
@@ -224,17 +224,17 @@ export default class Game extends Phaser.Scene {
                 }
 
                 case 'spikes-moveup': {
-                    // const spikeMoveUp = this.matter.add.sprite(x, y, 'spikesMoveUp')
-                    //     .setFixedRotation()
-                    //     .setStatic(true)
-                        
-                    
-                    const spikeMoveUp = new MovingSpikeController(this, x, y, 'spikesMoveUp', {
-                        isStatic: true
-                    })
-                    this.spikesMoveUp.push(spikeMoveUp) //add a scorpion controller for each scorpion in tiled
+                    const spikeMoveUp = this.matter.add.sprite(x, y, 'spikesMoveUp')
+                        .setFixedRotation()
 
-                    spikeMoveUp.moveVertically()
+                    // const spikeMoveUp = new MovingSpikeController(this, x, y, 'spikesMoveUp', {
+                    //     isStatic: true
+                    // })
+                    // this.spikesMoveUp.push(spikeMoveUp) 
+                    this.spikesMoveUp.push(new MovingSpikesController(this, spikeMoveUp as Phaser.Physics.Matter.Sprite)) //add a scorpion controller for each scorpion in tiled
+
+
+                    // spikeMoveUp.moveVertically()
                     this.obstacles.add('spikeMoveUp', spikeMoveUp.body as MatterJS.BodyType)
                     
                     break
