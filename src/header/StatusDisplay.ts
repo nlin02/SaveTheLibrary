@@ -5,24 +5,18 @@ import PlayerController from '../controllers/PlayerController'
 
 export default class StatusDisplay extends Phaser.Scene
 {
-    private starsLabel!: Phaser.GameObjects.Text //!: tells us it won't be null
-    private starsCollected = 0
-    private graphics!: Phaser.GameObjects.Graphics
-    private lastHealth = 100
-
     private timePos !: Phaser.GameObjects.Rectangle // represents positive time
     private timeNeg !: Phaser.GameObjects.Rectangle // represents negative time
     
     private initialTime: number
-    private initialTimeBarLength = 150
 
-    private timeBarX = 150
-    private timeBarY = 30
-    private timeBarHeight = 20
+    private timeBarX = 170
+    private timeBarY = 50
+    private timeBarHeight = 25
+    private timeBarLength = 180
 
     private clock : Phaser.GameObjects.Image
     private redDeath : Phaser.GameObjects.Image
-    private nearDeath = false
 
     constructor()
     {
@@ -32,23 +26,10 @@ export default class StatusDisplay extends Phaser.Scene
     }
 
 
-    init()
-    {
-        this.starsCollected = 0 // reset to 0
-    }
-
     create()
     {
-        this.clock = this.add.image(this.timeBarX - 100, this.timeBarY, 'clock')
+        this.clock = this.add.image(this.timeBarX - 0.65 * this.timeBarLength, this.timeBarY, 'clock')
             .setDisplaySize(this.timeBarHeight + 10, this.timeBarHeight + 10)
-
-        this.graphics = this.add.graphics()
-
-        // this.setHealthBar(100)
-
-        // this.starsLabel = this.add.text(10,35, 'Stars: 0',{
-        //     fontSize: '0px'
-        // })
 
         this.setUpTime()
         this.createDeathOverlay()
@@ -56,8 +37,6 @@ export default class StatusDisplay extends Phaser.Scene
         // events.on('star-collected', this.handleStarCollected, this)
         events.on('timerIncrement', this.updateTimeBar, this)
         events.on('startedTime', this.setStartTime, this)
-
-        
 
         // // clean up of resources that we know we need for later.. 
         this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
@@ -74,7 +53,7 @@ export default class StatusDisplay extends Phaser.Scene
 
         this.tweens.add({
             targets: this.redDeath,
-            alpha: 0.3,
+            alpha: 0.25,
             yoyo: true,
             repeat: -1,
             speed: 500, 
@@ -85,23 +64,15 @@ export default class StatusDisplay extends Phaser.Scene
 
     private setStartTime(initialTime:number) {
         this.initialTime = initialTime
-        console.log("set initial time", initialTime, this.initialTime)
     }
 
-    // private handleStarCollected()
-    // {
-    //     this.starsCollected +=1 // can also do ++this.starsCollected
-    //     this.starsLabel.text = `Stars:  ${this.starsCollected}` // string interpolation :) 
-
-    // }
-
     private setUpTime(){
-        this.timeNeg = this.add.rectangle(this.timeBarX, this.timeBarY, this.initialTimeBarLength, this.timeBarHeight, 0x808080)
-        this.timePos = this.add.rectangle(this.timeBarX, this.timeBarY, this.initialTimeBarLength, this.timeBarHeight, 0x2c58aa)
+        this.timeNeg = this.add.rectangle(this.timeBarX, this.timeBarY, this.timeBarLength, this.timeBarHeight, 0x808080)
+        this.timePos = this.add.rectangle(this.timeBarX, this.timeBarY, this.timeBarLength, this.timeBarHeight, 0x2c58aa)
     }
 
     private updateTimeBar(currentTime: number){ 
-        const lengthPerTime = this.initialTimeBarLength / this.initialTime
+        const lengthPerTime = this.timeBarLength / this.initialTime
         this.timePos.setSize(Math.ceil(lengthPerTime * currentTime), this.timeBarHeight)
         this.timePos.setPosition(this.timeBarX - .1/2, this.timeBarY)
 
@@ -115,27 +86,6 @@ export default class StatusDisplay extends Phaser.Scene
             this.redDeath.setVisible(true)
         }
 
-        
     }
-
-    // private handleHealthChanged(value: number)
-    // {
-    //     this.tweens.addCounter({
-    //         from: this.lastHealth,
-    //         to: value,
-    //         duration: 200,
-    //         onUpdate: tween => {
-    //             const value = tween.getValue() //value between from and two
-    //             // console.log(value)
-    //             this.setHealthBar(value)
-    //         }
-    //     })
-        
-        
-    //     this.lastHealth = value
-    // }
-
-
-
 
 }
