@@ -60,6 +60,10 @@ export default class StatusDisplay extends Phaser.Scene
         
 
         // // clean up of resources that we know we need for later.. 
+        this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
+            events.off('timerIncrement', this.updateTimeBar, this)
+            events.off('startedTime', this.setStartTime, this)
+        })
     }
     
     // private setHealthBar(value: number){
