@@ -79,6 +79,11 @@ export default class PlayerController {
             onUpdate: this.swimOnUpdate,
             onExit: this.swimOnExit
         })
+        .addState('swim-idle', {
+            onEnter: this.swimIdleOnEnter,
+            onUpdate: this.swimIdleOnUpdate,
+            onExit: this.swimOnExit
+        })
         .addState('climb-idle', {
             onEnter: this.climbIdleOnEnter,
             onUpdate: this.climbIdleOnUpdate,
@@ -317,6 +322,10 @@ export default class PlayerController {
             this.sprite.setVelocityY(-this.speed + speedMod) //this.sprite.setVelocityY(-this.speed) 
             this.sprite.setIgnoreGravity(true)
         } 
+        else if (this.cursors.space.isDown){
+            this.sprite.setVelocityY(-this.speed) //this.sprite.setVelocityY(-this.speed) 
+            this.sprite.setIgnoreGravity(true)
+        }
         else if (this.cursors.down.isDown) {
             this.sprite.setVelocityY(this.speed - speedMod)
             this.sprite.setIgnoreGravity(true)
@@ -334,12 +343,12 @@ export default class PlayerController {
         else if (this.stateMachine.isCurrentState('swim')) {
             this.sprite.setVelocity(0,0)
             this.sprite.setIgnoreGravity(true)
-            // this.stateMachine.setState('climb-idle');
+            this.stateMachine.setState('swim-idle');
         }
 
         if (!tile.properties.canSwim) {
             this.sprite.setIgnoreGravity(false)
-            this.stateMachine.setState('idle');
+            this.stateMachine.setState('swim-idle');
         }
     }
 
@@ -350,22 +359,21 @@ export default class PlayerController {
     // ------------- Climb Idle State --------------
     
     private swimIdleOnEnter() {
+        this.sprite.setVelocityY(1)
         this.sprite.setIgnoreGravity(true)
-        this.sprite.setVelocity(0,0)
-        // this.sprite.play('player-climb-idle')
     }
 
     private swimIdleOnUpdate() {
         const tile = this.map.getTileAt(Math.floor(this.sprite.x / 72), Math.floor(this.sprite.y / 72), true, this.groundLayer);
 
-        if (this.cursors.up.isDown || this.cursors.down.isDown) {
+        if (this.cursors.up.isDown || this.cursors.down.isDown || this.cursors.space.isDown) {
             this.stateMachine.setState('swim')
         }
         else if (this.cursors.left.isDown || this.cursors.right.isDown) {
             this.stateMachine.setState('swim')
         }
 
-        if (!tile.properties.canClimb) {
+        if (!tile.properties.canSwim) {
             this.sprite.setIgnoreGravity(false)
             this.stateMachine.setState('idle');
         }
@@ -599,7 +607,7 @@ export default class PlayerController {
             events.emit('timerIncrement', this.remTime)
         }
         else {
-            console.log("ELSE STATEMENT INVOKED")
+
             this.aboveZero = false
             this.stateMachine.setState('dead')
         }
