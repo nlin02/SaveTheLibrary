@@ -13,7 +13,7 @@ export default class TitleScene extends Phaser.Scene{
             'Livvic',
             'Roboto'
         ]))
-        this.load.image('homeBackground', 'assets/HomeBackground.png')
+        this.load.image('homeBackground', 'assets/screenBackgrounds/HomeBackground.png')
 
     }
 

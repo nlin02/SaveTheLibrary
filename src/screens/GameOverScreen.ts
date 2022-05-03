@@ -12,7 +12,7 @@ export default class GameOver extends Phaser.Scene{
             'Livvic',
             'Roboto'
         ]))
-        this.load.image('deathBackground', 'assets/GameOverBackground.png')
+        this.load.image('deathBackground', 'assets/screenBackgrounds/GameOverBackground.png')
 
     }
 
