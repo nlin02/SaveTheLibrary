@@ -22,9 +22,6 @@ export default class Game extends Phaser.Scene {
     private blueParticles
     private blueEmitter
 
-    private smokeParticles
-    private smokeEmitter
-
     private map?: Phaser.Tilemaps.Tilemap
     private groundLayer?: Phaser.Tilemaps.TilemapLayer
 
@@ -91,7 +88,7 @@ export default class Game extends Phaser.Scene {
         this.load.audio('levelchange', ['/assets/audio/levelchange.mp3'])
 
         this.load.image('clock', 'assets/greyClock.png')
-        this.load.image('Julius', 'assets/Julius.png')
+        this.load.image('professor', 'assets/Professor.png')
         this.load.image('timeMachine', 'assets/timemachine.png')
         this.load.image('door', 'assets/ExitDoor.png')
         this.load.image('redDeathEdges', 'assets/redEdges70.png')
@@ -183,7 +180,6 @@ export default class Game extends Phaser.Scene {
 
     createObjects(layer: Phaser.Tilemaps.ObjectLayer){
         this.createBlueEmitter()
-        this.createSmokeEmitter()
         layer.objects.forEach(objData => {
             const { x = 0, y = 0, name, width = 0, height = 0 } = objData
 
@@ -241,25 +237,22 @@ export default class Game extends Phaser.Scene {
 
                 case 'fire':{
                     const fire = this.matter.add.sprite(x, y, 'fire')
-                        .setFixedRotation()
-                                            
+                        .setFixedRotation()                    
                     this.obstacles.add('fire', fire.body as MatterJS.BodyType)
-
                     this.animateFire(fire)
-                    this.smokeEmitter.startFollow(fire)
-              
+
                     break
                 }
 
-                case 'julius':{
-                    const juliusSprite = this.matter.add.sprite(x, y, 'Julius', undefined,{
+                case 'professor':{
+                    const sprite = this.matter.add.sprite(x, y, 'professor', undefined,{
                         isStatic: true,
                         isSensor: true
                     })
                     for (var property of objData.properties) {
-                        juliusSprite.setData(property.name, property.value)
+                        sprite.setData(property.name, property.value)
                     }
-                    juliusSprite.setData('type', 'Julius') // set the Data of the star so that when collieded, we know it's a star
+                    sprite.setData('type', 'Professor') // set the Data of the star so that when collieded, we know it's a star
                     break
                 }
 
@@ -271,7 +264,6 @@ export default class Game extends Phaser.Scene {
                     for (var property of objData.properties) {
                         machine.setData(property.name, property.value)
                     }
-                    // machine.setData('targetScene', 'LevelDungeon')
                     machine.setData('type', 'time-machine') // set the Data of the star so that when collieded, we know it's a star
                     this.blueEmitter.startFollow(machine);
 
@@ -322,19 +314,6 @@ export default class Game extends Phaser.Scene {
             scale: { start: 0.7, end: 0, ease: 'Quad.easeOut'},
             blendMode: 'HARD_LIGHT',
             lifespan: 4000,
-            alpha: 0.8,
-        });
-    }
-
-    createSmokeEmitter() {
-        this.smokeParticles = this.add.particles('smoke');
-        this.smokeEmitter = this.smokeParticles.createEmitter({
-            x: 0,
-            y: 100, 
-            speed: 50,
-            scale: { start: 0.3, end: 0.2, ease: 'Quad.easeOut'},
-            blendMode: 'HARD_LIGHT',
-            lifespan: 400,
             alpha: 0.8,
         });
     }
