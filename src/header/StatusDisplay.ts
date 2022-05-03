@@ -66,19 +66,6 @@ export default class StatusDisplay extends Phaser.Scene
         })
     }
     
-    // private setHealthBar(value: number){
-    //     const width = 200
-    //     const percent = Phaser.Math.Clamp(value, 0, 100) / 100 // normalize within 0 and 1
-    //     // console.log(value)
-    //     this.graphics.clear() //clearing it out since this gets reset often
-    //     this.graphics.fillStyle(0x808080) // set the back bar to be gray
-    //     this.graphics.fillRoundedRect(100,10,width,20, 5)
-    //     if (percent > 0){
-    //         this.graphics.fillStyle(0x00ff00) // set another rectangle that is green
-    //         this.graphics.fillRoundedRect(10,10,width * percent,20, 5) // fit it within the bar    
-    //     } 
-        
-    // }
 
     createDeathOverlay() {        
         this.redDeath = this.add.image(405,305,'redDeathEdges')
