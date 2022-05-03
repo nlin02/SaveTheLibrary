@@ -167,8 +167,8 @@ export default class Game extends Phaser.Scene {
         this.add.image(width * 0.5, height * 0.5, 'sky')
 		    .setScrollFactor(0)
 
-        createAligned(this, width * 0.5, totalWidth, 'clouds', 0.25)
-        createAligned(this, width * 0.5, totalWidth, 'houses', 0.5)  
+        createParallax(this, width * 0.5, totalWidth, 'clouds', 0.25)
+        createParallax(this, width * 0.5, totalWidth, 'houses', 0.5)  
 
         this.map.createLayer('background', [tileset, tombTileSet, darkTileSet])
         this.groundLayer = this.map.createLayer('ground', [tileset, tombTileSet, darkTileSet])   // creates the game layer
@@ -364,7 +364,7 @@ export default class Game extends Phaser.Scene {
      * @param {string} texture 
      * @param {number} scrollFactor 
      */
- const createAligned = (scene, width, totalWidth, texture, scrollFactor) => {
+ const createParallax = (scene, width, totalWidth, texture, scrollFactor) => {
     const w = scene.textures.get(texture).getSourceImage().width
     const count = Math.ceil(totalWidth / w) * scrollFactor
 
