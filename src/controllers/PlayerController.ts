@@ -311,7 +311,7 @@ export default class PlayerController {
     private swimOnEnter() {
         this.sprite.setIgnoreGravity(true)
         this.sprite.setVelocity(0,0)
-        // this.sprite.play('player-climb')
+        this.sprite.play('player-swim')
     }
 
     private swimOnUpdate() {
@@ -356,7 +356,7 @@ export default class PlayerController {
         this.sprite.setIgnoreGravity(false)
     }
 
-    // ------------- Climb Idle State --------------
+    // ------------- Swim Idle State --------------
     
     private swimIdleOnEnter() {
         this.sprite.setVelocityY(1)
@@ -653,10 +653,14 @@ export default class PlayerController {
     private createAnimations() {
         this.sprite.anims.create({
             key: 'player-idle',
-            frames: [{
-                key: 'explorer',
-                frame: 'explorer_walk01.png'
-            }]
+            frames: this.sprite.anims.generateFrameNames('explorer', {
+                start: 1, 
+                end: 2, 
+                prefix: 'explorer_idle0',
+                suffix: '.png'
+            }),
+            repeat: -1,
+            frameRate: 5
         })
 
         this.sprite.anims.create({
@@ -699,6 +703,18 @@ export default class PlayerController {
                 key: 'explorer',
                 frame: 'explorer_climb02.png'          
             }]
+        })
+
+        this.sprite.anims.create({
+            key: 'player-swim',
+            frames: this.sprite.anims.generateFrameNames('explorer', {
+                start: 1,
+                end: 4, 
+                prefix: 'explorer_swim0',
+                suffix: '.png'
+            }),
+            repeat: -1,
+            frameRate: 10
         })
     }
 }

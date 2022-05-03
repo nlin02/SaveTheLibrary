@@ -3772,6 +3772,6 @@
   <object id="64" name="spikes" x="6973.38" y="1266.16" width="83.6502" height="38.0228"/>
   <object id="65" name="spikes-moveup" x="10945.5" y="1668.04" width="160.359" height="153.945"/>
   <object id="66" name="spikes-moveup" x="15541.3" y="2378.92" width="170.94" height="142.45"/>
-  <object id="67" name="fire" x="4572.22" y="1016.74" width="71.2957" height="68.1959"/>
+  <object id="67" name="fire" x="4575.32" y="1047.74" width="71.2957" height="68.1959"/>
  </objectgroup>
 </map>
