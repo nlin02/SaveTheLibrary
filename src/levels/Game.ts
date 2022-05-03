@@ -157,7 +157,7 @@ export default class Game extends Phaser.Scene {
         const darkTileSet = this.map.addTilesetImage('DarkTiles', 'tiles3')
 
         // Background
-        const totalWidth = this.map.widthInPixels
+        const totalWidth = this.map.widthInPixels + 500
 
         this.add.image(width * 0.5, height * 0.5, 'sky')
 		    .setScrollFactor(0)
@@ -381,10 +381,10 @@ export default class Game extends Phaser.Scene {
     const w = scene.textures.get(texture).getSourceImage().width
     const count = Math.ceil(totalWidth / w) * scrollFactor
 
-    let x = width * 0.5
+    let x = width * 0.5 - 500
     for (let i = 0; i < count; ++i)
     {
-        const m = scene.add.image(x, scene.scale.height + 100, texture)
+        const m = scene.add.image(x, scene.scale.height + 250, texture)
             .setOrigin(0, 1)
             .setScrollFactor(scrollFactor, 0)
 
