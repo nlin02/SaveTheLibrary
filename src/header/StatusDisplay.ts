@@ -69,6 +69,7 @@ export default class StatusDisplay extends Phaser.Scene
     private setUpTime(){
         this.timeNeg = this.add.rectangle(this.timeBarX, this.timeBarY, this.timeBarLength, this.timeBarHeight, 0x808080)
         this.timePos = this.add.rectangle(this.timeBarX, this.timeBarY, this.timeBarLength, this.timeBarHeight, 0x2c58aa)
+        this.clock.setTint(0x2c58aa)
     }
 
     private updateTimeBar(currentTime: number){ 
@@ -78,6 +79,7 @@ export default class StatusDisplay extends Phaser.Scene
 
         if (currentTime < 0.5 * this.initialTime && currentTime > 0.25 * this.initialTime) {
             this.timePos.fillColor = 0x614d79
+            this.clock.setTint(0x614d79)
         }
         else if(currentTime < 0.25 * this.initialTime) {
             this.timePos.fillColor = 0xc22626
