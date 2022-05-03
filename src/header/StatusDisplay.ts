@@ -21,6 +21,8 @@ export default class StatusDisplay extends Phaser.Scene
     private timeBarHeight = 20
 
     private clock : Phaser.GameObjects.Image
+    private redDeath : Phaser.GameObjects.Image
+    private nearDeath = false
 
     constructor()
     {
@@ -49,10 +51,16 @@ export default class StatusDisplay extends Phaser.Scene
         // })
 
         this.setUpTime()
+        this.redDeath = this.add.image(405,305,'redDeathEdges')
+        this.redDeath.setDisplaySize(810,610)
+        this.redDeath.setAlpha(0)
+        // redDeath.setOrigin(0.5,0.5)
 
         // events.on('star-collected', this.handleStarCollected, this)
         events.on('timerIncrement', this.updateTimeBar, this)
         events.on('startedTime', this.setStartTime, this)
+
+        
 
         // // clean up of resources that we know we need for later.. 
         // this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
@@ -73,6 +81,21 @@ export default class StatusDisplay extends Phaser.Scene
     //     } 
         
     // }
+
+
+    nearDeathOverlay() {        
+        this.tweens.add({
+            targets: this.redDeath,
+            onStart: () => {
+                this.redDeath.setAlpha(0.4)
+            },
+            alpha: 0.8,
+            yoyo: true,
+            repeat: -1,
+            ease: 'Sine.easeInOut'
+        });
+    }
+
 
     private setStartTime(initialTime:number) {
         this.initialTime = initialTime
@@ -95,6 +118,9 @@ export default class StatusDisplay extends Phaser.Scene
         const lengthPerTime = this.initialTimeBarLength / this.initialTime
         this.timePos.setSize(Math.ceil(lengthPerTime * currentTime), this.timeBarHeight)
         this.timePos.setPosition(this.timeBarX - .1/2, this.timeBarY)
+        if (this.nearDeath) {
+            this.nearDeathOverlay()
+        }
 
         if (currentTime < 0.5 * this.initialTime && currentTime > 0.25 * this.initialTime) {
             this.timePos.fillColor = 0x614d79
@@ -103,6 +129,7 @@ export default class StatusDisplay extends Phaser.Scene
             this.timePos.fillColor = 0xc22626
             this.cameras.main.shake(500,0.005)
             this.clock.setTint(0xc22626)
+            this.nearDeath = true
         }
 
         
