@@ -6,7 +6,6 @@ import ScorpionController from '../controllers/ScorpionController'
 import Slopes from 'phaser-slopes'
 import PhysicsTimer from 'physics-timer'
 import { sharedInstance as events } from '../eventcenter/EventCenter'
-import MovingSpikeController from '../controllers/MovingSpikeController'
 
 
 export default class Game extends Phaser.Scene {
@@ -236,14 +235,7 @@ export default class Game extends Phaser.Scene {
                 case 'spikes-moveup': {
                     const spikeMoveUp = this.matter.add.sprite(x, y, 'spikesMoveUp')
                         .setFixedRotation()
-
-                    // const spikeMoveUp = new MovingSpikeController(this, x, y, 'spikesMoveUp', {
-                    //     isStatic: true
-                    // })
-                    // this.spikesMoveUp.push(spikeMoveUp) 
                     this.spikesMoveUp.push(new MovingSpikesController(this, spikeMoveUp as Phaser.Physics.Matter.Sprite)) //add a scorpion controller for each scorpion in tiled
-
-                    // spikeMoveUp.moveVertically()
                     this.obstacles.add('spikeMoveUp', spikeMoveUp.body as MatterJS.BodyType)
                     
                     break
