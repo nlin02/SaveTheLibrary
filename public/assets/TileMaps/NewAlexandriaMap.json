@@ -266,7 +266,7 @@
                 {
                  "height":129.328,
                  "id":46,
-                 "name":"julius",
+                 "name":"professor",
                  "properties":[
                         {
                          "name":"targetScene",
@@ -491,14 +491,80 @@
                 }, 
                 {
                  "height":68.1959,
-                 "id":67,
+                 "id":68,
                  "name":"fire",
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":71.2957,
-                 "x":4575.32204587725,
-                 "y":1047.73776813391
+                 "x":25397.4910568913,
+                 "y":2134.83702515662
+                }, 
+                {
+                 "height":68.1959,
+                 "id":69,
+                 "name":"fire",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":71.2957,
+                 "x":25265.713135094,
+                 "y":2141.31790655649
+                }, 
+                {
+                 "height":68.1959,
+                 "id":70,
+                 "name":"fire",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":71.2957,
+                 "x":25486.0631026896,
+                 "y":1756.78561016418
+                }, 
+                {
+                 "height":68.1959,
+                 "id":71,
+                 "name":"fire",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":71.2957,
+                 "x":26192.4791752754,
+                 "y":2108.91349955714
+                }, 
+                {
+                 "height":68.1959,
+                 "id":72,
+                 "name":"fire",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":71.2957,
+                 "x":25004.3175852992,
+                 "y":2113.23408715705
+                }, 
+                {
+                 "height":68.1959,
+                 "id":73,
+                 "name":"fire",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":71.2957,
+                 "x":25769.0615904839,
+                 "y":1754.62531636423
+                }, 
+                {
+                 "height":68.1959,
+                 "id":74,
+                 "name":"fire",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":71.2957,
+                 "x":26209.7615256751,
+                 "y":1754.62531636423
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -507,7 +573,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":68,
+ "nextobjectid":75,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.8.2",

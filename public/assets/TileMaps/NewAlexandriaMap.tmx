@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="390" height="55" tilewidth="72" tileheight="72" infinite="0" nextlayerid="6" nextobjectid="68">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="390" height="55" tilewidth="72" tileheight="72" infinite="0" nextlayerid="6" nextobjectid="75">
  <editorsettings>
   <export target="NewAlexandriaMap.json" format="json"/>
  </editorsettings>
@@ -3748,7 +3748,7 @@
   <object id="42" name="spikes" x="24188.8" y="2446.53" width="78.9474" height="68.4211"/>
   <object id="43" name="spikes" x="24483.6" y="2304.42" width="73.6842" height="78.9474"/>
   <object id="45" name="spikes" x="10504.6" y="2067.58" width="300" height="36.8421"/>
-  <object id="46" name="julius" x="25967.8" y="2128.1" width="91.7814" height="129.328">
+  <object id="46" name="professor" x="25967.8" y="2128.1" width="91.7814" height="129.328">
    <properties>
     <property name="targetScene" value="LevelCut"/>
    </properties>
@@ -3772,6 +3772,12 @@
   <object id="64" name="spikes" x="6973.38" y="1266.16" width="83.6502" height="38.0228"/>
   <object id="65" name="spikes-moveup" x="10945.5" y="1668.04" width="160.359" height="153.945"/>
   <object id="66" name="spikes-moveup" x="15541.3" y="2378.92" width="170.94" height="142.45"/>
-  <object id="67" name="fire" x="4575.32" y="1047.74" width="71.2957" height="68.1959"/>
+  <object id="68" name="fire" x="25397.5" y="2134.84" width="71.2957" height="68.1959"/>
+  <object id="69" name="fire" x="25265.7" y="2141.32" width="71.2957" height="68.1959"/>
+  <object id="70" name="fire" x="25486.1" y="1756.79" width="71.2957" height="68.1959"/>
+  <object id="71" name="fire" x="26192.5" y="2108.91" width="71.2957" height="68.1959"/>
+  <object id="72" name="fire" x="25004.3" y="2113.23" width="71.2957" height="68.1959"/>
+  <object id="73" name="fire" x="25769.1" y="1754.63" width="71.2957" height="68.1959"/>
+  <object id="74" name="fire" x="26209.8" y="1754.63" width="71.2957" height="68.1959"/>
  </objectgroup>
 </map>
