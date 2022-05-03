@@ -1,27 +1,49 @@
 import Phaser from 'phaser'
+import WebFontFile from '../WebFontFile';
 
-export default class Win extends Phaser.Scene{
+
+export default class TitleScene extends Phaser.Scene{
     constructor(){
         super('win')
     }
+    
+    preload() {
+        this.load.addFile(new WebFontFile(this.load, [
+            'Redressed',
+            'Livvic',
+            'Roboto'
+        ]))
+        this.load.image('winBackground', 'assets/screenBackgrounds/winBackground.png')
+
+    }
 
     create(){
+
         const{width, height} = this.scale
-        this.add.text(width*0.5, height *0.3, 'Yay! You Win!! ', {
-            fontSize: '52px',
-            color: '#ff0000'
+
+        const background = this.add.image(0,0,"winBackground")
+        background.setScale(1.05,1.05)
+        background.setOrigin(0,0)
+
+        const text = this.add.text(width*0.5, height *0.2, 'MISSION SUCCESS!', {
+            fontSize: '70px',
+            color: '#3a1b13'
         })
         .setOrigin(0.5)
-
-        const button = this.add.rectangle(width * 0.5, height *0.55, 150, 75,0xffffff)
+        .setFontFamily("Redressed")
+        .setShadow(3,4,"#C2B280", 4)
+        
+        
+        const button = this.add.rectangle(width * 0.8, height *0.8, 150, 75,0xffffff)
             .setInteractive()
             .on(Phaser.Input.Events.GAMEOBJECT_POINTER_UP, () => {
-                this.scene.start('game')
+                this.scene.start('LevelHouse')
             })
 
         this.add.text(button.x, button.y, 'Play Again',{
-            color: '#000000'
+            color: '#918151'
         })
         .setOrigin(0.5)
+        .setFontFamily("Livvic")
     }
 }
