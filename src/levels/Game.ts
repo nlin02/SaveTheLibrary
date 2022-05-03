@@ -96,17 +96,24 @@ export default class Game extends Phaser.Scene {
         this.load.image('door', 'assets/ExitDoor.png')
         this.load.image('redDeathEdges', 'assets/redEdges70.png')
 
+        // Background
+        this.load.image('sky', 'assets/background/BlueBackground.png')
+        this.load.image('clouds', 'assets/background/Clouds.png')
+        this.load.image('houses', 'assets/background/HouseShadow.png')
+        this.load.image('orangeblue', 'assets/background/OrangeGradBackground.png')
+        this.load.image('pyramids', 'assets/background/PyramidShadow.png')
+        this.load.image('sphinx', 'assets/background/Sphinx.png')
     }
 
     create() {
         console.log("Launching " + this.tilemapKey)
         this.scene.launch('status-display') //runs parallel scenes (aka UI.. )
+
         this.setUpTileMap()
         const music = this.sound.add(this.musicKey)
         this.createMusic(music)
 
-        events.on('changeScene', this.changeScene, this)
-        
+        events.on('changeScene', this.changeScene, this)      
     }
 
     // when scene ends, clean up scorpion events
@@ -124,26 +131,10 @@ export default class Game extends Phaser.Scene {
         this.playerController?.update(dt)
         this.scorpions.forEach(scorpion => scorpion.update(dt))
         this.spikesMoveUp.forEach(spikeMoveUp => spikeMoveUp.update(dt))
-        
-        // TODO: Delete later !! 
-        // const keyH = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.H)
-        // if (Phaser.Input.Keyboard.JustDown(keyH)) {
-        //     this.scene.start('LevelAlexandria')
-        // }
-
     }
 
     changeScene(nextScene: Phaser.Scene) {
-        // Scene Transition (Fade Out)
-        console.log("Fade Out", this.cameras)
-
-        this.cameras.main.fadeOut(5000, 0, 100, 100)
-
-        this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
-            this.time.delayedCall(1000, () => {
-                this.scene.start(nextScene)
-            })
-        })
+        this.scene.start(nextScene)
     }
 
     setUpTileMap(){
@@ -164,7 +155,16 @@ export default class Game extends Phaser.Scene {
         const tileset = this.map.addTilesetImage('AllTilesLarge', 'tiles')
         const tombTileSet = this.map.addTilesetImage('TombTiles', 'tiles2')
         const darkTileSet = this.map.addTilesetImage('DarkTiles', 'tiles3')
-        
+
+        // Background
+        const totalWidth = this.map.widthInPixels
+
+        this.add.image(width * 0.5, height * 0.5, 'sky')
+		    .setScrollFactor(0)
+
+        createAligned(this, width * 0.5, totalWidth, 'clouds', 0.25)
+        createAligned(this, width * 0.5, totalWidth, 'houses', 0.5)  
+
         this.map.createLayer('background', [tileset, tombTileSet, darkTileSet])
         this.groundLayer = this.map.createLayer('ground', [tileset, tombTileSet, darkTileSet])   // creates the game layer
         this.groundLayer.setCollisionByProperty({ collides: true })   // sets collision property
@@ -233,7 +233,6 @@ export default class Game extends Phaser.Scene {
                     // this.spikesMoveUp.push(spikeMoveUp) 
                     this.spikesMoveUp.push(new MovingSpikesController(this, spikeMoveUp as Phaser.Physics.Matter.Sprite)) //add a scorpion controller for each scorpion in tiled
 
-
                     // spikeMoveUp.moveVertically()
                     this.obstacles.add('spikeMoveUp', spikeMoveUp.body as MatterJS.BodyType)
                     
@@ -287,17 +286,6 @@ export default class Game extends Phaser.Scene {
                     star.setData('type', 'star') // set the Data of the star so that when collieded, we know it's a star
                     break
                 }
-
-                // case 'health': {
-                //     const health = this.matter.add.sprite(x,y, 'health', undefined, {
-                //         isStatic: true,
-                //         isSensor: true
-                //     })
-
-                //     health.setData('type', 'health')
-                //     health.setData('healthPoints', 10)
-                //     break
-                // }
 
                 case 'spikes': {
                     const spike = this.matter.add.rectangle(x + (width * 0.5), y + (height * 0.5), width, height, {
@@ -369,8 +357,6 @@ export default class Game extends Phaser.Scene {
 
     }
 
- 
-
     createMusic(song: Phaser.Sound.BaseSound){
         if (this.sound.locked){
 			this.add.text(this.scale.width * 0.5, 50, 'Tap to Play').setOrigin(0.5)
@@ -382,5 +368,26 @@ export default class Game extends Phaser.Scene {
 			song.play()
 		}
     }
+}
 
+/**
+     * Used for parallex scrolling to repeat background images
+     * @param {Phaser.Scene} scene 
+     * @param {number} totalWidth 
+     * @param {string} texture 
+     * @param {number} scrollFactor 
+     */
+ const createAligned = (scene, width, totalWidth, texture, scrollFactor) => {
+    const w = scene.textures.get(texture).getSourceImage().width
+    const count = Math.ceil(totalWidth / w) * scrollFactor
+
+    let x = width * 0.5
+    for (let i = 0; i < count; ++i)
+    {
+        const m = scene.add.image(x, scene.scale.height + 100, texture)
+            .setOrigin(0, 1)
+            .setScrollFactor(scrollFactor, 0)
+
+            x += m.width
+    }
 }
