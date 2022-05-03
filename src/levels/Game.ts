@@ -132,6 +132,10 @@ export default class Game extends Phaser.Scene {
         // Physics Timer
         this.physicsTimer.update()  // you can pass dt to use Phaser's timer instead of the clock, but I find this is actually smoother
 
+    }
+
+    fixedIntervalUpdate(dt:number) {
+        this.matter.world.step()
         this.playerController?.update(dt)
         this.scorpions.forEach(scorpion => scorpion.update(dt))
         this.spikesMoveUp.forEach(spikeMoveUp => spikeMoveUp.update(dt))
@@ -144,7 +148,9 @@ export default class Game extends Phaser.Scene {
     setUpTileMap(){
 
         this.matter.world.autoUpdate = false;
-        this.physicsTimer = new PhysicsTimer(() => this.matter.world.step())
+        this.physicsTimer = new PhysicsTimer(() => {
+            this.fixedIntervalUpdate(1000/60)
+        })
 
         // Sets width and height to the scale
         const {width, height} = this.scale
