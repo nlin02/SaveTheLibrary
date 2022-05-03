@@ -20,6 +20,8 @@ export default class StatusDisplay extends Phaser.Scene
     private timeBarY = 30
     private timeBarHeight = 20
 
+    private clock : Phaser.GameObjects.Image
+
     constructor()
     {
         super({//the key of our scene; it will be playing simultaneously as Game scene
@@ -35,7 +37,7 @@ export default class StatusDisplay extends Phaser.Scene
 
     create()
     {
-        this.add.image(this.timeBarX - 100, this.timeBarY, 'clock')
+        this.clock = this.add.image(this.timeBarX - 100, this.timeBarY, 'clock')
             .setDisplaySize(this.timeBarHeight + 10, this.timeBarHeight + 10)
 
         this.graphics = this.add.graphics()
@@ -99,6 +101,8 @@ export default class StatusDisplay extends Phaser.Scene
         }
         else if(currentTime < 0.25 * this.initialTime) {
             this.timePos.fillColor = 0xc22626
+            this.cameras.main.shake(500,0.005)
+            this.clock.setTint(0xc22626)
         }
 
         
