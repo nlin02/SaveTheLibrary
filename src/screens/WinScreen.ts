@@ -21,11 +21,11 @@ export default class TitleScene extends Phaser.Scene{
 
         const{width, height} = this.scale
 
-        const background = this.add.image(0,0,"winBackground")
+        const background = this.add.image(-25,0,"winBackground")
         background.setScale(1.05,1.05)
         background.setOrigin(0,0)
 
-        const text = this.add.text(width*0.5, height *0.2, 'MISSION SUCCESS!', {
+        const text = this.add.text(width*0.5, height *0.15, 'MISSION SUCCESS!', {
             fontSize: '70px',
             color: '#3a1b13'
         })
@@ -34,7 +34,7 @@ export default class TitleScene extends Phaser.Scene{
         .setShadow(3,4,"#C2B280", 4)
         
         
-        const button = this.add.rectangle(width * 0.8, height *0.8, 150, 75,0xffffff)
+        const button = this.add.rectangle(width * 0.8, height *0.85, 150, 75,0xffffff)
             .setInteractive()
             .on(Phaser.Input.Events.GAMEOBJECT_POINTER_UP, () => {
                 this.scene.start('LevelHouse')
