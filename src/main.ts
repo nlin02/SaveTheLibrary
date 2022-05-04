@@ -3,6 +3,7 @@ import Phaser from 'phaser'
 import UI from './header/StatusDisplay'
 import GameOver from './screens/GameOverScreen'
 import TitleScene from './screens/HomeScreen'
+import EmailScreen from './screens/EmailScreen'
 import Win from './screens/WinScreen'
 import TimeTravelScreen from './screens/TimeTravelScreen'
 import LevelAlexandria from './levels/LevelAlexandria'
@@ -21,7 +22,7 @@ var config = {
 			debug: false
 		}
 	},
-	scene: [TitleScene, LevelAlexandria, LevelHouse, LevelTomb, UI, GameOver, TimeTravelScreen, Win]
+	scene: [TitleScene, EmailScreen, LevelAlexandria, LevelHouse, LevelTomb, UI, GameOver, TimeTravelScreen, Win]
 }
 
 export default new Phaser.Game(config)
