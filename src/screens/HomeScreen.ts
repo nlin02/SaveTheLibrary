@@ -40,7 +40,7 @@ export default class TitleScene extends Phaser.Scene{
                 this.scene.start('email-screen')  
             })
 
-        this.add.text(button.x, button.y, 'Start Game',{
+        this.add.text(button.x, button.y, 'BEGIN',{
             color: '#918151'
         })
         .setOrigin(0.5)
