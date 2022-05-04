@@ -7,7 +7,7 @@ export default class LevelHouse extends Game {
         let tilemapKey = "LevelHouse"
         let tilemapJSONFileLocation = "assets/TileMaps/NewHouseMap.json"
 
-        let levelTime = 500
+        let levelTime = 400
         let musicKey = 'housemusic'
 
         let foregroundImageKey = 'houses'
