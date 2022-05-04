@@ -17,6 +17,11 @@ export default class GameOver extends Phaser.Scene{
     }
 
     create(){
+        this.sound.removeByKey('winmusic')
+        this.sound.removeByKey('housemusic')
+        this.sound.removeByKey('tombmusic')
+        this.sound.removeByKey('egyptmusic')
+
         const background = this.add.image(0,0,"deathBackground")
         background.setScale(1.1,1.1)
         background.setOrigin(0,0)
