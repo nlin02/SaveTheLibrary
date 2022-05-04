@@ -5,7 +5,7 @@ export default class LevelAlexandria extends Game {
 
     constructor() {
         let tilemapKey = "LevelAlexandria"
-        let tilemapJSONFileLocation = "assets/tilemaps/NewAlexandriaMap.json"
+        let tilemapJSONFileLocation = "assets/TileMaps/NewAlexandriaMap.json"
         let levelTime = 800
         let musicKey = 'egyptmusic'
 

@@ -68,9 +68,9 @@ export default class Game extends Phaser.Scene {
         this.load.atlas('spikesMoveUp', 'assets/spikesMoveUp.png', 'assets/spikesMoveUp.json')
         this.load.atlas('fire', 'assets/fire.png', 'assets/fire.json')
 
-        this.load.image('tiles', 'assets/tilemaps/AllTilesLarge.png')
-        this.load.image('tiles2', 'assets/tilemaps/TombTiles.png')
-        this.load.image('tiles3', 'assets/tilemaps/DarkTiles.png')
+        this.load.image('tiles', 'assets/TileMaps/AllTilesLarge.png')
+        this.load.image('tiles2', 'assets/TileMaps/TombTiles.png')
+        this.load.image('tiles3', 'assets/TileMaps/DarkTiles.png')
         this.load.tilemapTiledJSON(this.tilemapKey, this.tilemapJSONLocation)
         
         this.load.image('star', 'assets/newStar.png')
@@ -85,14 +85,14 @@ export default class Game extends Phaser.Scene {
         this.load.image('jumpInstr', 'assets/instructions/jumpInstruction.png')
 
         //all audio is used in player controller
-        this.load.audio('egyptmusic', ['/assets/audio/egyptmusic.mp3'])
-        this.load.audio('tombmusic', ['/assets/audio/tombmusic.mp3'])
-        this.load.audio('housemusic', ['/assets/audio/housemusic.mp3'])
-        this.load.audio('powerup', ['/assets/audio/powerup.mp3'])
-        this.load.audio('spikehit', ['/assets/audio/spikehit.mp3'])
-        this.load.audio('scorpionstomp', ['/assets/audio/scorpionstomp.mp3'])
-        this.load.audio('scorpionhit', ['/assets/audio/scorpionhit.mp3'])
-        this.load.audio('levelchange', ['/assets/audio/levelchange.mp3'])
+        this.load.audio('egyptmusic', ['assets/audio/egyptmusic.mp3'])
+        this.load.audio('tombmusic', ['assets/audio/tombmusic.mp3'])
+        this.load.audio('housemusic', ['assets/audio/housemusic.mp3'])
+        this.load.audio('powerup', ['assets/audio/powerup.mp3'])
+        this.load.audio('spikehit', ['assets/audio/spikehit.mp3'])
+        this.load.audio('scorpionstomp', ['assets/audio/scorpionstomp.mp3'])
+        this.load.audio('scorpionhit', ['assets/audio/scorpionhit.mp3'])
+        this.load.audio('levelchange', ['assets/audio/levelchange.mp3'])
 
         this.load.image('clock', 'assets/greyClock.png')
         this.load.image('professor', 'assets/Professor.png')
