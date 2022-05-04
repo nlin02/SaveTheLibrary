@@ -169,19 +169,7 @@ export default class Game extends Phaser.Scene {
         const darkTileSet = this.map.addTilesetImage('DarkTiles', 'tiles3')
 
         // Background
-        const totalWidth = this.map.widthInPixels + 500
-
-        if (this.backgroundImageKey) {
-            this.add.image(width * 0.5, height * 0.5, this.backgroundImageKey)
-		    .setScrollFactor(0)
-        }
-
-        if(this.midgroundImageKey) {
-            createParallax(this, width * 0.5, totalWidth, this.midgroundImageKey, 0.25)
-        } 
-        if (this.foregroundImageKey) {
-            createParallax(this, width * 0.5, totalWidth, this.foregroundImageKey, 0.5)  
-        }
+        this.createBackground()
 
         this.map.createLayer('background', [tileset, tombTileSet, darkTileSet])
         this.groundLayer = this.map.createLayer('ground', [tileset, tombTileSet, darkTileSet])   // creates the game layer
@@ -195,8 +183,23 @@ export default class Game extends Phaser.Scene {
 
         const objectLayer = this.map.getObjectLayer('objects')
         this.createObjects(objectLayer)
+    }
 
+    createBackground() {
+        const {width, height} = this.scale
+        const totalWidth = this.map.widthInPixels + 500
 
+        if (this.backgroundImageKey) {
+            this.add.image(width * 0.5, height * 0.5, this.backgroundImageKey)
+		    .setScrollFactor(0)
+        }
+
+        if(this.midgroundImageKey) {
+            createParallax(this, width * 0.5, totalWidth, this.midgroundImageKey, 0.25)
+        } 
+        if (this.foregroundImageKey) {
+            createParallax(this, width * 0.5, totalWidth, this.foregroundImageKey, 0.5)  
+        }
     }
 
     createObjects(layer: Phaser.Tilemaps.ObjectLayer){
