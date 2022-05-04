@@ -21,6 +21,8 @@ export default class TimeTravelScreen extends Phaser.Scene{
     }
 
     create(){
+        this.sound.removeByKey('housemusic')
+        
         console.log("creating travel screen ")
         const{width, height} = this.scale
 

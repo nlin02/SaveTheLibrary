@@ -30,27 +30,3 @@ export default class EmailScreen extends Phaser.Scene{
         .setFontFamily("Livvic")
     }
 }
-    
-//     create(){
-
-//         this.cameras.main.fadeIn(1000, 0, 0, 0)
-
-//         const background = this.add.image(-25,0,"email")
-//         background.setOrigin(0,0)
-
-
-//         const{width, height} = this.scale
-
-//         const button = this.add.rectangle(width * 0.8, height *0.85, 150, 75,0xffffff)
-//             .setInteractive()
-//             .on(Phaser.Input.Events.GAMEOBJECT_POINTER_UP, () => {
-//                 this.scene.start('LevelHouse')
-//             })
-
-//         this.add.text(button.x, button.y, 'Play Game',{
-//             color: '#918151'
-//         })
-//         .setOrigin(0.5)
-//         .setFontFamily("Livvic")
-//     }
-// }

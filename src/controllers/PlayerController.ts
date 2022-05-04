@@ -136,24 +136,18 @@ export default class PlayerController {
 
                 case 'Professor': {        
                     this.scene.sound.play('levelchange')
-                    this.scene.sound.removeByKey('housemusic')
-                    this.scene.sound.play('tombmusic')
                     this.scene.scene.start('win')
                     break
                 }
 
                 case 'time-machine': {
                     this.scene.sound.play('levelchange')
-                    this.scene.sound.removeByKey('housemusic')
-                    this.scene.sound.play('tombmusic')
                     this.scene.scene.start('travel')
                     break
                 }
 
                 case 'exit-door': {
                     this.scene.sound.play('levelchange')
-                    this.scene.sound.removeByKey('tombmusic')
-                    this.scene.sound.play('egyptmusic')
                     this.scene.scene.start('LevelAlexandria')
                     break
                 }
