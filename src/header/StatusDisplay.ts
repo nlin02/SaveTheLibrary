@@ -26,8 +26,8 @@ export default class StatusDisplay extends Phaser.Scene
     }
 
 
-    create()
-    {
+    create() {
+        this.cameras.main.fadeIn(1000, 0, 0, 0)
         this.clock = this.add.image(this.timeBarX - 0.65 * this.timeBarLength, this.timeBarY, 'clock')
             .setDisplaySize(this.timeBarHeight + 10, this.timeBarHeight + 10)
 
