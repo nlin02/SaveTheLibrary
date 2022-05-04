@@ -304,6 +304,7 @@ export default class PlayerController {
         }
     }
 
+    // ------------- Check Swimming Handler --------------
     private checkSwimming() {
         if (!this.stateMachine.isCurrentState('swim')) {
             const tile = this.map.getTileAt(Math.floor(this.sprite.x / 72), Math.floor(this.sprite.y / 72), true, this.groundLayer);
@@ -334,10 +335,6 @@ export default class PlayerController {
             this.sprite.setVelocityY(-this.speed + speedMod) //this.sprite.setVelocityY(-this.speed) 
             this.sprite.setIgnoreGravity(true)
         } 
-        // else if (this.cursors.space.isDown) {
-        //     this.sprite.setIgnoreGravity(false)
-        //     this.stateMachine.setState('jump');
-        // }
         else if (this.cursors.down.isDown) {
             this.sprite.setVelocityY(this.speed - speedMod)
             this.sprite.setIgnoreGravity(true)
