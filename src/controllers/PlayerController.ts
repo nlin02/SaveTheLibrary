@@ -313,6 +313,7 @@ export default class PlayerController {
     // ------------- Swim State --------------
 
     private swimOnEnter() {
+        this.scene.sound.play('swim')
         this.sprite.setIgnoreGravity(true)
         this.sprite.setTint(0x3275a8)
         this.sprite.setVelocity(0,0)
@@ -356,6 +357,7 @@ export default class PlayerController {
     }
 
     private swimOnExit() {
+        this.scene.sound.removeByKey('swim')
         this.sprite.clearTint()
         this.sprite.setIgnoreGravity(false)
     }

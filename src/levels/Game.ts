@@ -88,6 +88,7 @@ export default class Game extends Phaser.Scene {
         this.load.audio('egyptmusic', 'assets/audio/egyptmusic.mp3')
         this.load.audio('tombmusic', 'assets/audio/tombmusic.mp3')
         this.load.audio('housemusic', 'assets/audio/housemusic.mp3')
+        this.load.audio('winmusic', 'assets/audio/winmusic.mp3')
         this.load.audio('powerup', 'assets/audio/powerup.mp3')
         this.load.audio('objecthit', 'assets/audio/objecthit.mp3')
         this.load.audio('scorpionstomp', 'assets/audio/scorpionstomp.mp3')
@@ -95,6 +96,7 @@ export default class Game extends Phaser.Scene {
         this.load.audio('levelchange', 'assets/audio/levelchange.mp3')
         this.load.audio('timetravel', 'assets/audio/timetravel.mp3')
         this.load.audio('gamecompleted', 'assets/audio/gamecompleted.mp3')
+        this.load.audio('swim', 'assets/audio/swim.mp3')
 
         this.load.image('clock', 'assets/greyClock.png')
         this.load.image('professor', 'assets/Professor.png')

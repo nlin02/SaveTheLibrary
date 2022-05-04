@@ -18,6 +18,9 @@ export default class TitleScene extends Phaser.Scene{
     }
 
     create(){
+        this.sound.removeByKey('egyptmusic')
+        this.sound.play('winmusic')
+
         this.cameras.main.fadeIn(1000, 0, 0, 0)
         const{width, height} = this.scale
 
