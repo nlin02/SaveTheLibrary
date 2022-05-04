@@ -23,8 +23,9 @@ export default class EmailScreen extends Phaser.Scene{
                 this.scene.start('LevelHouse')
             })
 
-        this.add.text(button.x, button.y, 'Start Game',{
-            color: '#7A76A6'
+        this.add.text(button.x, button.y, 'START',{
+            color: '#7A76A6',
+            fontSize: 'xx-large',
         })
         .setOrigin(.5)
         .setFontFamily("Livvic")
