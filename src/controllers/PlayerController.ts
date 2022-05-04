@@ -144,7 +144,7 @@ export default class PlayerController {
                     this.scene.sound.play('levelchange')
                     this.scene.sound.removeByKey('housemusic')
                     this.scene.sound.play('tombmusic')
-                    this.scene.scene.start('LevelTomb')
+                    this.scene.scene.start('travel') //WAHOO 
                     break
                 }
 

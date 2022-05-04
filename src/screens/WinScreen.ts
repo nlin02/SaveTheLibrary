@@ -18,7 +18,7 @@ export default class TitleScene extends Phaser.Scene{
     }
 
     create(){
-
+        
         const{width, height} = this.scale
 
         const background = this.add.image(-25,0,"winBackground")
