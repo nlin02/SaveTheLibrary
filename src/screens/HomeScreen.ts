@@ -26,7 +26,7 @@ export default class TitleScene extends Phaser.Scene{
         background.setOrigin(0,0)
 
         const text = this.add.text(width*0.5, height *0.4, '        SAVING \n PROFESSOR P', {
-            fontSize: '80px',
+            fontSize: '100px',
             color: '#3a1b13'
         })
         .setOrigin(0.5)
@@ -41,7 +41,8 @@ export default class TitleScene extends Phaser.Scene{
             })
 
         this.add.text(button.x, button.y, 'BEGIN',{
-            color: '#918151'
+            color: '#918151',
+            fontSize: 'xx-large',
         })
         .setOrigin(0.5)
         .setFontFamily("Livvic")
