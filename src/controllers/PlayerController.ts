@@ -37,6 +37,8 @@ export default class PlayerController {
     private speedTime = 0
     private speedLength = 300
 
+    private idleState : string
+
     constructor(scene: Phaser.Scene, sprite: Phaser.Physics.Matter.Sprite, cursors: CursorKeys, obstacles: ObstaclesController, map: Phaser.Tilemaps.Tilemap, layer: Phaser.Tilemaps.TilemapLayer, levelTime: number, yellowParticles) {
         this.scene = scene
         this.sprite = sprite
@@ -213,10 +215,12 @@ export default class PlayerController {
 
     private idleOnEnter() {
         this.sprite.play('player-idle')
+        this.idleState = 'idle'
         
     }
 
     private idleOnUpdate() {
+        this.idleState = 'idle'
         if (this.cursors.left.isDown || this.cursors.right.isDown) {
             this.stateMachine.setState('walk')
         }
@@ -371,11 +375,13 @@ export default class PlayerController {
         this.sprite.setVelocityY(1)
         this.sprite.setTint(0x3275a8)
         this.sprite.setIgnoreGravity(true)
+        this.idleState = "swim-idle"
     }
 
     private swimIdleOnUpdate() {
         const tile = this.map.getTileAt(Math.floor(this.sprite.x / 72), Math.floor(this.sprite.y / 72), true, this.groundLayer);
         this.sprite.setTint(0x3275a8)
+        this.idleState = "swim-idle"
 
         if (this.cursors.up.isDown || this.cursors.down.isDown) {
             this.stateMachine.setState('swim')
@@ -545,7 +551,7 @@ export default class PlayerController {
                 this.sprite.setTint(0xc22626)
             }
         })
-        this.stateMachine.setState('idle')
+        this.stateMachine.setState(this.idleState)
     }
 
 
