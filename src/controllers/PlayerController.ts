@@ -135,13 +135,13 @@ export default class PlayerController {
                 }
 
                 case 'Professor': {        
-                    this.scene.sound.play('levelchange')
+                    this.scene.sound.play('gamecompleted')
                     this.scene.scene.start('win')
                     break
                 }
 
                 case 'time-machine': {
-                    this.scene.sound.play('levelchange')
+                    this.scene.sound.play('timetravel')
                     this.scene.scene.start('travel')
                     break
                 }
@@ -549,7 +549,7 @@ export default class PlayerController {
     // ------------- Spike Hit State --------------
 
     private spikeHitOnEnter() {
-        this.scene.sound.play('spikehit')
+        this.scene.sound.play('objecthit')
         this.sprite.clearTint()
         this.sprite.setVelocityY(-12)
 

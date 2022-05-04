@@ -84,15 +84,17 @@ export default class Game extends Phaser.Scene {
         this.load.image('climbInstr', 'assets/instructions/climbInstruction.png')
         this.load.image('jumpInstr', 'assets/instructions/jumpInstruction.png')
 
-        //all audio is used in player controller
-        this.load.audio('egyptmusic', ['/assets/audio/egyptmusic.mp3'])
-        this.load.audio('tombmusic', ['/assets/audio/tombmusic.mp3'])
-        this.load.audio('housemusic', ['/assets/audio/housemusic.mp3'])
-        this.load.audio('powerup', ['/assets/audio/powerup.mp3'])
-        this.load.audio('spikehit', ['/assets/audio/spikehit.mp3'])
-        this.load.audio('scorpionstomp', ['/assets/audio/scorpionstomp.mp3'])
-        this.load.audio('scorpionhit', ['/assets/audio/scorpionhit.mp3'])
-        this.load.audio('levelchange', ['/assets/audio/levelchange.mp3'])
+        //all sound effects are used in player controller
+        this.load.audio('egyptmusic', 'assets/audio/egyptmusic.mp3')
+        this.load.audio('tombmusic', 'assets/audio/tombmusic.mp3')
+        this.load.audio('housemusic', 'assets/audio/housemusic.mp3')
+        this.load.audio('powerup', 'assets/audio/powerup.mp3')
+        this.load.audio('objecthit', 'assets/audio/objecthit.mp3')
+        this.load.audio('scorpionstomp', 'assets/audio/scorpionstomp.mp3')
+        this.load.audio('scorpionhit', 'assets/audio/scorpionhit.mp3')
+        this.load.audio('levelchange', 'assets/audio/levelchange.mp3')
+        this.load.audio('timetravel', 'assets/audio/timetravel.mp3')
+        this.load.audio('gamecompleted', 'assets/audio/gamecompleted.mp3')
 
         this.load.image('clock', 'assets/greyClock.png')
         this.load.image('professor', 'assets/Professor.png')
