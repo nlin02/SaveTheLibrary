@@ -25,7 +25,7 @@ export default class TitleScene extends Phaser.Scene{
         background.setScale(1.1,1.1)
         background.setOrigin(0,0)
 
-        const text = this.add.text(width*0.5, height *0.4, 'SAVE THE \nLIBRARY', {
+        const text = this.add.text(width*0.5, height *0.4, '        SAVING \n PROFESSOR P', {
             fontSize: '80px',
             color: '#3a1b13'
         })
