@@ -144,7 +144,7 @@ export default class PlayerController {
                     this.scene.sound.play('levelchange')
                     this.scene.sound.removeByKey('housemusic')
                     this.scene.sound.play('tombmusic')
-                    this.scene.scene.start('travel') //WAHOO 
+                    this.scene.scene.start('travel')
                     break
                 }
 
@@ -213,6 +213,7 @@ export default class PlayerController {
 
     private idleOnEnter() {
         this.sprite.play('player-idle')
+        
     }
 
     private idleOnUpdate() {
@@ -226,6 +227,7 @@ export default class PlayerController {
         }
 
         this.checkClimbing()
+        this.checkSwimming()
     }
 
     // ------------- Walk State --------------
@@ -262,6 +264,7 @@ export default class PlayerController {
     private jumpOnEnter() {
         this.sprite.setFriction(0) //make the sprite slippery in the air
         this.sprite.setVelocityY(-15)
+        this.checkSwimming()
     }
 
     private jumpOnUpdate() {
@@ -312,6 +315,7 @@ export default class PlayerController {
 
     private swimOnEnter() {
         this.sprite.setIgnoreGravity(true)
+        this.sprite.setTint(0x3275a8)
         this.sprite.setVelocity(0,0)
         this.sprite.play('player-swim')
     }
@@ -320,14 +324,16 @@ export default class PlayerController {
         const tile = this.map.getTileAt(Math.floor(this.sprite.x / 72), Math.floor(this.sprite.y / 72), true, this.groundLayer);
         const speedMod = 3
 
-        if (this.cursors.up.isDown) {
+        this.sprite.setTint(0x3275a8)
+
+        if (this.cursors.up.isDown || this.cursors.space.isDown) {
             this.sprite.setVelocityY(-this.speed + speedMod) //this.sprite.setVelocityY(-this.speed) 
             this.sprite.setIgnoreGravity(true)
         } 
-        else if (this.cursors.space.isDown){
-            this.sprite.setVelocityY(-this.speed) //this.sprite.setVelocityY(-this.speed) 
-            this.sprite.setIgnoreGravity(true)
-        }
+        // else if (this.cursors.space.isDown) {
+        //     this.sprite.setIgnoreGravity(false)
+        //     this.stateMachine.setState('jump');
+        // }
         else if (this.cursors.down.isDown) {
             this.sprite.setVelocityY(this.speed - speedMod)
             this.sprite.setIgnoreGravity(true)
@@ -350,11 +356,12 @@ export default class PlayerController {
 
         if (!tile.properties.canSwim) {
             this.sprite.setIgnoreGravity(false)
-            this.stateMachine.setState('swim-idle');
+            this.stateMachine.setState('idle');
         }
     }
 
     private swimOnExit() {
+        this.sprite.clearTint()
         this.sprite.setIgnoreGravity(false)
     }
 
@@ -362,14 +369,19 @@ export default class PlayerController {
     
     private swimIdleOnEnter() {
         this.sprite.setVelocityY(1)
+        this.sprite.setTint(0x3275a8)
         this.sprite.setIgnoreGravity(true)
     }
 
     private swimIdleOnUpdate() {
         const tile = this.map.getTileAt(Math.floor(this.sprite.x / 72), Math.floor(this.sprite.y / 72), true, this.groundLayer);
+        this.sprite.setTint(0x3275a8)
 
-        if (this.cursors.up.isDown || this.cursors.down.isDown || this.cursors.space.isDown) {
+        if (this.cursors.up.isDown || this.cursors.down.isDown) {
             this.stateMachine.setState('swim')
+        }
+        if (this.cursors.space.isDown) {
+            this.stateMachine.setState('jump')
         }
         else if (this.cursors.left.isDown || this.cursors.right.isDown) {
             this.stateMachine.setState('swim')
@@ -377,7 +389,7 @@ export default class PlayerController {
 
         if (!tile.properties.canSwim) {
             this.sprite.setIgnoreGravity(false)
-            this.stateMachine.setState('idle');
+            this.stateMachine.setState('swim-idle');
         }
     }
 
