@@ -62,16 +62,16 @@ export default class Game extends Phaser.Scene {
         this.load.scenePlugin('Slopes', Slopes);
         
         this.load.atlas('explorer', 'assets/explorer/explorer.png', 'assets/explorer/explorer.json')
-        this.load.atlas('scorpion', 'assets/scorpion.png', 'assets/scorpion.json')
-        this.load.atlas('spikesMoveUp', 'assets/spikesMoveUp.png', 'assets/spikesMoveUp.json')
-        this.load.atlas('fire', 'assets/fire.png', 'assets/fire.json')
+        this.load.atlas('scorpion', 'assets/scorpion/scorpion.png', 'assets/scorpion/scorpion.json')
+        this.load.atlas('spikesMoveUp', 'assets/spikes/spikesMoveUp.png', 'assets/spikes/spikesMoveUp.json')
+        this.load.atlas('fire', 'assets/fire/fire.png', 'assets/fire/fire.json')
 
         this.load.image('tiles', 'assets/tilemaps/AllTilesLarge.png')
         this.load.image('tiles2', 'assets/tilemaps/TombTiles.png')
         this.load.image('tiles3', 'assets/tilemaps/DarkTiles.png')
         this.load.tilemapTiledJSON(this.tilemapKey, this.tilemapJSONLocation)
         
-        this.load.image('star', 'assets/newStar.png')
+        this.load.image('star', 'assets/star.png')
         this.load.image('health', 'assets/health.png')
         this.load.image('yellow', 'assets/particles/yellow.png');
         this.load.image('blue', 'assets/particles/blue.png');

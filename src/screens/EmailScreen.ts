@@ -6,7 +6,7 @@ export default class EmailScreen extends Phaser.Scene {
     }
 
     preload () {
-        this.load.image('email', 'assets/email.png');
+        this.load.image('email', 'assets/screenBackgrounds/email.png');
     }
 
     create() {
