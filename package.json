@@ -1,7 +1,7 @@
 {
-	"name": "SaveTheLibrary",
+	"name": "SavingProfessorP",
 	"version": "1.0.0",
-	"description": "Based off of supertommy's side scrolling prototype, we created our own Save the Library game.",
+	"description": "Based off of supertommy's side scrolling prototype, we created our own Saving Professor P game.",
 	"scripts": {
 		"start": "parcel src/index.html -p 8000",
 		"build": "parcel build src/index.html --out-dir dist",
@@ -10,13 +10,13 @@
 		"predeploy": "rm -rf dist ; parcel build src/index.html --public-url https://nlin02.github.io/SaveTheLibrary",
 		"deploy": "gh-pages -d dist"
 	},
-	"author": "supertommy",
-	"license": "MIT",
+	"author": "Bea Bautista, Linda Lor, Nina Lin, and Katie McCarthy",
+	"license": "",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/ourcade/phaser3-parcel-template.git"
+		"url": "https://github.com/nlin02/SaveTheLibrary"
 	},
-	"homepage": "https://github.com/ourcade/phaser3-parcel-template",
+	"homepage": "https://github.com/nlin02/SaveTheLibrary",
 	"devDependencies": {
 		"@types/node": "^17.0.31",
 		"@typescript-eslint/eslint-plugin": "^2.29.0",

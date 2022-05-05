@@ -1,5 +1,5 @@
 # Saving Professor P
-2D side scrolling adventure game available at: WEBSITE
+2D side scrolling adventure game available at: https://nlin02.github.io/SaveTheLibrary/
 
 By Bea Bautista, Linda Lor, Nina Lin, and Katie McCarthy
 
