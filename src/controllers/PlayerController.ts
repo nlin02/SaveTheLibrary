@@ -225,7 +225,7 @@ export default class PlayerController {
         }
 
         this.checkClimbing()
-        this.checkSwimming()
+        // this.checkSwimming()
     }
 
     // ------------- Walk State --------------

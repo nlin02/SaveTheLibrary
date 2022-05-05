@@ -83,6 +83,10 @@ export default class Game extends Phaser.Scene {
         this.load.image('moveInstr', 'assets/instructions/moveInstruction.png')
         this.load.image('climbInstr', 'assets/instructions/climbInstruction.png')
         this.load.image('jumpInstr', 'assets/instructions/jumpInstruction.png')
+        this.load.image('exclam1', 'assets/instructions/exclam_01.png')
+        this.load.image('exclam2', 'assets/instructions/exclam_02.png')
+        this.load.image('exclam3', 'assets/instructions/exclam_03.png')
+        this.load.image('exclam4', 'assets/instructions/exclam_04.png')
 
         //all sound effects are used in player controller
         this.load.audio('egyptmusic', 'assets/audio/egyptmusic.mp3')
@@ -241,6 +245,27 @@ export default class Game extends Phaser.Scene {
                     break
                 }
 
+                case 'exclam1': {
+                    const img = this.add.image(x, y, 'exclam1', undefined)
+                    img.setScale(.5,.5)
+                    break
+                }
+                case 'exclam2': {
+                    const img = this.add.image(x, y, 'exclam2', undefined)
+                    img.setScale(.5,.5)
+                    break
+                }
+                case 'exclam3': {
+                    const img = this.add.image(x, y, 'exclam3', undefined)
+                    img.setScale(.5,.5)
+                    break
+                }
+                case 'exclam4': {
+                    const img = this.add.image(x, y, 'exclam4', undefined)
+                    img.setScale(.5,.5)
+                    break
+                }
+
                 case 'scorpion': {
                     const scorpion = this.matter.add.sprite(x, y, 'scorpion')
                         .setFixedRotation()
@@ -278,6 +303,18 @@ export default class Game extends Phaser.Scene {
                         sprite.setData(property.name, property.value)
                     }
                     sprite.setData('type', 'Professor') // set the Data of the star so that when collieded, we know it's a star
+                    break
+                }
+
+                case 'entrance':{
+                    const sprite = this.matter.add.sprite(x, y, 'door', undefined,{
+                        isStatic: true,
+                        isSensor: true
+                    })
+                    // for (var property of objData.properties) {
+                    //     sprite.setData(property.name, property.value)
+                    // }
+                    // sprite.setData('type', 'entr') // set the Data of the star so that when collieded, we know it's a star
                     break
                 }
 
