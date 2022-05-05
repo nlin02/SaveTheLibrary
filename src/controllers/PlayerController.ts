@@ -3,7 +3,6 @@ import StateMachine from '../StateMachine/StateMachine'
 import { sharedInstance as events } from '../eventcenter/EventCenter'
 import ObstaclesController from './ObstaclesController'
 
-
 type CursorKeys = Phaser.Types.Input.Keyboard.CursorKeys
 
 export default class PlayerController {
@@ -24,15 +23,15 @@ export default class PlayerController {
     private obstacles: ObstaclesController
     private lastscorpion?: Phaser.Physics.Matter.Sprite
 
-    private speed = 7
     private aboveZero
     private startTime:number
-    private remTime:number // TODO: UPDATE
+    private remTime:number
 
     private isStunned = false
     private stunTime = 0
     private stunLength = 300
 
+    private speed = 7
     private isSuperSpeed = false
     private speedTime = 0
     private speedLength = 300
@@ -58,54 +57,8 @@ export default class PlayerController {
         this.createAnimations()
         this.createParticleEmitter()
 
-        this.stateMachine.addState('idle', {
-            onEnter: this.idleOnEnter,
-            onUpdate: this.idleOnUpdate
-        })
-        .addState('walk', {
-            onEnter: this.walkOnEnter,
-            onUpdate: this.walkOnUpdate
-        })
-        .addState('jump', {
-            onEnter: this.jumpOnEnter,
-            onUpdate: this.jumpOnUpdate,
-            onExit: this.jumpOnExit
-        })
-        .addState('climb', {
-            onEnter: this.climbOnEnter,
-            onUpdate: this.climbOnUpdate,
-            onExit: this.climbOnExit
-        })
-        .addState('swim', {
-            onEnter: this.swimOnEnter,
-            onUpdate: this.swimOnUpdate,
-            onExit: this.swimOnExit
-        })
-        .addState('swim-idle', {
-            onEnter: this.swimIdleOnEnter,
-            onUpdate: this.swimIdleOnUpdate,
-            onExit: this.swimOnExit
-        })
-        .addState('climb-idle', {
-            onEnter: this.climbIdleOnEnter,
-            onUpdate: this.climbIdleOnUpdate,
-        })
-        .addState('spike-hit', {
-            onEnter: this.spikeHitOnEnter
-        })
-        .addState('scorpion-hit', {
-            onEnter: this.scorpionHitOnEnter
-        })
-        .addState('star-speed', {
-            onEnter: this.starSpeedOnEnter
-        })
-        .addState('scorpion-stomp', {
-            onEnter: this.scorpionStompOnEnter
-        })
-        .addState('dead',{
-            onEnter: this.deadOnEnter
-        })
-        .setState('idle')
+        this.createStates()
+        this.stateMachine.setState('idle')
 
         this.sprite.setOnCollide((data: MatterJS.ICollisionPair) => {
 
@@ -163,11 +116,60 @@ export default class PlayerController {
 
     update(dt: number) {
         this.stateMachine.update(dt)
-        if (this.aboveZero) { // duplication code, but ensures that method updateTime is not being called ALL THE TIME 
+        if (this.aboveZero) { // ensures that method updateTime is not being called ALL THE TIME 
             this.updateTime()
             this.handleSpeedStunLogic()
         }
+    }
 
+    private createStates() {
+        this.stateMachine.addState('idle', {
+                onEnter: this.idleOnEnter,
+                onUpdate: this.idleOnUpdate
+            })
+            .addState('walk', {
+                onEnter: this.walkOnEnter,
+                onUpdate: this.walkOnUpdate
+            })
+            .addState('jump', {
+                onEnter: this.jumpOnEnter,
+                onUpdate: this.jumpOnUpdate,
+                onExit: this.jumpOnExit
+            })
+            .addState('climb', {
+                onEnter: this.climbOnEnter,
+                onUpdate: this.climbOnUpdate,
+                onExit: this.climbOnExit
+            })
+            .addState('swim', {
+                onEnter: this.swimOnEnter,
+                onUpdate: this.swimOnUpdate,
+                onExit: this.swimOnExit
+            })
+            .addState('swim-idle', {
+                onEnter: this.swimIdleOnEnter,
+                onUpdate: this.swimIdleOnUpdate,
+                onExit: this.swimOnExit
+            })
+            .addState('climb-idle', {
+                onEnter: this.climbIdleOnEnter,
+                onUpdate: this.climbIdleOnUpdate,
+            })
+            .addState('spike-hit', {
+                onEnter: this.spikeHitOnEnter
+            })
+            .addState('scorpion-hit', {
+                onEnter: this.scorpionHitOnEnter
+            })
+            .addState('star-speed', {
+                onEnter: this.starSpeedOnEnter
+            })
+            .addState('scorpion-stomp', {
+                onEnter: this.scorpionStompOnEnter
+            })
+            .addState('dead',{
+                onEnter: this.deadOnEnter
+            })
     }
 
     private createParticleEmitter() {
@@ -216,7 +218,6 @@ export default class PlayerController {
     private idleOnEnter() {
         this.sprite.play('player-idle')
         this.idleState = 'idle'
-        
     }
 
     private idleOnUpdate() {
@@ -231,7 +232,6 @@ export default class PlayerController {
         }
 
         this.checkClimbing()
-        // this.checkSwimming()
     }
 
     // ------------- Walk State --------------
@@ -258,9 +258,9 @@ export default class PlayerController {
         if (spaceJustPressed) {
             this.stateMachine.setState('jump')
         }
+
         this.checkSwimming()
         this.checkClimbing()
-
     }
 
     // ------------- Jump State --------------
@@ -280,6 +280,7 @@ export default class PlayerController {
             this.sprite.flipX = false
             this.sprite.setVelocityX(5)
         }
+
         this.checkSwimming()
         this.checkClimbing()
     }
@@ -305,13 +306,13 @@ export default class PlayerController {
     }
 
     // ------------- Check Swimming Handler --------------
+
     private checkSwimming() {
         if (!this.stateMachine.isCurrentState('swim')) {
             const tile = this.map.getTileAt(Math.floor(this.sprite.x / 72), Math.floor(this.sprite.y / 72), true, this.groundLayer);
 
             if (tile.properties.canSwim) {
                 this.stateMachine.setState('swim');
-                // console.log("IN SWIMMING STATE")
             }
         }
     }
@@ -333,7 +334,7 @@ export default class PlayerController {
         this.sprite.setTint(0x3275a8)
 
         if (this.cursors.up.isDown || this.cursors.space.isDown) {
-            this.sprite.setVelocityY(-this.speed + speedMod) //this.sprite.setVelocityY(-this.speed) 
+            this.sprite.setVelocityY(-this.speed + speedMod)
             this.sprite.setIgnoreGravity(true)
         } 
         else if (this.cursors.down.isDown) {
@@ -553,7 +554,6 @@ export default class PlayerController {
         this.stateMachine.setState(this.idleState)
     }
 
-
     // ------------- Spike Hit State --------------
 
     private spikeHitOnEnter() {
@@ -568,7 +568,6 @@ export default class PlayerController {
         }
         this.stunPlayer()
     }
-
 
     // ------------- Scorpion Hit State --------------
 
@@ -632,22 +631,15 @@ export default class PlayerController {
         }
     }
 
-    // ------------- Collect Star Method --------------
-//never used?!?!?! 
-    private collectStar(sprite: Phaser.Physics.Matter.Sprite) {
-        events.emit('star-collected')
-        sprite.destroy()
-    }
-
-
-
     // ---------------- Super Speed Method --------------
+
     private starSpeedOnEnter() {
         if(this.isStunned) {
             this.resetSpeedStunLogic()
             this.stateMachine.setState('idle')
             return
         }
+
         this.yellowParticleEmitter.setVisible(true)
         
         this.isSuperSpeed = true
@@ -658,13 +650,6 @@ export default class PlayerController {
 
     private destroyStar(sprite: Phaser.Physics.Matter.Sprite) {
         sprite.destroy()
-    }
-
-
-    // ------------- Switch Scene Method --------------
-
-    private switchScene(sprite: Phaser.Physics.Matter.Sprite) {
-        events.emit('changeScene', sprite.getData('targetScene'))
     }
 
     // ------------- Create Animations --------------

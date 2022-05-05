@@ -15,6 +15,22 @@ export default class ScorpionController {
 
         this.createAnimations()
 
+        this.createStates()
+        this.stateMachine.setState('idle')
+
+        events.on('scorpion-stomped', this.handleStomped, this)
+    }
+
+    destroy() {
+        events.off('scorpion-stomped', this.handleStomped, this)
+    }
+
+    //statemachine needs an update function to execute each frame
+    update(dt: number) {
+        this.stateMachine.update(dt)
+    }
+
+    private createStates() {
         this.stateMachine.addState('idle')
             .addState('idle', {
                 onEnter: this.idleOnEnter
@@ -28,24 +44,12 @@ export default class ScorpionController {
                 onUpdate: this.moveRightOnUpdate
             })
             .addState('dead')
-            .setState('idle')
-
-            events.on('scorpion-stomped', this.handleStomped, this)
-    }
-
-    destroy() {
-        events.off('scorpion-stomped', this.handleStomped, this)
-    }
-
-    //statemachine needs an update function to execute each frame
-    update(dt: number) {
-        this.stateMachine.update(dt)
     }
 
     private createAnimations() {
+        // key of texture is preloaded in Game.ts
         this.sprite.anims.create({
             key: 'idle',
-            // key of the texture (game.ts preload)
             frames: [{key: 'scorpion', frame: 'scorpForward1.png'}]
         })
         this.sprite.anims.create({ 
@@ -75,6 +79,7 @@ export default class ScorpionController {
     private idleOnEnter() {
         this.sprite.play('idle')
         const rand = Phaser.Math.Between(1,100)
+        
         // if random number is greater than 50, scorpion begins moving left
         if(rand < 50) {
             this.stateMachine.setState('move-left')

@@ -1,6 +1,5 @@
 import Phaser from 'phaser'
 
-
 export default class TimeTravelScreen extends Phaser.Scene{
 
     private background: Phaser.GameObjects.Image
@@ -9,38 +8,30 @@ export default class TimeTravelScreen extends Phaser.Scene{
     private screenTime = 15;
     private characterScale = 1 
 
-    constructor()
-    {
+    constructor() {
         super('travel')
     }
 
-    preload ()
-    {
+    preload () {
         this.load.image('background', 'assets/travelbg.png');
         this.load.image('character', 'assets/explorertravel.png');
     }
 
-    create(){
+    create() {
         this.sound.removeByKey('housemusic')
         
-        console.log("creating travel screen ")
         const{width, height} = this.scale
 
         this.background = this.add.image(400,300, "background")
         this.background.setScale(.5,.5)
-        // this.background.setOrigin(0,0)
-        this.background.setRotation
+            .setRotation
 
         this.character = this.add.image(400,300, "character")
         this.character.setScale(this.characterScale,this.characterScale)
-        // this.background.setOrigin(0,0)
-        this.character.setRotation
+            .setRotation
     }
-   
 
-    update()
-    {
-        console.log(this.screenTime)
+    update() {
         this.screenTime -= 0.1
         if( this.screenTime > 0) {
             this.background.rotation += 0.03
@@ -49,11 +40,9 @@ export default class TimeTravelScreen extends Phaser.Scene{
         else{
             this.scene.start('LevelTomb')
         }
-        
     }
 
-    private updateCharacter(){
-
+    private updateCharacter() {
         if( this.characterScale > 0) {
             this.characterScale -= 0.007
         }
@@ -61,5 +50,4 @@ export default class TimeTravelScreen extends Phaser.Scene{
         this.character.setScale(this.characterScale, this.characterScale)
         this.character.rotation += 0.06
     }
-
 }

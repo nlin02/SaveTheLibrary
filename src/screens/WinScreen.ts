@@ -1,9 +1,8 @@
 import Phaser from 'phaser'
 import WebFontFile from '../WebFontFile';
 
-
-export default class TitleScene extends Phaser.Scene{
-    constructor(){
+export default class TitleScene extends Phaser.Scene {
+    constructor() {
         super('win')
     }
     
@@ -14,10 +13,9 @@ export default class TitleScene extends Phaser.Scene{
             'Roboto'
         ]))
         this.load.image('winBackground', 'assets/screenBackgrounds/winBackground.png')
-
     }
 
-    create(){
+    create() {
         this.sound.removeByKey('egyptmusic')
         this.sound.play('winmusic')
 
@@ -26,16 +24,15 @@ export default class TitleScene extends Phaser.Scene{
 
         const background = this.add.image(-25,0,"winBackground")
         background.setScale(1.05,1.05)
-        background.setOrigin(0,0)
+            .setOrigin(0,0)
 
         const text = this.add.text(width*0.5, height *0.15, 'MISSION SUCCESS!', {
             fontSize: '70px',
             color: '#3a1b13'
         })
-        .setOrigin(0.5)
-        .setFontFamily("Redressed")
-        .setShadow(3,4,"#C2B280", 4)
-        
+            .setOrigin(0.5)
+            .setFontFamily("Redressed")
+            .setShadow(3,4,"#C2B280", 4)
         
         const button = this.add.rectangle(width * 0.8, height *0.85, 150, 75,0xffffff)
             .setInteractive()
@@ -44,9 +41,10 @@ export default class TitleScene extends Phaser.Scene{
             })
 
         this.add.text(button.x, button.y, 'Play Again',{
-            color: '#918151'
+            color: '#918151',
+            fontSize: 'x-large'
         })
-        .setOrigin(0.5)
-        .setFontFamily("Livvic")
+            .setOrigin(0.5)
+            .setFontFamily("Livvic")
     }
 }

@@ -1,9 +1,8 @@
 import Phaser from 'phaser'
 import WebFontFile from '../WebFontFile';
 
-
-export default class TitleScene extends Phaser.Scene{
-    constructor(){
+export default class TitleScene extends Phaser.Scene {
+    constructor() {
         super('title-scene')
     }
     
@@ -14,25 +13,23 @@ export default class TitleScene extends Phaser.Scene{
             'Roboto'
         ]))
         this.load.image('homeBackground', 'assets/screenBackgrounds/HomeBackground.png')
-
     }
 
-    create(){
-
+    create() {
         const{width, height} = this.scale
 
         const background = this.add.image(0,0,"homeBackground")
         background.setScale(1.1,1.1)
-        background.setOrigin(0,0)
+            .setOrigin(0,0)
 
         const text = this.add.text(width*0.5, height *0.4, '        SAVING \n PROFESSOR P', {
             fontSize: '100px',
             color: '#3a1b13'
         })
-        .setOrigin(0.5)
-        .setFontFamily("Redressed")
-        .setShadow(3,4,"#C2B280", 4)
-        
+            .setOrigin(0.5)
+            .setFontFamily("Redressed")
+            .setShadow(3,4,"#C2B280", 4)
+            
         
         const button = this.add.rectangle(width * 0.5, height *0.7, 150, 75,0xffffff)
             .setInteractive()
@@ -43,8 +40,8 @@ export default class TitleScene extends Phaser.Scene{
         this.add.text(button.x, button.y, 'Start Game',{
             color: '#918151',
             fontSize: 'x-large'
-        })
-        .setOrigin(0.5)
-        .setFontFamily("Livvic")
+            })
+            .setOrigin(0.5)
+            .setFontFamily("Livvic")
     }
 }

@@ -1,5 +1,4 @@
 import Phaser from 'phaser'
-
 import UI from './header/StatusDisplay'
 import GameOver from './screens/GameOverScreen'
 import TitleScene from './screens/HomeScreen'

@@ -1,4 +1,3 @@
-import Phaser from 'phaser'
 import Game from './Game'
 
 export default class LevelTomb extends Game {

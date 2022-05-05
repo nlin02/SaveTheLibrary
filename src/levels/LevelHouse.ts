@@ -1,4 +1,3 @@
-import Phaser from 'phaser'
 import Game from './Game'
 
 export default class LevelHouse extends Game {
@@ -6,7 +5,6 @@ export default class LevelHouse extends Game {
     constructor() {
         let tilemapKey = "LevelHouse"
         let tilemapJSONFileLocation = "assets/TileMaps/NewHouseMap.json"
-
         let levelTime = 400
         let musicKey = 'housemusic'
 

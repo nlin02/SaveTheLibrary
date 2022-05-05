@@ -1,6 +1,5 @@
 import { Physics } from "phaser";
 import StateMachine from "../StateMachine/StateMachine";
-import { sharedInstance as events} from "../eventcenter/EventCenter";
 
 export default class MovingSpikesController {
     private scene: Phaser.Scene
@@ -31,7 +30,6 @@ export default class MovingSpikesController {
         
         this.sprite.setMass(10000000)
         this.sprite.setIgnoreGravity(true)
-
     }
 
     update(dt: number) {
@@ -57,7 +55,7 @@ export default class MovingSpikesController {
         const rand = Phaser.Math.Between(1,100)
         if(rand < 50) {
             this.stateMachine.setState('move-up')
-        }
+        } 
         else {
             this.stateMachine.setState('move-down')
         }
@@ -71,7 +69,6 @@ export default class MovingSpikesController {
     private moveUpOnUpdate(dt: number) {
         this.moveTime += dt
         this.sprite.setVelocityY(-4)
-        // this.sprite.setX()
 
         // if moveTime is greater than 2000 ms, change state to right
         if(this.moveTime > 1200) {
@@ -88,10 +85,8 @@ export default class MovingSpikesController {
         this.moveTime += dt
         this.sprite.setVelocityY(4)
 
-
         if(this.moveTime > 1200) {
             this.stateMachine.setState('move-up')
         }
     }
-
 }

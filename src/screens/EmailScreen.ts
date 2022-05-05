@@ -1,16 +1,15 @@
 import Phaser from 'phaser'
 
-export default class EmailScreen extends Phaser.Scene{
-    constructor(){
+export default class EmailScreen extends Phaser.Scene {
+    constructor() {
         super('email-screen')
     }
 
-    preload ()
-    {
+    preload () {
         this.load.image('email', 'assets/email.png');
     }
 
-    create(){
+    create() {
         this.cameras.main.fadeIn(1000, 0, 0, 0)
         const{width, height} = this.scale
 
@@ -26,8 +25,8 @@ export default class EmailScreen extends Phaser.Scene{
         this.add.text(button.x, button.y, 'START',{
             color: '#7A76A6',
             fontSize: 'xx-large',
-        })
-        .setOrigin(.5)
-        .setFontFamily("Livvic")
+            })
+            .setOrigin(.5)
+            .setFontFamily("Livvic")
     }
 }

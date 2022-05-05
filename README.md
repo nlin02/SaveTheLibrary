@@ -12,12 +12,14 @@ We used Phaser, a 2D game framework, to make this game run on the desktop. We al
 
 # Important Things To Know
 
-What to install:
+You can use the above link to play the game browser. 
+In your terminal be sure to run 'npm install'. If you want to run it locally, once the repository is downloaded and you are in the game’s terminal, type 'npm run start' in the terminal and copy and paste the local host into your browser of choice.
 
-You can use the above link to play the game browser. If you want to run it locally, once the repository is downloaded and you are in the game’s terminal, type ‘npm run start’ in the terminal and copy and paste the local host into your browser of choice.
+If you wish to update the link to reflect newly pushed code, use 'npm deploy'.
 
 # Credits and Thanks
 We would like to give a large shout out to SuperTommy for his extensive open source code that helped us navigate phaser. Specifically, we used “Making Your First Phaser Game in TypeScript.”
+
 We’d also like to thank our professor, Paul Cantrell, for his advice, guidance, and support, and the rest of our COMP 225 class for class feedback. 
 
 

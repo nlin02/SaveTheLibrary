@@ -28,14 +28,14 @@ export default class StateMachine {
         this.context = context
     }
 
-    isCurrentState(name: string) {
+    public isCurrentState(name: string) {
         if (!this.currentState) {
             return false
         }
         return this.currentState.name === name
     }
 
-    addState(name: string, config?: {onEnter?: () => void, onUpdate?: (dt: number) => void, onExit?: () => void}) { 
+    public addState(name: string, config?: {onEnter?: () => void, onUpdate?: (dt: number) => void, onExit?: () => void}) { 
         const context = this.context
         
         this.states.set(name, {
@@ -47,7 +47,7 @@ export default class StateMachine {
         return this
     }
 
-    setState(name: string) {
+    public setState(name: string) {
         if (!this.states.has(name)) {
             console.warn(`Tried to change to unknown state: ${name}`)
             return
@@ -63,8 +63,6 @@ export default class StateMachine {
         }
 
         this.isChangingState = true
-
-        console.log(`[StateMachine (${this.id})] change from ${this.currentState?.name ?? 'none'} to ${name}`)
 
         if (this.currentState && this.currentState.onExit) {
             this.currentState.onExit()
