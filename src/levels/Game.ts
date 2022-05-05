@@ -311,10 +311,8 @@ export default class Game extends Phaser.Scene {
                         isStatic: true,
                         isSensor: true
                     })
-                    // for (var property of objData.properties) {
-                    //     sprite.setData(property.name, property.value)
-                    // }
-                    // sprite.setData('type', 'entr') // set the Data of the star so that when collieded, we know it's a star
+            
+                    sprite.setData('type', 'enter-door') // set the Data of the star so that when collieded, we know it's a star
                     break
                 }
 

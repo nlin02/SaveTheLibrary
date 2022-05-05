@@ -25,8 +25,8 @@ export default class TitleScene extends Phaser.Scene{
         background.setScale(1.1,1.1)
         background.setOrigin(0,0)
 
-        const text = this.add.text(width*0.5, height *0.4, '        SAVING \n PROFESSOR P', {
-            fontSize: '100px',
+        const text = this.add.text(width*0.5, height *0.4, 'SAVE THE \nLIBRARY', {
+            fontSize: '80px',
             color: '#3a1b13'
         })
         .setOrigin(0.5)
@@ -37,12 +37,11 @@ export default class TitleScene extends Phaser.Scene{
         const button = this.add.rectangle(width * 0.5, height *0.7, 150, 75,0xffffff)
             .setInteractive()
             .on(Phaser.Input.Events.GAMEOBJECT_POINTER_UP, () => {
-                this.scene.start('email-screen')  
+                this.scene.start('LevelHouse')  
             })
 
-        this.add.text(button.x, button.y, 'BEGIN',{
-            color: '#918151',
-            fontSize: 'xx-large',
+        this.add.text(button.x, button.y, 'Start Game',{
+            color: '#918151'
         })
         .setOrigin(0.5)
         .setFontFamily("Livvic")

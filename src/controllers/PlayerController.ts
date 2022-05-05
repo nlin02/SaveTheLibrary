@@ -151,6 +151,12 @@ export default class PlayerController {
                     this.scene.scene.start('LevelAlexandria')
                     break
                 }
+
+                case 'enter-door': {
+                    this.scene.sound.play('levelchange')
+                    this.scene.scene.start('LevelAlexandria')
+                    break
+                }
             }
         })
     }
