@@ -185,7 +185,7 @@ export default class Game extends Phaser.Scene {
 
     private createBackground() {
         const {width, height} = this.scale
-        const totalWidth = this.map.widthInPixels + 500
+        const totalWidth = this.map.widthInPixels + 2000
 
         if (this.backgroundImageKey) {
             this.add.image(width * 0.5, height * 0.5, this.backgroundImageKey)
