@@ -3,22 +3,34 @@ import Phaser from 'phaser'
 export default class TimeTravelScreen extends Phaser.Scene{
 
     private background: Phaser.GameObjects.Image
-    private character: Phaser.GameObjects.Image
+    private explorer: Phaser.GameObjects.Image
+    private professor: Phaser.GameObjects.Image
 
     private screenTime = 15;
     private characterScale = 1 
 
-    constructor() {
-        super('travel')
+    private hasProfessor : boolean
+    private nextScene : string
+    private sceneKey: string
+    private previousSound : string
+
+    constructor(sceneKey: string, hasProfessor : boolean, nextScene : string, previousSound: string) {
+        super(sceneKey)
+        this.sceneKey = sceneKey
+        this.hasProfessor = hasProfessor
+        this.nextScene = nextScene
+        this.previousSound = previousSound
     }
 
     preload () {
         this.load.image('background', 'assets/screenBackgrounds/travelBackground.png');
-        this.load.image('character', 'assets/explorer/explorertravel.png');
+        this.load.image('explorer', 'assets/explorer/explorertravel.png');
+        this.load.image('professor', 'assets/professor/professor_idle.png');
+        
     }
 
     create() {
-        this.sound.removeByKey('housemusic')
+        this.sound.removeByKey(this.previousSound)
         
         const{width, height} = this.scale
 
@@ -26,9 +38,15 @@ export default class TimeTravelScreen extends Phaser.Scene{
         this.background.setScale(.5,.5)
             .setRotation
 
-        this.character = this.add.image(400,300, "character")
-        this.character.setScale(this.characterScale,this.characterScale)
+        this.explorer = this.add.image(400,300, 'explorer')
+        this.explorer.setScale(this.characterScale,this.characterScale)
             .setRotation
+
+        if (this.hasProfessor) {
+            this.professor = this.add.image(300,200, 'professor')
+            this.professor.setScale(this.characterScale,this.characterScale)
+                .setRotation
+        }
     }
 
     update() {
@@ -38,7 +56,7 @@ export default class TimeTravelScreen extends Phaser.Scene{
             this.updateCharacter()
         }
         else{
-            this.scene.start('LevelTomb')
+            this.scene.start(this.nextScene)
         }
     }
 
@@ -46,8 +64,12 @@ export default class TimeTravelScreen extends Phaser.Scene{
         if( this.characterScale > 0) {
             this.characterScale -= 0.007
         }
+        if (this.hasProfessor){
+            this.professor.setScale(this.characterScale, this.characterScale)
+            this.professor.rotation += 0.06
+        }
         
-        this.character.setScale(this.characterScale, this.characterScale)
-        this.character.rotation += 0.06
+        this.explorer.setScale(this.characterScale, this.characterScale)
+        this.explorer.rotation += 0.06
     }
 }

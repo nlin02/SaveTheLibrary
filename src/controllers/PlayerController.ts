@@ -89,23 +89,17 @@ export default class PlayerController {
 
                 case 'Professor': {        
                     this.scene.sound.play('gamecompleted')
-                    this.scene.scene.start('win')
+                    this.scene.scene.start('final')
                     break
                 }
 
                 case 'time-machine': {
                     this.scene.sound.play('timetravel')
-                    this.scene.scene.start('travel')
+                    this.scene.scene.start('solo-travel')
                     break
                 }
 
                 case 'exit-door': {
-                    this.scene.sound.play('levelchange')
-                    this.scene.scene.start('LevelAlexandria')
-                    break
-                }
-
-                case 'enter-door': {
                     this.scene.sound.play('levelchange')
                     this.scene.scene.start('LevelAlexandria')
                     break

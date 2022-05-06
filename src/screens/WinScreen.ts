@@ -13,10 +13,11 @@ export default class TitleScene extends Phaser.Scene {
             'Roboto'
         ]))
         this.load.image('winBackground', 'assets/screenBackgrounds/winBackground.png')
+        this.load.audio('winmusic', 'assets/audio/winmusic.mp3')
     }
 
     create() {
-        this.sound.removeByKey('egyptmusic')
+        this.sound.removeByKey('timetravel')
         this.sound.play('winmusic')
 
         this.cameras.main.fadeIn(1000, 0, 0, 0)

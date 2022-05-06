@@ -28,7 +28,7 @@ export default class FinalScreen extends Phaser.Scene{
     }
 
     create() {
-        this.sound.removeByKey('housemusic')
+        this.sound.removeByKey('egyptmusic')
         
         const{width, height} = this.scale
 
@@ -68,7 +68,7 @@ export default class FinalScreen extends Phaser.Scene{
 
             }
             else{
-                this.scene.start('travel')
+                this.scene.start('prof-travel')
             }
            
         }
