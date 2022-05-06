@@ -5,7 +5,7 @@ export default class FinalScreen extends Phaser.Scene{
     private background: Phaser.GameObjects.Image
     private explorer: Physics.Matter.Sprite
     private professor : Phaser.GameObjects.Image
-    private screenTime: number
+    private screenTime = 15 //: number
 
 
     constructor() {
@@ -27,7 +27,7 @@ export default class FinalScreen extends Phaser.Scene{
         
         const{width, height} = this.scale
 
-        this.screenTime = 15
+        //this.screenTime = 15
         this.background = this.add.image(400,300, "library")
         this.background.setScale(.5,.5)
             .setRotation
@@ -49,13 +49,12 @@ export default class FinalScreen extends Phaser.Scene{
     }
 
     update() {
-        
-        this.screenTime -= 0.1
-        if( 12 < this.screenTime) {
+        this.screenTime -= 0.01
+        if( 12.8 < this.screenTime) {
             this.explorer.setX(this.explorer.x + 2)
         }
         else {
-            if (this.explorer.x > 0) {
+            if (this.explorer.x > -10) {
                 this.explorer.flipX = true
             
                 this.explorer.setX(this.explorer.x - 2)
@@ -63,6 +62,7 @@ export default class FinalScreen extends Phaser.Scene{
 
             }
             else { 
+          
                 this.scene.start('prof-travel')
             }  
         }
