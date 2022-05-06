@@ -23,7 +23,7 @@ export default class PlayerController {
     private obstacles: ObstaclesController
     private lastscorpion?: Phaser.Physics.Matter.Sprite
 
-    private aboveZero
+    private aboveZero: boolean
     private startTime:number
     private remTime:number
 

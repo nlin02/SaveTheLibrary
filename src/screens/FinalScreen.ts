@@ -5,11 +5,8 @@ export default class FinalScreen extends Phaser.Scene{
     private background: Phaser.GameObjects.Image
     private explorer: Physics.Matter.Sprite
     private professor : Phaser.GameObjects.Image
+    private screenTime: number
 
-    private screenTime = 35;
-    private characterScale = .3
-
-    private status = 'professor'
 
     constructor() {
         super('final')
@@ -23,8 +20,6 @@ export default class FinalScreen extends Phaser.Scene{
         this.load.image('library', 'assets/screenBackgrounds/finalBackground.png')
         this.load.image('travel', 'assets/screenBackgrounds/travelBackground.png')
         this.load.image('professor', 'assets/professor/professor_faint.png')
-
-
     }
 
     create() {
@@ -32,6 +27,7 @@ export default class FinalScreen extends Phaser.Scene{
         
         const{width, height} = this.scale
 
+        this.screenTime = 15
         this.background = this.add.image(400,300, "library")
         this.background.setScale(.5,.5)
             .setRotation
@@ -56,10 +52,9 @@ export default class FinalScreen extends Phaser.Scene{
         
         this.screenTime -= 0.1
         if( 12 < this.screenTime) {
-
             this.explorer.setX(this.explorer.x + 2)
         }
-        else{
+        else {
             if (this.explorer.x > 0) {
                 this.explorer.flipX = true
             
@@ -67,24 +62,21 @@ export default class FinalScreen extends Phaser.Scene{
                 this.professor.setX(this.professor.x - 2)
 
             }
-            else{
+            else { 
                 this.scene.start('prof-travel')
-            }
-           
+            }  
         }
-
     }
 
 
     private placeFires() {
         const fireOne = this.matter.add.sprite(630, 430, 'fire')
         const fireTwo = this.matter.add.sprite(50, 280, 'fire')                    
-        this.animateFire(fireOne)
-        this.animateFire(fireTwo)
-
         const largeFireOne = this.matter.add.sprite(730, 400, 'fire').setScale(2,2)
         const largeFireTwo = this.matter.add.sprite(100, 180, 'fire').setScale(1.5,1.5) 
 
+        this.animateFire(fireOne)
+        this.animateFire(fireTwo)
         this.animateFire(largeFireOne)
         this.animateFire(largeFireTwo)
 
@@ -102,7 +94,6 @@ export default class FinalScreen extends Phaser.Scene{
             }),
             repeat: -1
         })
-
         fire.play('flicker-fire')
         fire.setStatic(true)
     }
