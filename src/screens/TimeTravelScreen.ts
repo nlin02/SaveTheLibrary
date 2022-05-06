@@ -6,8 +6,8 @@ export default class TimeTravelScreen extends Phaser.Scene{
     private explorer: Phaser.GameObjects.Image
     private professor: Phaser.GameObjects.Image
 
-    private screenTime = 15;
-    private characterScale = 1 
+    private screenTime: number
+    private characterScale: number
 
     private hasProfessor : boolean
     private nextScene : string
@@ -25,12 +25,19 @@ export default class TimeTravelScreen extends Phaser.Scene{
     preload () {
         this.load.image('background', 'assets/screenBackgrounds/travelBackground.png');
         this.load.image('explorer', 'assets/explorer/explorertravel.png');
-        this.load.image('professor', 'assets/professor/professor_idle.png');
+        this.load.image('professor', 'assets/professor/professor_faint.png');
+
+        this.load.audio('timetravel', 'assets/audio/timetravel.mp3')
+
         
     }
 
     create() {
         this.sound.removeByKey(this.previousSound)
+        this.sound.play('timetravel')
+
+        this.screenTime = 15;
+        this.characterScale = 1 
         
         const{width, height} = this.scale
 
