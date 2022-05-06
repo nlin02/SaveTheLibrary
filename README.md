@@ -12,9 +12,23 @@ We used Phaser, a 2D game framework, to make this game run on the desktop. We al
 
 # Important Things To Know (For Developers)
 
-To run it locally, please download the repository. Once it is downloaded, run 'npm install' in the terminal to install the dependencies needed for the game. Type 'npm run start' in the terminal and copy and paste the local host into your browser of choice to run the game.
+To run it locally, please download the repository.
 
-If you wish to update the link to reflect newly pushed code, use 'npm deploy'.
+To install the dependencies needed for the game:
+```bash 
+npm install
+``` 
+
+To run the game:
+```bash 
+npm run start
+``` 
+then copy and paste the local host into your browser of choice.
+
+To update the web link to reflect newly pushed code:
+```bash 
+npm deploy
+``` 
 
 # Credits and Thanks
 We would like to give a large shout out to SuperTommy from Ourcade for his extensive open source code that helped us navigate phaser. Specifically, we referenced his video series called “Sidescrolling Platformer in Phaser 3” on YouTube.
