@@ -1,3 +1,6 @@
+// State Machine from Tommy Leung (SuperTommy)!!
+// https://blog.ourcade.co/posts/2021/character-logic-state-machine-typescript/
+
 interface IState {
     name: string
     onEnter?: () => void
