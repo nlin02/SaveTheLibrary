@@ -13,7 +13,7 @@ export default class TimeTravelScreen extends Phaser.Scene{
     }
 
     preload () {
-        this.load.image('background', 'assets/screenBackgrounds/travelbg.png');
+        this.load.image('background', 'assets/screenBackgrounds/travelBackground.png');
         this.load.image('character', 'assets/explorer/explorertravel.png');
     }
 

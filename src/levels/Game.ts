@@ -101,7 +101,7 @@ export default class Game extends Phaser.Scene {
         this.load.audio('swim', 'assets/audio/swim.mp3')
 
         this.load.image('clock', 'assets/greyClock.png')
-        this.load.image('professor', 'assets/Professor.png')
+        this.load.image('professor', 'assets/professor/professor_idle.png')
         this.load.image('timeMachine', 'assets/timemachine.png')
         this.load.image('door', 'assets/ExitDoor.png')
         this.load.image('redDeathEdges', 'assets/redEdges70.png')
