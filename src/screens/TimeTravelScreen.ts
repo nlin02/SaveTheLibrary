@@ -24,7 +24,7 @@ export default class TimeTravelScreen extends Phaser.Scene{
 
     preload () {
         this.load.image('background', 'assets/screenBackgrounds/travelBackground.png');
-        this.load.image('explorer', 'assets/explorer/explorertravel.png');
+        this.load.image('explorer', 'assets/explorer/explorer_travel.png');
         this.load.image('professor', 'assets/professor/professor_faint.png');
 
         this.load.audio('timetravel', 'assets/audio/timetravel.mp3')

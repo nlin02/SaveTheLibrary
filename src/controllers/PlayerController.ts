@@ -94,7 +94,6 @@ export default class PlayerController {
                 }
 
                 case 'time-machine': {
-                    this.scene.sound.play('timetravel')
                     this.scene.scene.start('solo-travel')
                     break
                 }
