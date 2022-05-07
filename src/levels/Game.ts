@@ -72,19 +72,13 @@ export default class Game extends Phaser.Scene {
         this.load.tilemapTiledJSON(this.tilemapKey, this.tilemapJSONLocation)
         
         this.load.image('star', 'assets/star.png')
-        this.load.image('health', 'assets/health.png')
         this.load.image('yellow', 'assets/particles/yellow.png');
         this.load.image('blue', 'assets/particles/blue.png');
         this.load.image('smoke', 'assets/particles/smoke.png');
-        this.load.image('red', 'assets/particles/red.png');
 
         this.load.image('moveInstr', 'assets/instructions/moveInstruction.png')
         this.load.image('climbInstr', 'assets/instructions/climbInstruction.png')
         this.load.image('jumpInstr', 'assets/instructions/jumpInstruction.png')
-        this.load.image('exclam1', 'assets/instructions/exclam_01.png')
-        this.load.image('exclam2', 'assets/instructions/exclam_02.png')
-        this.load.image('exclam3', 'assets/instructions/exclam_03.png')
-        this.load.image('exclam4', 'assets/instructions/exclam_04.png')
 
         //all sound effects are used in PlayerController
         this.load.audio('egyptmusic', 'assets/audio/egyptmusic.mp3')
