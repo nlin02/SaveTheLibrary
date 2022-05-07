@@ -119,13 +119,7 @@ export default class Game extends Phaser.Scene {
         this.scene.launch('status-display') //runs parallel scenes (aka UI.. )
 
         this.setUpTileMap()
-
-        if (this.musicKey == 'egyptmusic'){
-            this.sound.removeByKey('tombmusic') 
-        }
-        if (this.musicKey == 'housemusic'){
-            this.sound.removeByKey('winmusic') //when the game is played another time, the sound starts over
-        }
+        this.sound.removeAll()
         const music = this.sound.add(this.musicKey)
         this.createMusic(music)
 
