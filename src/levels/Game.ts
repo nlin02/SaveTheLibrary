@@ -234,27 +234,6 @@ export default class Game extends Phaser.Scene {
                     break
                 }
 
-                case 'exclam1': {
-                    const img = this.add.image(x, y, 'exclam1', undefined)
-                    img.setScale(.5,.5)
-                    break
-                }
-                case 'exclam2': {
-                    const img = this.add.image(x, y, 'exclam2', undefined)
-                    img.setScale(.5,.5)
-                    break
-                }
-                case 'exclam3': {
-                    const img = this.add.image(x, y, 'exclam3', undefined)
-                    img.setScale(.5,.5)
-                    break
-                }
-                case 'exclam4': {
-                    const img = this.add.image(x, y, 'exclam4', undefined)
-                    img.setScale(.5,.5)
-                    break
-                }
-
                 case 'scorpion': {
                     const scorpion = this.matter.add.sprite(x, y, 'scorpion')
                         .setFixedRotation()
@@ -287,6 +266,7 @@ export default class Game extends Phaser.Scene {
                     for (var property of objData.properties) {
                         sprite.setData(property.name, property.value)
                     }
+                    sprite.flipX = true
                     sprite.setData('type', 'Professor')
                     break
                 }

@@ -28,8 +28,6 @@ export default class TimeTravelScreen extends Phaser.Scene{
         this.load.image('professor', 'assets/professor/professor_faint.png');
 
         this.load.audio('timetravel', 'assets/audio/timetravel.mp3')
-
-        
     }
 
     create() {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="390" height="55" tilewidth="72" tileheight="72" infinite="0" nextlayerid="6" nextobjectid="75">
+<map version="1.8" tiledversion="1.8.2" orientation="orthogonal" renderorder="right-down" width="390" height="55" tilewidth="72" tileheight="72" infinite="0" nextlayerid="6" nextobjectid="76">
  <editorsettings>
-  <export target="NewAlexandriaMap.json" format="json"/>
+  <export target="AlexandriaMap.tmj" format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="DarkTiles" tilewidth="72" tileheight="72" tilecount="475" columns="19">
   <image source="DarkTiles.png" width="1368" height="1800"/>
@@ -3772,12 +3772,13 @@
   <object id="64" name="spikes" x="6973.38" y="1266.16" width="83.6502" height="38.0228"/>
   <object id="65" name="spikes-moveup" x="10945.5" y="1668.04" width="160.359" height="153.945"/>
   <object id="66" name="spikes-moveup" x="15541.3" y="2378.92" width="170.94" height="142.45"/>
-  <object id="68" name="fire" x="25397.5" y="2134.84" width="71.2957" height="68.1959"/>
-  <object id="69" name="fire" x="25265.7" y="2141.32" width="71.2957" height="68.1959"/>
-  <object id="70" name="fire" x="25486.1" y="1756.79" width="71.2957" height="68.1959"/>
-  <object id="71" name="fire" x="26192.5" y="2108.91" width="71.2957" height="68.1959"/>
-  <object id="72" name="fire" x="25004.3" y="2113.23" width="71.2957" height="68.1959"/>
-  <object id="73" name="fire" x="25769.1" y="1754.63" width="71.2957" height="68.1959"/>
-  <object id="74" name="fire" x="26209.8" y="1754.63" width="71.2957" height="68.1959"/>
+  <object id="68" name="fire" x="25392.2" y="2140.12" width="71.2957" height="68.1959"/>
+  <object id="69" name="fire" x="25255.1" y="2141.32" width="71.2957" height="68.1959"/>
+  <object id="70" name="fire" x="25486.1" y="1770.66" width="71.2957" height="68.1959"/>
+  <object id="71" name="fire" x="26192.5" y="2129.71" width="71.2957" height="68.1959"/>
+  <object id="72" name="fire" x="25060.4" y="2138.4" width="71.2957" height="68.1959"/>
+  <object id="73" name="fire" x="25769.1" y="1773.7" width="71.2957" height="68.1959"/>
+  <object id="74" name="fire" x="26209.8" y="1777.16" width="71.2957" height="68.1959"/>
+  <object id="75" name="fire" x="25688.4" y="2131.56" width="71.2957" height="68.1959"/>
  </objectgroup>
 </map>

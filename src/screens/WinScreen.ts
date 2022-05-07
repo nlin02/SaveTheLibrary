@@ -38,10 +38,10 @@ export default class TitleScene extends Phaser.Scene {
         const button = this.add.rectangle(width * 0.8, height *0.85, 150, 75,0xffffff)
             .setInteractive()
             .on(Phaser.Input.Events.GAMEOBJECT_POINTER_UP, () => {
-                this.scene.start('LevelHouse')
+                this.scene.start('credit')
             })
 
-        this.add.text(button.x, button.y, 'Play Again',{
+        this.add.text(button.x, button.y, 'Credits',{
             color: '#918151',
             fontSize: 'x-large'
         })

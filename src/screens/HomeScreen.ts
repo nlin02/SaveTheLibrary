@@ -17,6 +17,7 @@ export default class TitleScene extends Phaser.Scene {
 
     create() {
         const{width, height} = this.scale
+        this.sound.removeByKey('winmusic')
 
         const background = this.add.image(0,0,"homeBackground")
         background.setScale(1.1,1.1)
