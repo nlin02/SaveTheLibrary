@@ -27,7 +27,7 @@ then copy and paste the local host into your browser of choice.
 
 To update the web link to reflect newly pushed code:
 ```bash 
-npm deploy
+npm run deploy
 ``` 
 
 # Credits and Thanks
